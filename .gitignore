@@ -11,3 +11,4 @@ gen/
 bin/
 output
 generated_grammar*
+*.iml
