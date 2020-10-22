@@ -1,24 +1,33 @@
 package com.freelog.cg;
 
 
-import java.util.Map;
 import java.lang.reflect.Field;
+import java.util.Map;
 
 
 public class CompilerGeneratorBuilder {
 
     public String templateDir = "grammar_templates";
+
+    // 输出目录
     public String outputDir = "output";
+
     public String serviceName = "Resource";
+
+    // 语法书目录
     public String grammarDir = "generated_grammars";
+
+    // 目标语言
     public String targetLang = "JavaScript";
+
     public Boolean noVisitor = false;
     public Boolean noListener = false;
     public String partialNode = "";
+
+    // 包名
     public String packageName = null;
 
-    public CompilerGenerator build() 
-    {
+    public CompilerGenerator build() {
         CompilerGenerator cg = new CompilerGenerator(this.serviceName, this.grammarDir, this.outputDir, this.targetLang, this.partialNode, this.noVisitor, this.noListener, this.packageName);
         return cg;
     }
@@ -64,15 +73,16 @@ public class CompilerGeneratorBuilder {
         return this;
     }
 
+    // 根据参数配置字段
     public CompilerGeneratorBuilder setFieldsFromOptions(Map<String, String> cli_options) {
-        Class<? extends CompilerGeneratorBuilder> thisClass = this.getClass();;
+        Class<? extends CompilerGeneratorBuilder> thisClass = this.getClass();
+
         for (Map.Entry<String, String> entry : cli_options.entrySet()) {
             try {
                 Option option = Option.optionDefs.get(entry.getKey());
                 Field f = thisClass.getDeclaredField(option.fieldName);
                 f.set(this, entry.getValue());
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 System.err.println("can't access field");
             }
         }

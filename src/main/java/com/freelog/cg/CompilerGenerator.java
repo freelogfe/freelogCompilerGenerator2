@@ -5,13 +5,17 @@ import org.stringtemplate.v4.ST;
 import org.stringtemplate.v4.STGroup;
 import org.stringtemplate.v4.STGroupDir;
 
-import java.io.*;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.*;
-import java.util.*;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 public class CompilerGenerator {
+
     public String serviceName;
     public String grammarDir;
     public String targetLang;
@@ -27,7 +31,9 @@ public class CompilerGenerator {
     public final String grammarResource = "grammar_files";
     public final String templateStartingRule = "policy_grammar";
 
-    public CompilerGenerator() {}
+    public CompilerGenerator() {
+    }
+
     public CompilerGenerator(String serviceName, String grammarDir, String outputDir, String targetLang, String partialNode, Boolean noVisitor, Boolean noListener, String packageName) {
         this.serviceName = serviceName;
         this.targetLang = targetLang;
@@ -64,48 +70,46 @@ public class CompilerGenerator {
 
         String grammar = st.render();
 
-        Path outputPath = Paths.get(this.grammarDir, this.serviceName+"Policy.g4");
+        Path outputPath = Paths.get(this.grammarDir, this.serviceName + "Policy.g4");
         System.out.println(outputPath);
         writeFile(outputPath, grammar);
     }
 
-    private void copyGrammar(){
+    private void copyGrammar() {
         PathMatcher matcher = FileSystems.getDefault().getPathMatcher("glob:**.g4");
         try {
-            ResourceAccess.walkResource(this.grammarResource, new SimpleFileVisitor<Path>() { 
+            ResourceAccess.walkResource(this.grammarResource, new SimpleFileVisitor<Path>() {
                 @Override
                 public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-                    if (matcher.matches(file)){
+                    if (matcher.matches(file)) {
                         Path dest = Paths.get(CompilerGenerator.this.grammarDir + "/" + file.getFileName());
                         copyFile(file, dest);
                     }
                     return FileVisitResult.CONTINUE;
                 }
-            }); 
-        }
-        catch (Exception e) {
+            });
+        } catch (Exception e) {
             System.err.println("copy grammar:\n" + e);
         }
     }
 
     public void parseGrammar() {
-        String grammarFile = this.partialNode.equals("")? this.serviceName+"Policy.g4" : this.partialNode + ".g4";
+        String grammarFile = this.partialNode.equals("") ? this.serviceName + "Policy.g4" : this.partialNode + ".g4";
         Path grammarPath = Paths.get(this.grammarDir, grammarFile);
         String visitorFlag = this.noVisitor ? "-no-visitor" : "-visitor";
         String listenerFlag = this.noListener ? "-no-listener" : "-listener";
-        List<String> toolArgs = new LinkedList<String> (Arrays.asList(
-            grammarPath.toString(),
-            visitorFlag,
-            listenerFlag,
-            "-Dlanguage=" + this.targetLang,
-            "-o", this.outputDir
+        List<String> toolArgs = new LinkedList<String>(Arrays.asList(
+                grammarPath.toString(),
+                visitorFlag,
+                listenerFlag,
+                "-Dlanguage=" + this.targetLang,
+                "-o", this.outputDir
         ));
 
         if (this.packageName != null) {
             toolArgs.add("-package");
             toolArgs.add(this.packageName);
         }
-
 
         String[] toolArgsArray = new String[toolArgs.size()];
         toolArgs.toArray(toolArgsArray);
@@ -115,28 +119,24 @@ public class CompilerGenerator {
         tool.processGrammarsOnCommandLine();
     }
 
-
-    private void writeFile(Path path, String content){
+    private void writeFile(Path path, String content) {
         try {
             Files.createDirectories(path.getParent());
             Files.createFile(path);
             Files.writeString(path, content, StandardCharsets.UTF_8);
-        } 
-        catch (FileAlreadyExistsException e){
+        } catch (FileAlreadyExistsException e) {
             System.err.println(e);
-        }
-        catch (IOException e){
+        } catch (IOException e) {
             System.err.println(e);
         }
 
     }
 
-    private void copyFile(Path source, Path dest){
+    private void copyFile(Path source, Path dest) {
 
         try {
             Files.copy(source, dest, StandardCopyOption.REPLACE_EXISTING);
-        }
-        catch (IOException e){
+        } catch (IOException e) {
             System.err.println(e);
         }
     }
