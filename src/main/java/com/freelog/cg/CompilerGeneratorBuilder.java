@@ -7,20 +7,23 @@ import java.util.Map;
 
 public class CompilerGeneratorBuilder {
 
+    // 语法模板目录
     public String templateDir = "grammar_templates";
 
     // 输出目录
     public String outputDir = "output";
 
-    public String serviceName = "Resource";
+    public String serviceName = "";
 
-    // 语法书目录
+    // 语言目录
     public String grammarDir = "generated_grammars";
 
     // 目标语言
     public String targetLang = "JavaScript";
 
+    // 是否生成访问器
     public Boolean noVisitor = false;
+    // 是否生成监听器
     public Boolean noListener = false;
     public String partialNode = "";
 
@@ -68,7 +71,6 @@ public class CompilerGeneratorBuilder {
     }
 
     public CompilerGeneratorBuilder setPackageName(String packageName) {
-        System.out.println(packageName);
         this.packageName = packageName;
         return this;
     }
@@ -83,7 +85,7 @@ public class CompilerGeneratorBuilder {
                 Field f = thisClass.getDeclaredField(option.fieldName);
                 f.set(this, entry.getValue());
             } catch (Exception e) {
-                System.err.println("can't access field");
+                e.printStackTrace();
             }
         }
         return this;

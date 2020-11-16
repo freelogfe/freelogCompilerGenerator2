@@ -3,7 +3,10 @@ lexer grammar LexToken;
 SELF : 'self';
 TERMINATE : 'terminate';
 
-SUBJECT_ID : '*' (HEX_DIGIT)+;
+SUBJECT_ID :
+    {System.out.println(getCycle() != null  && getCycle().equals("subject"));}
+    {getCycle() != null  && getCycle().equals("subject")}?
+    '*' (HEX_DIGIT)+;
 UOID : '@' ID;
 ACCOUNT_NUMBER : '#' (ALPHABET|DIGIT)+;
 SUBJECT_SERVICE_NAME : '^' ID;

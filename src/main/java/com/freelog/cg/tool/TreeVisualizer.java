@@ -40,7 +40,7 @@ public class TreeVisualizer {
         TreeViewer viewer = new TreeViewer(ruleNames, tree);
         viewer.setScale(1.5);
         panel.add(viewer);
-        frame.add(panel);
+        frame.add(new JScrollPane(panel));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
@@ -60,7 +60,7 @@ public class TreeVisualizer {
             Constructor<? extends Parser> parserCtor = parserClass.getConstructor(TokenStream.class);
             parser = parserCtor.newInstance((TokenStream) null);
         } catch (Exception e) {
-            System.err.println("cant load parser: " + e);
+            e.printStackTrace();
         }
 
         return parser;
@@ -75,7 +75,7 @@ public class TreeVisualizer {
             Constructor<? extends Lexer> lexerCtor = lexerClass.getConstructor(CharStream.class);
             lexer = lexerCtor.newInstance((TokenStream) null);
         } catch (Exception e) {
-            System.err.println("cant load parser: " + e);
+            e.printStackTrace();
         }
 
         return lexer;
@@ -99,7 +99,7 @@ public class TreeVisualizer {
             System.out.println(startRule);
             tree = (ParserRuleContext) startRule.invoke(parser, (Object[]) null);
         } catch (NoSuchMethodException e) {
-            System.err.print("starting rule name(policy) not found");
+            e.printStackTrace();
         }
 
         return tree;

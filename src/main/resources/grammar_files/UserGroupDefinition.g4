@@ -1,4 +1,4 @@
-grammar userGroupDefinition;
+grammar UserGroupDefinition;
 
 color
     :'level_one'

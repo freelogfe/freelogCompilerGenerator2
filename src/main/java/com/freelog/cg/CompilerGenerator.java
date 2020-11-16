@@ -1,6 +1,8 @@
 package com.freelog.cg;
 
 import org.antlr.v4.Tool;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.stringtemplate.v4.ST;
 import org.stringtemplate.v4.STGroup;
 import org.stringtemplate.v4.STGroupDir;
@@ -15,6 +17,8 @@ import java.util.List;
 import java.util.Map;
 
 public class CompilerGenerator {
+
+    private static final Logger logger = LoggerFactory.getLogger(CompilerGenerator.class);
 
     public String serviceName;
     public String grammarDir;
@@ -71,7 +75,7 @@ public class CompilerGenerator {
         String grammar = st.render();
 
         Path outputPath = Paths.get(this.grammarDir, this.serviceName + "Policy.g4");
-        System.out.println(outputPath);
+        logger.info("{}", outputPath);
         writeFile(outputPath, grammar);
     }
 
@@ -89,7 +93,7 @@ public class CompilerGenerator {
                 }
             });
         } catch (Exception e) {
-            System.err.println("copy grammar:\n" + e);
+            e.printStackTrace();
         }
     }
 
@@ -113,7 +117,7 @@ public class CompilerGenerator {
 
         String[] toolArgsArray = new String[toolArgs.size()];
         toolArgs.toArray(toolArgsArray);
-        //System.out.println("array\n"+Arrays.toString(toolArgsArray));
+//        System.out.println("array\n" + Arrays.toString(toolArgsArray));
 
         Tool tool = new Tool(toolArgsArray);
         tool.processGrammarsOnCommandLine();
@@ -122,14 +126,14 @@ public class CompilerGenerator {
     private void writeFile(Path path, String content) {
         try {
             Files.createDirectories(path.getParent());
+            if (Files.exists(path)) {
+                Files.delete(path);
+            }
             Files.createFile(path);
             Files.writeString(path, content, StandardCharsets.UTF_8);
-        } catch (FileAlreadyExistsException e) {
-            System.err.println(e);
-        } catch (IOException e) {
-            System.err.println(e);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
     }
 
     private void copyFile(Path source, Path dest) {
@@ -137,7 +141,7 @@ public class CompilerGenerator {
         try {
             Files.copy(source, dest, StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
-            System.err.println(e);
+            e.printStackTrace();
         }
     }
 }

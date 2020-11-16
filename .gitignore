@@ -10,5 +10,6 @@ node_modules/
 gen/
 bin/
 output
-generated_grammar*
+generated_grammars
+logs
 *.iml

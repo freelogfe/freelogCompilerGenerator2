@@ -9,21 +9,34 @@ entity_bracket :
     | event
     | policy
     | account
-    | user_orgnization_name
+    | user_organization_name
     )* EOF
     ;
 
 subject_service :SUBJECT_SERVICE_NAME;
 event_service : EVENT_SERVICE_NAME;
 
-subject : subject_service '.' user_orgnization_name '.' SUBJECT_ID;
+subject
+@init {
+    putCycle("subject");
+    System.out.println("subject init");
+}
+@after {
+    popCycle();
+    System.out.println("subject afte");
+}
+    : {System.out.println("subject sta");}
+      subject_service '.' user_organization_name '.' SUBJECT_ID
+      {System.out.println("subject end");}
+    ;
+
 event : event_service '.' (event_path '.')? event_name;
 event_path : (ID '.')+ ID;
 event_name : ID;
 
-policy : subject_service '.' user_orgnization_name '.' ID;
+policy : subject_service '.' user_organization_name '.' ID;
 
 account: ACCOUNT_NUMBER;
 
-user_orgnization_name: UOID;
+user_organization_name: UOID;
 
