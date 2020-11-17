@@ -138,19 +138,19 @@ public class UserPolicyLexer extends Lexer {
 	public ATN getATN() { return _ATN; }
 
 	@Override
-	public void action(RuleContext _localctx, int ruleIndex, int actionIndex) {
+	public boolean sempred(RuleContext _localctx, int ruleIndex, int predIndex) {
 		switch (ruleIndex) {
 		case 9:
-			SUBJECT_ID_action((RuleContext)_localctx, actionIndex);
-			break;
+			return SUBJECT_ID_sempred((RuleContext)_localctx, predIndex);
 		}
+		return true;
 	}
-	private void SUBJECT_ID_action(RuleContext _localctx, int actionIndex) {
-		switch (actionIndex) {
+	private boolean SUBJECT_ID_sempred(RuleContext _localctx, int predIndex) {
+		switch (predIndex) {
 		case 0:
-			System.out.println(getCycle() != null  && getCycle().equals("subject"));
-			break;
+			return getCycle() != null  && getCycle().equals("subject");
 		}
+		return true;
 	}
 
 	public static final String _serializedATN =
@@ -246,7 +246,7 @@ public class UserPolicyLexer extends Lexer {
 		"u\2\2\u00dd\u00de\7g\2\2\u00de\u00df\7n\2\2\u00df\u00e0\7h\2\2\u00e0\22"+
 		"\3\2\2\2\u00e1\u00e2\7v\2\2\u00e2\u00e3\7g\2\2\u00e3\u00e4\7t\2\2\u00e4"+
 		"\u00e5\7o\2\2\u00e5\u00e6\7k\2\2\u00e6\u00e7\7p\2\2\u00e7\u00e8\7c\2\2"+
-		"\u00e8\u00e9\7v\2\2\u00e9\u00ea\7g\2\2\u00ea\24\3\2\2\2\u00eb\u00ec\b"+
+		"\u00e8\u00e9\7v\2\2\u00e9\u00ea\7g\2\2\u00ea\24\3\2\2\2\u00eb\u00ec\6"+
 		"\13\2\2\u00ec\u00ee\7,\2\2\u00ed\u00ef\5Q)\2\u00ee\u00ed\3\2\2\2\u00ef"+
 		"\u00f0\3\2\2\2\u00f0\u00ee\3\2\2\2\u00f0\u00f1\3\2\2\2\u00f1\26\3\2\2"+
 		"\2\u00f2\u00f3\7B\2\2\u00f3\u00f4\5I%\2\u00f4\30\3\2\2\2\u00f5\u00f8\7"+
@@ -309,7 +309,7 @@ public class UserPolicyLexer extends Lexer {
 		"\u01b1\3\2\2\2\u01b3\u01b6\3\2\2\2\u01b4\u01b2\3\2\2\2\u01b4\u01b5\3\2"+
 		"\2\2\u01b5J\3\2\2\2\u01b6\u01b4\3\2\2\2\u01b7\u01b9\t\5\2\2\u01b8\u01b7"+
 		"\3\2\2\2\u01b9\u01ba\3\2\2\2\u01ba\u01b8\3\2\2\2\u01ba\u01bb\3\2\2\2\u01bb"+
-		"\u01bc\3\2\2\2\u01bc\u01bd\b&\3\2\u01bdL\3\2\2\2\u01be\u01bf\t\6\2\2\u01bf"+
+		"\u01bc\3\2\2\2\u01bc\u01bd\b&\2\2\u01bdL\3\2\2\2\u01be\u01bf\t\6\2\2\u01bf"+
 		"N\3\2\2\2\u01c0\u01c1\t\7\2\2\u01c1P\3\2\2\2\u01c2\u01c3\t\b\2\2\u01c3"+
 		"R\3\2\2\2\u01c4\u01c5\t\t\2\2\u01c5T\3\2\2\2\u01c6\u01c7\t\n\2\2\u01c7"+
 		"V\3\2\2\2\u01c8\u01c9\t\13\2\2\u01c9X\3\2\2\2\u01ca\u01cb\t\f\2\2\u01cb"+
@@ -343,7 +343,7 @@ public class UserPolicyLexer extends Lexer {
 		"\u0226\3\2\2\2\u022c\u022d\3\2\2\2\u022d\u00a8\3\2\2\2\u022e\u022f\t#"+
 		"\2\2\u022f\u00aa\3\2\2\2\35\2\u00f0\u00f8\u00fa\u0120\u0132\u0138\u013d"+
 		"\u013f\u0146\u0155\u015e\u0164\u0169\u0176\u0181\u018e\u0199\u019b\u01b2"+
-		"\u01b4\u01ba\u0216\u0219\u0224\u022a\u022c\4\3\13\2\b\2\2";
+		"\u01b4\u01ba\u0216\u0219\u0224\u022a\u022c\3\b\2\2";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

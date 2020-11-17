@@ -12,12 +12,15 @@ import LexToken, <serviceName>Service, Event, Expression, Entity;
 
     public static void putCycle(String cycle){
         stack.push(cycle);
+        System.out.println("put > " + cycle);
     }
 
     public static void popCycle(){
+        String cycle = null;
         if(!stack.isEmpty()){
-            stack.pop();
+            cycle = stack.pop();
         }
+        System.out.println("pop > " + cycle);
     }
 
     public static String getCycle(){

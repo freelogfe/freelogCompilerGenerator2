@@ -128,12 +128,15 @@ public class UserPolicyParser extends Parser {
 
 	    public static void putCycle(String cycle){
 	        stack.push(cycle);
+	        System.out.println("put >" + cycle);
 	    }
 
 	    public static void popCycle(){
+	        String cycle = null;
 	        if(!stack.isEmpty()){
-	            stack.pop();
+	            cycle = stack.pop();
 	        }
+	        System.out.println("pop >" + cycle);
 	    }
 
 	    public static String getCycle(){
@@ -2339,7 +2342,6 @@ public class UserPolicyParser extends Parser {
 		enterRule(_localctx, 68, RULE_subject);
 
 		    putCycle("subject");
-		    System.out.println("subject init");
 
 		try {
 			enterOuterAlt(_localctx, 1);
@@ -2360,7 +2362,6 @@ public class UserPolicyParser extends Parser {
 			_ctx.stop = _input.LT(-1);
 
 			    popCycle();
-			    System.out.println("subject afte");
 
 		}
 		catch (RecognitionException re) {

@@ -19,11 +19,9 @@ event_service : EVENT_SERVICE_NAME;
 subject
 @init {
     putCycle("subject");
-    System.out.println("subject init");
 }
 @after {
     popCycle();
-    System.out.println("subject afte");
 }
     : {System.out.println("subject sta");}
       subject_service '.' user_organization_name '.' SUBJECT_ID
