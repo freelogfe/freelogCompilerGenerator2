@@ -75,7 +75,6 @@ public class CompilerGenerator {
         String grammar = st.render();
 
         Path outputPath = Paths.get(this.grammarDir, this.serviceName + "Policy.g4");
-        logger.info("{}", outputPath);
         writeFile(outputPath, grammar);
     }
 

@@ -27,6 +27,9 @@ subject
       subject_service '.' user_organization_name '.' SUBJECT_ID
       {System.out.println("subject end");}
     ;
+    finally {
+        System.out.println("subject finally");
+    }
 
 event : event_service '.' (event_path '.')? event_name;
 event_path : (ID '.')+ ID;

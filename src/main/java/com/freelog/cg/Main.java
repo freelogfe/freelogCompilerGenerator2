@@ -1,32 +1,25 @@
 package com.freelog.cg;
 
-import java.io.IOException;
-import java.nio.file.*;
-import java.nio.file.attribute.BasicFileAttributes;
+import com.freelog.cg.tool.GeneratedFileHelper;
+
+import java.nio.file.Paths;
 import java.util.*;
 
 class Main {
 
     public static void main(String[] args) {
         CompilerGeneratorBuilder cg_builder = new CompilerGeneratorBuilder();
-        CompilerGenerator cg = cg_builder.setServiceName("User").setTargetLang("Java").build();
+        CompilerGenerator cg = cg_builder
+                .setServiceName("User")
+                .setTargetLang("Java")
+                .setPackageName("com.freelog.compiler")
+                .build();
 
         cg.generate();
 
-        PathMatcher matcher = FileSystems.getDefault().getPathMatcher("glob:**.java");
-        try {
-            Files.walkFileTree(Paths.get(cg.outputDir + "/" + cg.grammarDir), new SimpleFileVisitor<>() {
-                @Override
-                public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-                    if (matcher.matches(file)) {
-                        Files.copy(file, Paths.get("src/main/java/com/freelog/cg/antlr/" + file.getFileName()), StandardCopyOption.REPLACE_EXISTING);
-                    }
-                    return FileVisitResult.CONTINUE;
-                }
-            });
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        String sourceDir = cg.outputDir + "/" + cg.grammarDir;
+        String targetDir = Paths.get("").toAbsolutePath().getParent() + "/FreelogCompilerJavaTarget/src/main/java";
+        GeneratedFileHelper.transfer4Java(sourceDir, targetDir, cg.packageName);
     }
 
     // 参数解析

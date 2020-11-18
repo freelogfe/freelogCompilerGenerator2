@@ -4,8 +4,7 @@ grammar <serviceName>Policy;
 import LexToken, <serviceName>Service, Event, Expression, Entity;
 
 @header {
-    package com.freelog.cg.antlr;
-    import java.util.*;
+import java.util.*;
 }
 @parser::members {
     public static Stack\<String> stack = new Stack\<>();
