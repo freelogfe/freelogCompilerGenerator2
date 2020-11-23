@@ -4,6 +4,7 @@ SELF : 'self';
 TERMINATE : 'terminate';
 
 SUBJECT_ID :
+    {System.out.println("SUBJECT_ID");}
     {getCycle() != null  && getCycle().equals("subject")}?
     '*' (HEX_DIGIT)+;
 UOID : '@' ID;

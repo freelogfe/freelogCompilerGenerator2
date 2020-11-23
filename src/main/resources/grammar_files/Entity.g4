@@ -23,12 +23,12 @@ subject
 @after {
     popCycle();
 }
-    : {System.out.println("subject sta");}
+    : {logger.info("subject sta");}
       subject_service '.' user_organization_name '.' SUBJECT_ID
-      {System.out.println("subject end");}
+      {logger.info("subject end");}
     ;
     finally {
-        System.out.println("subject finally");
+       logger.info("subject finally");
     }
 
 event : event_service '.' (event_path '.')? event_name;

@@ -4,14 +4,16 @@ grammar <serviceName>Policy;
 import LexToken, <serviceName>Service, Event, Expression, Entity;
 
 @header {
+import org.slf4j.*;
 import java.util.*;
 }
 @parser::members {
+    private static final Logger logger = LoggerFactory.getLogger(<serviceName>PolicyParser.class);
     public static Stack\<String> stack = new Stack\<>();
 
     public static void putCycle(String cycle){
         stack.push(cycle);
-        System.out.println("put > " + cycle);
+        logger.info("put > " + cycle);
     }
 
     public static void popCycle(){
@@ -19,7 +21,7 @@ import java.util.*;
         if(!stack.isEmpty()){
             cycle = stack.pop();
         }
-        System.out.println("pop > " + cycle);
+        logger.info("pop > " + cycle);
     }
 
     public static String getCycle(){
