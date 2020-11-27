@@ -1,43 +1,20 @@
 grammar Entity;
-import LexToken;
 
-//this rule serve as starting rule for testing Entities only
+import EntityToken;
+
+// this rule serve as starting rule for testing Entities only
 entity_bracket : 
-    ( subject_service
-    | event_service
+    ( account
     | subject
-    | event
-    | policy
-    | account
+    | subject_service
     | user_organization_name
     )* EOF
     ;
 
-subject_service :SUBJECT_SERVICE_NAME;
-event_service : EVENT_SERVICE_NAME;
+account : ACCOUNT_NUMBER ;
 
-subject
-@init {
-    putCycle("subject");
-}
-@after {
-    popCycle();
-}
-    : {logger.info("subject sta");}
-      subject_service '.' user_organization_name '.' SUBJECT_ID
-      {logger.info("subject end");}
-    ;
-    finally {
-       logger.info("subject finally");
-    }
+subject : subject_service '.' user_organization_name '.' SUBJECT_ID ;
 
-event : event_service '.' (event_path '.')? event_name;
-event_path : (ID '.')+ ID;
-event_name : ID;
+subject_service : SUBJECT_SERVICE_NAME ;
 
-policy : subject_service '.' user_organization_name '.' ID;
-
-account: ACCOUNT_NUMBER;
-
-user_organization_name: UOID;
-
+user_organization_name : UOID ;

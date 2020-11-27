@@ -18,7 +18,7 @@ class Main {
         cg.generate();
 
         String sourceDir = cg.outputDir + "/" + cg.grammarDir;
-        String targetDir = Paths.get("").toAbsolutePath().getParent() + "/FreelogCompilerJavaTarget/src/main/java";
+        String targetDir = Paths.get("").toAbsolutePath().getParent() + "/FreelogCompilerJavaTarget2/src/main/java";
         GeneratedFileHelper.transfer4Java(sourceDir, targetDir, cg.packageName);
     }
 

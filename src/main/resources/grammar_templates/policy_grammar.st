@@ -1,48 +1,13 @@
 policy_grammar(serviceName, keep_id) ::= <<
 grammar <serviceName>Policy;
 
-import LexToken, <serviceName>Service, Event, Expression, Entity;
+import <serviceName>Service, Entity, Expression, Event;
 
-@header {
-import org.slf4j.*;
-import java.util.*;
-}
-@parser::members {
-    private static final Logger logger = LoggerFactory.getLogger(<serviceName>PolicyParser.class);
-    public static Stack\<String> stack = new Stack\<>();
+policy : requirement declaration_section? state_definition_section EOF ;
 
-    public static void putCycle(String cycle){
-        stack.push(cycle);
-        logger.info("put > " + cycle);
-    }
+requirement : 'require' (contract_with_subject) ;
 
-    public static void popCycle(){
-        String cycle = null;
-        if(!stack.isEmpty()){
-            cycle = stack.pop();
-        }
-        logger.info("pop > " + cycle);
-    }
-
-    public static String getCycle(){
-        if(!stack.isEmpty()){
-            return stack.peek();
-        }else{
-            return null;
-        }
-    }
-}
-@lexer::members {
-    public static String getCycle(){
-        return <serviceName>PolicyParser.getCycle();
-    }
-}
-
-policy : requirement declaration_section? state_definition_section EOF;
-
-requirement : REQUIRE (contract_with_subject);
-
-contract_with_subject : 'contract' 'with' subject;
+contract_with_subject : 'contract' 'with' subject ;
 
 declaration_section: declaration_statements+ ;
 
@@ -51,25 +16,24 @@ declaration_statements
   ;
 
 state_definition_section
-  :  state_definition+
+  : state_definition+
   ;
 
 state_definition
-  : service_state? state_name ':' state_transition+
-  ;
-
-state_transition
-  : 'proceed' 'to' state_name 'on' event
-  | TERMINATE
+  : state_name service_state_definition? ':' state_transition+
   ;
 
 state_name : ID ;
 
-service_state
-  : 'authorized'
-  | 'unauthorized'
+service_state_definition : '[' service_state (',' service_state)* ']' ;
+
+service_state : ID ;
+
+state_transition
+  : 'proceed' 'to' state_name 'on' event
+  | 'terminate'
   ;
 
-subject_id : subject { <keep_id> };
+subject_id : subject { <keep_id> } ;
 
 >>
