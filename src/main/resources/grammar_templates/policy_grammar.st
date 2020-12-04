@@ -12,8 +12,11 @@ contract_with_subject : 'contract' 'with' subject ;
 declaration_section: declaration_statements+ ;
 
 declaration_statements
-  : expression_assignment
+  : service_state_constant
+  | expression_assignment
   ;
+
+service_state_constant : type='always' service_state ;
 
 state_definition_section
   : state_definition+
@@ -27,10 +30,14 @@ state_name : ID ;
 
 service_state_definition : '[' service_state (',' service_state)* ']' ;
 
-service_state : ID ;
+service_state
+  : 'citable'
+  | 'procurable'
+  | 'presentable'
+  ;
 
 state_transition
-  : 'proceed' 'to' state_name 'on' event
+  : event '=>' state_name
   | 'terminate'
   ;
 
