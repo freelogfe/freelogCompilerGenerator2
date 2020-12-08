@@ -1,7 +1,7 @@
 lexer grammar LexToken;
 
 ID
-  : ALPHABET (ALPHABET | INT | '_' | '-')*
+  : ALPHABET (ALPHABET | INT | '_')*
   ;
 
 INT : DIGIT+ ;

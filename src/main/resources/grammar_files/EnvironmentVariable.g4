@@ -1,5 +1,7 @@
 grammar EnvironmentVariable;
 
-import LexToken;
+import EnvironmentVariableToken;
 
-environment_variable : ID ;
+environment_variable
+  : VARIABLE_CONTRACT
+  ;

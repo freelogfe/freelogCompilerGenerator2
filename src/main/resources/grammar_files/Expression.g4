@@ -52,7 +52,10 @@ constant
   | EULER
   ;
 
-variable : ID ;
+variable
+  : environment_variable # VariableEnvironment
+  | ID                   # VariableArg
+  ;
 
 expression_call_or_literal
   : expression_call
