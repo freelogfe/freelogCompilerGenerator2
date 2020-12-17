@@ -19,7 +19,7 @@ class Main {
 
         String sourceDir = cg.outputDir + "/" + cg.grammarDir;
         String targetDir = Paths.get("").toAbsolutePath().getParent() + "/FreelogCompilerJavaTarget2/src/main/java";
-        GeneratedFileHelper.transfer4Java(sourceDir, targetDir, cg.packageName);
+        GeneratedFileHelper.transfer4Java(sourceDir, targetDir, cg.targetLang, cg.packageName);
     }
 
     // 参数解析

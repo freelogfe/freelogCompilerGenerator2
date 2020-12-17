@@ -11,12 +11,21 @@ public class GeneratedFileHelper {
 
     private static final Logger logger = LoggerFactory.getLogger(GeneratedFileHelper.class);
 
-    public static void transfer4Java(String sourceDir, String targetDir, String packageName) {
-        logger.info("sourceDir: {}", sourceDir);
-        logger.info("targetDir: {}", targetDir);
-        logger.info("packageName: {}", packageName);
+    public static void transfer4Java(String sourceDir, String targetDir, String targetLang, String packageName) {
+        logger.info("sourceDir: {}\ntargetDir: {}\ntargetLang: {}\npackageName: {}",
+                sourceDir, targetDir, targetLang, packageName);
 
-        PathMatcher matcher = FileSystems.getDefault().getPathMatcher("glob:**.java");
+        String matchStr = null;
+        switch (targetLang.toLowerCase()) {
+            case "java":
+                matchStr = "glob:**.java";
+                break;
+            case "javascript":
+                matchStr = "glob:**.js";
+                break;
+        }
+        PathMatcher matcher = FileSystems.getDefault().getPathMatcher(matchStr);
+
         try {
             Files.walkFileTree(Paths.get(sourceDir), new SimpleFileVisitor<>() {
                 private Path targetDirPath;
@@ -47,9 +56,5 @@ public class GeneratedFileHelper {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public static void main(String[] args) {
-        System.out.println(Paths.get("").toAbsolutePath().getParent().toString());
     }
 }

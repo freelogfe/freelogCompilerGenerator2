@@ -3,7 +3,20 @@ grammar <serviceName>Policy;
 
 import <serviceName>Service, Entity, Expression, Event;
 
-policy : requirement declaration_section? state_definition_section EOF ;
+policy : audience_strict declaration_section? state_definition_section EOF ;
+
+audience_strict : 'for' audience_clause ':' requirement ;
+
+audience_clause
+  : users
+  | audience_clause ','  audience_clause
+  ;
+
+users
+  : 'public'
+  | 'nodes'
+  | 'registered_users'
+  ;
 
 requirement : 'require' (contract_with_subject) ;
 
@@ -16,7 +29,11 @@ declaration_statements
   | expression_assignment
   ;
 
-service_state_constant : type='always' service_state ;
+service_state_constant : type=service_state_scope service_state ;
+
+service_state_scope
+  : 'always'
+  ;
 
 state_definition_section
   : state_definition+
@@ -26,15 +43,15 @@ state_definition
   : state_name service_state_definition? ':' state_transition+
   ;
 
-state_name : ID ;
+state_name
+  : 'initial'
+  | 'finish'
+  | ID
+  ;
 
 service_state_definition : '[' service_state (',' service_state)* ']' ;
 
-service_state
-  : 'citable'
-  | 'procurable'
-  | 'presentable'
-  ;
+service_state : ID ;
 
 state_transition
   : event '=>' state_name
