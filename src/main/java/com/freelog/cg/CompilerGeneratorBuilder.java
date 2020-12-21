@@ -1,11 +1,16 @@
 package com.freelog.cg;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.lang.reflect.Field;
 import java.util.Map;
 
 
 public class CompilerGeneratorBuilder {
+
+    private static final Logger logger = LoggerFactory.getLogger(CompilerGeneratorBuilder.class);
 
     // 语法模板目录
     public String templateDir = "grammar_templates";
@@ -17,6 +22,8 @@ public class CompilerGeneratorBuilder {
 
     // 语言目录
     public String grammarDir = "generated_grammars";
+
+    public String outputDirTargetLang = null;
 
     // 目标语言
     public String targetLang = "JavaScript";
@@ -84,6 +91,8 @@ public class CompilerGeneratorBuilder {
                 Option option = Option.optionDefs.get(entry.getKey());
                 Field f = thisClass.getDeclaredField(option.fieldName);
                 f.set(this, entry.getValue());
+            } catch (NoSuchFieldException e) {
+                logger.warn("", e);
             } catch (Exception e) {
                 e.printStackTrace();
             }

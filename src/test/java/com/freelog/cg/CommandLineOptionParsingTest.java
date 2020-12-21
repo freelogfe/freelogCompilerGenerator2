@@ -49,5 +49,4 @@ public class CommandLineOptionParsingTest {
         assertEquals("JavaScript", cg.targetLang);
         assertEquals("./output", cg.outputDir);
     }
-
 }

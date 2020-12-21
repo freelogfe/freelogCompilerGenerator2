@@ -27,6 +27,8 @@ public class Option {
             Map.entry("-t", new Option("targetLang", OptionArgType.STRING, "specify target language of the generated compilers")),
             Map.entry("-nv", new Option("noVisitor", "dont generate visitor")),
             Map.entry("-p", new Option("partial", OptionArgType.STRING, "partial compile up to specific partial step grammar definition, grammar definition DAG for structure")),
-            Map.entry("-help", new Option("help", OptionArgType.STRING, "print help messages"))
+            Map.entry("-help", new Option("help", OptionArgType.STRING, "print help messages")),
+            Map.entry("-pn", new Option("packageName", OptionArgType.STRING, "包名，仅在Java语言中使用")),
+            Map.entry("-ot", new Option("outputDirTargetLang", OptionArgType.STRING, "目标语言输出目录"))
     );
 }

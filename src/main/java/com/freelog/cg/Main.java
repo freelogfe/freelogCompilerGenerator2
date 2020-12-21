@@ -2,24 +2,23 @@ package com.freelog.cg;
 
 import com.freelog.cg.tool.GeneratedFileHelper;
 
-import java.nio.file.Paths;
 import java.util.*;
 
 class Main {
 
     public static void main(String[] args) {
+        Map<String, String> argMap = parseArgs(args);
+
         CompilerGeneratorBuilder cg_builder = new CompilerGeneratorBuilder();
-        CompilerGenerator cg = cg_builder
-                .setServiceName("User")
-                .setTargetLang("Java")
-                .setPackageName("com.freelog.compiler")
-                .build();
+        CompilerGenerator cg = cg_builder.setFieldsFromOptions(argMap).build();
 
         cg.generate();
 
-        String sourceDir = cg.outputDir + "/" + cg.grammarDir;
-        String targetDir = Paths.get("").toAbsolutePath().getParent() + "/FreelogCompilerJavaTarget2/src/main/java";
-        GeneratedFileHelper.transfer4Java(sourceDir, targetDir, cg.targetLang, cg.packageName);
+        if (cg_builder.outputDirTargetLang != null) {
+            String sourceDir = cg.outputDir + "/" + cg.grammarDir;
+            String targetDir = cg_builder.outputDirTargetLang;
+            GeneratedFileHelper.transfer(sourceDir, targetDir, cg.targetLang, cg.packageName);
+        }
     }
 
     // 参数解析

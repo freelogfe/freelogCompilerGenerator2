@@ -11,7 +11,7 @@ public class GeneratedFileHelper {
 
     private static final Logger logger = LoggerFactory.getLogger(GeneratedFileHelper.class);
 
-    public static void transfer4Java(String sourceDir, String targetDir, String targetLang, String packageName) {
+    public static void transfer(String sourceDir, String targetDir, String targetLang, String packageName) {
         logger.info("sourceDir: {}\ntargetDir: {}\ntargetLang: {}\npackageName: {}",
                 sourceDir, targetDir, targetLang, packageName);
 
