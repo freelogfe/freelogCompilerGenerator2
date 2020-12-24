@@ -14,9 +14,9 @@ class Main {
 
         cg.generate();
 
-        if (cg_builder.outputDirTargetLang != null) {
+        if (cg.outputDirTargetLang != null) {
             String sourceDir = cg.outputDir + "/" + cg.grammarDir;
-            String targetDir = cg_builder.outputDirTargetLang;
+            String targetDir = cg.outputDirTargetLang;
             GeneratedFileHelper.transfer(sourceDir, targetDir, cg.targetLang, cg.packageName);
         }
     }

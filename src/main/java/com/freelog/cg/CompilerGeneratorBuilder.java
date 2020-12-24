@@ -23,6 +23,7 @@ public class CompilerGeneratorBuilder {
     // 语言目录
     public String grammarDir = "generated_grammars";
 
+    // 目标语言输出目录
     public String outputDirTargetLang = null;
 
     // 目标语言
@@ -39,6 +40,7 @@ public class CompilerGeneratorBuilder {
 
     public CompilerGenerator build() {
         CompilerGenerator cg = new CompilerGenerator(this.serviceName, this.grammarDir, this.outputDir, this.targetLang, this.partialNode, this.noVisitor, this.noListener, this.packageName);
+        cg.outputDirTargetLang = this.outputDirTargetLang;
         return cg;
     }
 

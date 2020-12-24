@@ -22,6 +22,7 @@ public class CompilerGenerator {
 
     public String serviceName;
     public String grammarDir;
+    public String outputDirTargetLang;
     public String targetLang;
     public String outputDir;
     public String partialNode;
