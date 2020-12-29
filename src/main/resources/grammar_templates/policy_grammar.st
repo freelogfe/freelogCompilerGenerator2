@@ -1,7 +1,7 @@
 policy_grammar(serviceName, keep_id) ::= <<
 grammar <serviceName>Policy;
 
-import <serviceName>Service, Entity, Expression, Event;
+import Entity, Expression, Event;
 
 policy : audience_strict declaration_section? state_definition_section EOF ;
 

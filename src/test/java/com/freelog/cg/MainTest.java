@@ -18,9 +18,9 @@ public class MainTest {
 
         cg.generate();
 
-        String sourceDir = cg.outputDir + "/" + cg.grammarDir;
-        String targetDir = Paths.get("").toAbsolutePath().getParent() + "/FreelogCompilerJavaTarget2/src/main/java";
-        GeneratedFileHelper.transfer(sourceDir, targetDir, cg.targetLang, cg.packageName);
+//        String sourceDir = cg.outputDir + "/" + cg.grammarDir;
+//        String targetDir = Paths.get("").toAbsolutePath().getParent() + "/FreelogCompilerJavaTarget2/src/main/java";
+//        GeneratedFileHelper.transfer(sourceDir, targetDir, cg.targetLang, cg.packageName);
     }
 
     @Test
@@ -33,8 +33,8 @@ public class MainTest {
 
         cg.generate();
 
-        String sourceDir = cg.outputDir + "/" + cg.grammarDir;
-        String targetDir = Paths.get("D:/space_webstorm/resource-policy-lang/gen2").toString();
-        GeneratedFileHelper.transfer(sourceDir, targetDir, cg.targetLang, cg.packageName);
+//        String sourceDir = cg.outputDir + "/" + cg.grammarDir;
+//        String targetDir = Paths.get("D:/space_webstorm/resource-policy-lang/gen2").toString();
+//        GeneratedFileHelper.transfer(sourceDir, targetDir, cg.targetLang, cg.packageName);
     }
 }

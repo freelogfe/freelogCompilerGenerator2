@@ -20,14 +20,12 @@ public class CompilerGenerator {
 
     private static final Logger logger = LoggerFactory.getLogger(CompilerGenerator.class);
 
+    public final String tmpDir = "tmp";
     public String serviceName;
-    public String grammarDir;
-    public String outputDirTargetLang;
     public String targetLang;
-    public String outputDir;
-    public String partialNode;
     public Boolean noVisitor;
     public Boolean noListener;
+    public String partialNode;
     public String packageName;
 
     public final Map<String, Map<String, String>> all_injections = TargetDependentInjection.injections;
@@ -39,11 +37,9 @@ public class CompilerGenerator {
     public CompilerGenerator() {
     }
 
-    public CompilerGenerator(String serviceName, String grammarDir, String outputDir, String targetLang, String partialNode, Boolean noVisitor, Boolean noListener, String packageName) {
+    public CompilerGenerator(String serviceName, String targetLang, String partialNode, Boolean noVisitor, Boolean noListener, String packageName) {
         this.serviceName = serviceName;
         this.targetLang = targetLang;
-        this.outputDir = outputDir;
-        this.grammarDir = grammarDir;
         this.partialNode = partialNode;
         this.noVisitor = noVisitor;
         this.noListener = noListener;
@@ -62,7 +58,7 @@ public class CompilerGenerator {
         parseGrammar();
     }
 
-    public void renderGrammarFromTemplate() {
+    private void renderGrammarFromTemplate() {
         STGroup stg = new STGroupDir(this.templateGroupDir);
         String startingRule = this.templateStartingRule;
         ST st = stg.getInstanceOf(startingRule);
@@ -75,7 +71,7 @@ public class CompilerGenerator {
 
         String grammar = st.render();
 
-        Path outputPath = Paths.get(this.grammarDir, this.serviceName + "Policy.g4");
+        Path outputPath = Paths.get(this.tmpDir, this.serviceName + "Policy.g4");
         writeFile(outputPath, grammar);
     }
 
@@ -86,7 +82,7 @@ public class CompilerGenerator {
                 @Override
                 public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
                     if (matcher.matches(file)) {
-                        Path dest = Paths.get(CompilerGenerator.this.grammarDir + "/" + file.getFileName());
+                        Path dest = Paths.get(CompilerGenerator.this.tmpDir + "/" + file.getFileName());
                         copyFile(file, dest);
                     }
                     return FileVisitResult.CONTINUE;
@@ -97,17 +93,16 @@ public class CompilerGenerator {
         }
     }
 
-    public void parseGrammar() {
+    private void parseGrammar() {
         String grammarFile = this.partialNode.equals("") ? this.serviceName + "Policy.g4" : this.partialNode + ".g4";
-        Path grammarPath = Paths.get(this.grammarDir, grammarFile);
+        Path grammarPath = Paths.get(this.tmpDir, grammarFile);
         String visitorFlag = this.noVisitor ? "-no-visitor" : "-visitor";
         String listenerFlag = this.noListener ? "-no-listener" : "-listener";
         List<String> toolArgs = new LinkedList<String>(Arrays.asList(
                 grammarPath.toString(),
                 visitorFlag,
                 listenerFlag,
-                "-Dlanguage=" + this.targetLang,
-                "-o", this.outputDir
+                "-Dlanguage=" + this.targetLang
         ));
 
         if (this.packageName != null) {
@@ -137,7 +132,6 @@ public class CompilerGenerator {
     }
 
     private void copyFile(Path source, Path dest) {
-
         try {
             Files.copy(source, dest, StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {

@@ -6,7 +6,7 @@ import java.util.*;
 
 class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         Map<String, String> argMap = parseArgs(args);
 
         CompilerGeneratorBuilder cg_builder = new CompilerGeneratorBuilder();
@@ -14,11 +14,7 @@ class Main {
 
         cg.generate();
 
-        if (cg.outputDirTargetLang != null) {
-            String sourceDir = cg.outputDir + "/" + cg.grammarDir;
-            String targetDir = cg.outputDirTargetLang;
-            GeneratedFileHelper.transfer(sourceDir, targetDir, cg.targetLang, cg.packageName);
-        }
+        GeneratedFileHelper.generateAndClean(cg_builder, cg);
     }
 
     // 参数解析
