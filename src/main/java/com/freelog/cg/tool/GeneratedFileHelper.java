@@ -15,8 +15,19 @@ public class GeneratedFileHelper {
 
     private static final Logger logger = LoggerFactory.getLogger(GeneratedFileHelper.class);
 
-    public static void generateAndClean(CompilerGeneratorBuilder cg_builder, CompilerGenerator cg) throws Exception {
+    private CompilerGeneratorBuilder cg_builder;
+
+    private CompilerGenerator cg;
+
+    public GeneratedFileHelper(CompilerGeneratorBuilder cg_builder, CompilerGenerator cg) {
+        this.cg_builder = cg_builder;
+        this.cg = cg;
+    }
+
+    public void generateAndClean() throws Exception {
+        // 源路径
         Path sourceDir = Paths.get(cg.tmpDir);
+        // 目标路径
         Path outputDir = Paths.get(cg_builder.outputDir);
         if (!Files.isDirectory(outputDir)) {
             Files.createDirectory(outputDir);
@@ -63,7 +74,7 @@ public class GeneratedFileHelper {
         FileUtils.deleteDirectory(new File(sourceDir.toString()));
     }
 
-    public static void transfer(String sourceDir, String targetDir, String targetLang, String packageName) {
+    public void transfer(String sourceDir, String targetDir, String targetLang, String packageName) {
         String matchStr = null;
         switch (targetLang.toLowerCase()) {
             case "java":
@@ -83,10 +94,10 @@ public class GeneratedFileHelper {
                     if (packageName != null && packageName.matches("[a-z]+(\\.[a-z]+)*")) {
                         String[] sonDirs = packageName.split("\\.");
                         targetDirPath = Paths.get(targetDir, sonDirs);
+                        Files.createDirectories(targetDirPath);
                     } else {
                         targetDirPath = Paths.get(targetDir);
                     }
-                    Files.createDirectories(targetDirPath);
                 }
 
                 @Override
