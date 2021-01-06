@@ -4,7 +4,7 @@ import com.freelog.cg.tool.GeneratedFileHelper;
 
 import java.util.*;
 
-class Main {
+public class Main {
 
     public static void main(String[] args) throws Exception {
         Map<String, String> argMap = parseArgs(args);

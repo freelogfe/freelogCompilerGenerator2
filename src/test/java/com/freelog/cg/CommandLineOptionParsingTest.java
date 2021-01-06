@@ -11,6 +11,7 @@ import static org.junit.Assert.assertEquals;
  * Unit test for simple App.
  */
 public class CommandLineOptionParsingTest {
+
     @Test
     public void parse_empty() {
         String[] args = new String[]{};

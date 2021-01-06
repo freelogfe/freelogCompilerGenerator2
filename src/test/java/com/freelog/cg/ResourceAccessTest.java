@@ -16,6 +16,7 @@ import java.util.Iterator;
  * Unit test for simple App.
  */
 public class ResourceAccessTest {
+
     @Test
     public void grammarWalkerTest() {
         try {
@@ -24,7 +25,7 @@ public class ResourceAccessTest {
                 System.out.println(iterator.next());
             }
         } catch (Exception e) {
-            System.err.println(e);
+            e.printStackTrace();
         }
     }
 
@@ -39,7 +40,7 @@ public class ResourceAccessTest {
                 }
             });
         } catch (Exception e) {
-            System.err.println(e);
+            e.printStackTrace();
         }
     }
 }

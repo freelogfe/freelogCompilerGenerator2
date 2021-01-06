@@ -7,6 +7,7 @@ import org.junit.Test;
 /**
  * Unit test for simple App.
  */
+@Deprecated
 public class CompilerGeneratorTest {
 
     @Test

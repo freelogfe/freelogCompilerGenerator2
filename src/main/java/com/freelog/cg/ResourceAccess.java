@@ -8,7 +8,7 @@ import java.nio.file.*;
 import java.util.Collections;
 import java.util.stream.Stream;
 
-class ResourceAccess {
+public class ResourceAccess {
 
     public static Stream<Path> jarFolderWalkStream(String folder_name) throws IOException, URISyntaxException {
         URI uri = ResourceAccess.class.getClassLoader().getResource(folder_name).toURI();

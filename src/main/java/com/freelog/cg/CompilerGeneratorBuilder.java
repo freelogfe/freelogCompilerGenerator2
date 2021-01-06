@@ -67,6 +67,16 @@ public class CompilerGeneratorBuilder {
         return this;
     }
 
+    public CompilerGeneratorBuilder setNoGrammar(Boolean noGrammar) {
+        this.noGrammar = noGrammar;
+        return this;
+    }
+
+    public CompilerGeneratorBuilder setNoOthers(Boolean noOthers) {
+        this.noOthers = noOthers;
+        return this;
+    }
+
     // 根据参数配置字段
     public CompilerGeneratorBuilder setFieldsFromOptions(Map<String, String> cli_options) {
         Class<? extends CompilerGeneratorBuilder> thisClass = this.getClass();

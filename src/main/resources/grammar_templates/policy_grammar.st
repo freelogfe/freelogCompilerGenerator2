@@ -5,7 +5,7 @@ import Entity, Expression, Event;
 
 policy : audience_strict declaration_section? state_definition_section EOF ;
 
-audience_strict : 'for' audience_clause ':' requirement ;
+audience_strict : 'for' audience_clause ;
 
 audience_clause
   : users
@@ -29,7 +29,7 @@ declaration_statements
   | expression_assignment
   ;
 
-service_state_constant : type=service_state_scope service_state ;
+service_state_constant : service_state_scope service_state ;
 
 service_state_scope
   : 'always'
@@ -55,7 +55,7 @@ service_state : ID ;
 
 state_transition
   : event '=>' state_name
-  | 'terminate'
+  | terminate='terminate'
   ;
 
 subject_id : subject { <keep_id> } ;
