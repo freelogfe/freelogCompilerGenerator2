@@ -1,5 +1,5 @@
-grammar A;
-import AToken;
+grammar Json;
+import JsonToken;
 
 json
     : object

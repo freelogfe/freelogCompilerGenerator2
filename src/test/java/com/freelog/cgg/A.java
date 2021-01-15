@@ -6,6 +6,7 @@ import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.BailErrorStrategy;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
+import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.junit.Test;
 
 import java.io.InputStream;
@@ -20,6 +21,7 @@ public class A {
     public void a() {
         List<String> toolArgs = new LinkedList<String>(Arrays.asList(
                 Paths.get("src/test/java/com/freelog/cgg/A.g4").toString(),
+                "-visitor",
                 "-package",
                 "com.freelog.cgg"
         ));
@@ -32,11 +34,7 @@ public class A {
         tool.processGrammarsOnCommandLine();
     }
 
-    public static void main(String[] args) throws Exception{
-
-//    }
-//    @Test
-//    public void b() throws Exception {
+    public static void main(String[] args) throws Exception {
         InputStream is = A.class.getClassLoader().getResourceAsStream("A.sc");
         ANTLRInputStream input = new ANTLRInputStream(is);
 
@@ -45,28 +43,23 @@ public class A {
         // 新建词法符号缓冲区
         CommonTokenStream stream = new CommonTokenStream(lexer);
         // 新建语法分析器
-        AParser parser = new AParser(stream);
-//        parser.setErrorHandler(new BailErrorStrategy());
-//        parser.removeErrorListeners();
-//        parser.addErrorListener(new VerboseListener());
-        // 令语法分析器报告所有的歧义
-//        parser.getInterpreter().setPredictionMode(PredictionMode.LL_EXACT_AMBIG_DETECTION);
-//        parser.addErrorListener(new DiagnosticErrorListener());
+        AParser parser = new CAParser(stream);
+        parser.setErrorHandler(new BailErrorStrategy());
+//        parser.addParseListener(new CAListener());
+
 //        parser.setBuildParseTree(false);
-        ParseTree tree = parser.r();
+        ParseTree tree = parser.json();
 
-        // 新建语法分析树遍历器
-//        ParseTreeWalker walker = new ParseTreeWalker();
-        // 新建监听器
-//        CustomListener listener = new CustomListener();
-        // 遍历
-//        walker.walk(listener, tree);
+        ParseTreeWalker walker = new ParseTreeWalker();
+        CAListener listener = new CAListener(stream);
+        walker.walk(listener, tree);
 
-        // 新建访问器
-//        CustomVisitor visitor = new CustomVisitor();
-        // 访问
-//        visitor.visit(tree);
+        CAVisitor visitor = new CAVisitor();
+        visitor.visit(tree);
 
+//        System.out.println();
+//        System.out.println(tree.toStringTree(parser));
+//
         TreeVisualizer.viewAST(Arrays.asList(parser.getRuleNames()), tree);
     }
 }

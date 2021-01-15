@@ -1,1 +1,7 @@
-hello hi
+{
+    "description" : "An imaginary server config file",
+    "logs" : {"level":"verbose", "dir":"/var/log"},
+    "host" : "antlr.org",
+    "admin": ["parrt", "tombu"],
+    "aliases": []
+}
