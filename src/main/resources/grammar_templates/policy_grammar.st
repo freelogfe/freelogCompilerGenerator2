@@ -44,9 +44,7 @@ state_definition
   ;
 
 state_name
-  : 'initial'
-  | 'finish'
-  | ID
+  : ID
   ;
 
 service_state_definition : '[' service_state (',' service_state)* ']' ;

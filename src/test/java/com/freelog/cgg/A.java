@@ -45,10 +45,10 @@ public class A {
         // 新建语法分析器
         AParser parser = new CAParser(stream);
         parser.setErrorHandler(new BailErrorStrategy());
-//        parser.addParseListener(new CAListener());
+//        parser.addParseListener(new CAListener(stream));
 
 //        parser.setBuildParseTree(false);
-        ParseTree tree = parser.json();
+        ParseTree tree = parser.rows();
 
         ParseTreeWalker walker = new ParseTreeWalker();
         CAListener listener = new CAListener(stream);
@@ -57,9 +57,6 @@ public class A {
         CAVisitor visitor = new CAVisitor();
         visitor.visit(tree);
 
-//        System.out.println();
-//        System.out.println(tree.toStringTree(parser));
-//
         TreeVisualizer.viewAST(Arrays.asList(parser.getRuleNames()), tree);
     }
 }

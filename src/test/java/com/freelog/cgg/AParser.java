@@ -17,28 +17,25 @@ public class AParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
-		STRING=10, NUMBER=11, WS=12;
+		ROW=1, ID=2, INT=3, ABC=4, WS=5;
 	public static final int
-		RULE_json = 0, RULE_object = 1, RULE_pair = 2, RULE_array = 3, RULE_value = 4;
+		RULE_rows = 0;
 	private static String[] makeRuleNames() {
 		return new String[] {
-			"json", "object", "pair", "array", "value"
+			"rows"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, "'{'", "','", "'}'", "':'", "'['", "']'", "'true'", "'false'", 
-			"'null'"
+			null, null, null, null, "'abc'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, null, null, null, null, null, null, null, null, null, "STRING", 
-			"NUMBER", "WS"
+			null, "ROW", "ID", "INT", "ABC", "WS"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -92,484 +89,51 @@ public class AParser extends Parser {
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
 
-	public static class JsonContext extends ParserRuleContext {
-		public ObjectContext object() {
-			return getRuleContext(ObjectContext.class,0);
+	public static class RowsContext extends ParserRuleContext {
+		public List<TerminalNode> ROW() { return getTokens(AParser.ROW); }
+		public TerminalNode ROW(int i) {
+			return getToken(AParser.ROW, i);
 		}
-		public ArrayContext array() {
-			return getRuleContext(ArrayContext.class,0);
-		}
-		public JsonContext(ParserRuleContext parent, int invokingState) {
+		public RowsContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_json; }
+		@Override public int getRuleIndex() { return RULE_rows; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AListener ) ((AListener)listener).enterJson(this);
+			if ( listener instanceof AListener ) ((AListener)listener).enterRows(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AListener ) ((AListener)listener).exitJson(this);
+			if ( listener instanceof AListener ) ((AListener)listener).exitRows(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof AVisitor ) return ((AVisitor<? extends T>)visitor).visitJson(this);
+			if ( visitor instanceof AVisitor ) return ((AVisitor<? extends T>)visitor).visitRows(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final JsonContext json() throws RecognitionException {
-		JsonContext _localctx = new JsonContext(_ctx, getState());
-		enterRule(_localctx, 0, RULE_json);
-		try {
-			setState(12);
-			_errHandler.sync(this);
-			switch (_input.LA(1)) {
-			case T__0:
-				enterOuterAlt(_localctx, 1);
-				{
-				setState(10);
-				object();
-				}
-				break;
-			case T__4:
-				enterOuterAlt(_localctx, 2);
-				{
-				setState(11);
-				array();
-				}
-				break;
-			default:
-				throw new NoViableAltException(this);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	public static class ObjectContext extends ParserRuleContext {
-		public ObjectContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_object; }
-	 
-		public ObjectContext() { }
-		public void copyFrom(ObjectContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	public static class AnObjectContext extends ObjectContext {
-		public List<PairContext> pair() {
-			return getRuleContexts(PairContext.class);
-		}
-		public PairContext pair(int i) {
-			return getRuleContext(PairContext.class,i);
-		}
-		public AnObjectContext(ObjectContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AListener ) ((AListener)listener).enterAnObject(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AListener ) ((AListener)listener).exitAnObject(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof AVisitor ) return ((AVisitor<? extends T>)visitor).visitAnObject(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class EmptyObjectContext extends ObjectContext {
-		public EmptyObjectContext(ObjectContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AListener ) ((AListener)listener).enterEmptyObject(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AListener ) ((AListener)listener).exitEmptyObject(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof AVisitor ) return ((AVisitor<? extends T>)visitor).visitEmptyObject(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final ObjectContext object() throws RecognitionException {
-		ObjectContext _localctx = new ObjectContext(_ctx, getState());
-		enterRule(_localctx, 2, RULE_object);
+	public final RowsContext rows() throws RecognitionException {
+		RowsContext _localctx = new RowsContext(_ctx, getState());
+		enterRule(_localctx, 0, RULE_rows);
 		int _la;
-		try {
-			setState(27);
-			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,2,_ctx) ) {
-			case 1:
-				_localctx = new AnObjectContext(_localctx);
-				enterOuterAlt(_localctx, 1);
-				{
-				setState(14);
-				match(T__0);
-				setState(15);
-				pair();
-				setState(20);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-				while (_la==T__1) {
-					{
-					{
-					setState(16);
-					match(T__1);
-					setState(17);
-					pair();
-					}
-					}
-					setState(22);
-					_errHandler.sync(this);
-					_la = _input.LA(1);
-				}
-				setState(23);
-				match(T__2);
-				}
-				break;
-			case 2:
-				_localctx = new EmptyObjectContext(_localctx);
-				enterOuterAlt(_localctx, 2);
-				{
-				setState(25);
-				match(T__0);
-				setState(26);
-				match(T__2);
-				}
-				break;
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	public static class PairContext extends ParserRuleContext {
-		public TerminalNode STRING() { return getToken(AParser.STRING, 0); }
-		public ValueContext value() {
-			return getRuleContext(ValueContext.class,0);
-		}
-		public PairContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_pair; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AListener ) ((AListener)listener).enterPair(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AListener ) ((AListener)listener).exitPair(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof AVisitor ) return ((AVisitor<? extends T>)visitor).visitPair(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final PairContext pair() throws RecognitionException {
-		PairContext _localctx = new PairContext(_ctx, getState());
-		enterRule(_localctx, 4, RULE_pair);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(29);
-			match(STRING);
-			setState(30);
-			match(T__3);
-			setState(31);
-			value();
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	public static class ArrayContext extends ParserRuleContext {
-		public ArrayContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_array; }
-	 
-		public ArrayContext() { }
-		public void copyFrom(ArrayContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	public static class EmptyArrayContext extends ArrayContext {
-		public EmptyArrayContext(ArrayContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AListener ) ((AListener)listener).enterEmptyArray(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AListener ) ((AListener)listener).exitEmptyArray(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof AVisitor ) return ((AVisitor<? extends T>)visitor).visitEmptyArray(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class AnArrayContext extends ArrayContext {
-		public List<ValueContext> value() {
-			return getRuleContexts(ValueContext.class);
-		}
-		public ValueContext value(int i) {
-			return getRuleContext(ValueContext.class,i);
-		}
-		public AnArrayContext(ArrayContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AListener ) ((AListener)listener).enterAnArray(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AListener ) ((AListener)listener).exitAnArray(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof AVisitor ) return ((AVisitor<? extends T>)visitor).visitAnArray(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final ArrayContext array() throws RecognitionException {
-		ArrayContext _localctx = new ArrayContext(_ctx, getState());
-		enterRule(_localctx, 6, RULE_array);
-		int _la;
-		try {
-			setState(46);
+			setState(3); 
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,4,_ctx) ) {
-			case 1:
-				_localctx = new AnArrayContext(_localctx);
-				enterOuterAlt(_localctx, 1);
+			_la = _input.LA(1);
+			do {
 				{
-				setState(33);
-				match(T__4);
-				setState(34);
-				value();
-				setState(39);
+				{
+				setState(2);
+				match(ROW);
+				}
+				}
+				setState(5); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-				while (_la==T__1) {
-					{
-					{
-					setState(35);
-					match(T__1);
-					setState(36);
-					value();
-					}
-					}
-					setState(41);
-					_errHandler.sync(this);
-					_la = _input.LA(1);
-				}
-				setState(42);
-				match(T__5);
-				}
-				break;
-			case 2:
-				_localctx = new EmptyArrayContext(_localctx);
-				enterOuterAlt(_localctx, 2);
-				{
-				setState(44);
-				match(T__4);
-				setState(45);
-				match(T__5);
-				}
-				break;
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	public static class ValueContext extends ParserRuleContext {
-		public ValueContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_value; }
-	 
-		public ValueContext() { }
-		public void copyFrom(ValueContext ctx) {
-			super.copyFrom(ctx);
-		}
-	}
-	public static class ObjectValueContext extends ValueContext {
-		public ObjectContext object() {
-			return getRuleContext(ObjectContext.class,0);
-		}
-		public ObjectValueContext(ValueContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AListener ) ((AListener)listener).enterObjectValue(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AListener ) ((AListener)listener).exitObjectValue(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof AVisitor ) return ((AVisitor<? extends T>)visitor).visitObjectValue(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class StringContext extends ValueContext {
-		public TerminalNode STRING() { return getToken(AParser.STRING, 0); }
-		public StringContext(ValueContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AListener ) ((AListener)listener).enterString(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AListener ) ((AListener)listener).exitString(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof AVisitor ) return ((AVisitor<? extends T>)visitor).visitString(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class ArrayValueContext extends ValueContext {
-		public ArrayContext array() {
-			return getRuleContext(ArrayContext.class,0);
-		}
-		public ArrayValueContext(ValueContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AListener ) ((AListener)listener).enterArrayValue(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AListener ) ((AListener)listener).exitArrayValue(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof AVisitor ) return ((AVisitor<? extends T>)visitor).visitArrayValue(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class AtomContext extends ValueContext {
-		public TerminalNode NUMBER() { return getToken(AParser.NUMBER, 0); }
-		public AtomContext(ValueContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AListener ) ((AListener)listener).enterAtom(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AListener ) ((AListener)listener).exitAtom(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof AVisitor ) return ((AVisitor<? extends T>)visitor).visitAtom(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final ValueContext value() throws RecognitionException {
-		ValueContext _localctx = new ValueContext(_ctx, getState());
-		enterRule(_localctx, 8, RULE_value);
-		try {
-			setState(55);
-			_errHandler.sync(this);
-			switch (_input.LA(1)) {
-			case STRING:
-				_localctx = new StringContext(_localctx);
-				enterOuterAlt(_localctx, 1);
-				{
-				setState(48);
-				match(STRING);
-				}
-				break;
-			case NUMBER:
-				_localctx = new AtomContext(_localctx);
-				enterOuterAlt(_localctx, 2);
-				{
-				setState(49);
-				match(NUMBER);
-				}
-				break;
-			case T__0:
-				_localctx = new ObjectValueContext(_localctx);
-				enterOuterAlt(_localctx, 3);
-				{
-				setState(50);
-				object();
-				}
-				break;
-			case T__4:
-				_localctx = new ArrayValueContext(_localctx);
-				enterOuterAlt(_localctx, 4);
-				{
-				setState(51);
-				array();
-				}
-				break;
-			case T__6:
-				_localctx = new AtomContext(_localctx);
-				enterOuterAlt(_localctx, 5);
-				{
-				setState(52);
-				match(T__6);
-				}
-				break;
-			case T__7:
-				_localctx = new AtomContext(_localctx);
-				enterOuterAlt(_localctx, 6);
-				{
-				setState(53);
-				match(T__7);
-				}
-				break;
-			case T__8:
-				_localctx = new AtomContext(_localctx);
-				enterOuterAlt(_localctx, 7);
-				{
-				setState(54);
-				match(T__8);
-				}
-				break;
-			default:
-				throw new NoViableAltException(this);
+			} while ( _la==ROW );
 			}
 		}
 		catch (RecognitionException re) {
@@ -584,23 +148,9 @@ public class AParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\16<\4\2\t\2\4\3\t"+
-		"\3\4\4\t\4\4\5\t\5\4\6\t\6\3\2\3\2\5\2\17\n\2\3\3\3\3\3\3\3\3\7\3\25\n"+
-		"\3\f\3\16\3\30\13\3\3\3\3\3\3\3\3\3\5\3\36\n\3\3\4\3\4\3\4\3\4\3\5\3\5"+
-		"\3\5\3\5\7\5(\n\5\f\5\16\5+\13\5\3\5\3\5\3\5\3\5\5\5\61\n\5\3\6\3\6\3"+
-		"\6\3\6\3\6\3\6\3\6\5\6:\n\6\3\6\2\2\7\2\4\6\b\n\2\2\2A\2\16\3\2\2\2\4"+
-		"\35\3\2\2\2\6\37\3\2\2\2\b\60\3\2\2\2\n9\3\2\2\2\f\17\5\4\3\2\r\17\5\b"+
-		"\5\2\16\f\3\2\2\2\16\r\3\2\2\2\17\3\3\2\2\2\20\21\7\3\2\2\21\26\5\6\4"+
-		"\2\22\23\7\4\2\2\23\25\5\6\4\2\24\22\3\2\2\2\25\30\3\2\2\2\26\24\3\2\2"+
-		"\2\26\27\3\2\2\2\27\31\3\2\2\2\30\26\3\2\2\2\31\32\7\5\2\2\32\36\3\2\2"+
-		"\2\33\34\7\3\2\2\34\36\7\5\2\2\35\20\3\2\2\2\35\33\3\2\2\2\36\5\3\2\2"+
-		"\2\37 \7\f\2\2 !\7\6\2\2!\"\5\n\6\2\"\7\3\2\2\2#$\7\7\2\2$)\5\n\6\2%&"+
-		"\7\4\2\2&(\5\n\6\2\'%\3\2\2\2(+\3\2\2\2)\'\3\2\2\2)*\3\2\2\2*,\3\2\2\2"+
-		"+)\3\2\2\2,-\7\b\2\2-\61\3\2\2\2./\7\7\2\2/\61\7\b\2\2\60#\3\2\2\2\60"+
-		".\3\2\2\2\61\t\3\2\2\2\62:\7\f\2\2\63:\7\r\2\2\64:\5\4\3\2\65:\5\b\5\2"+
-		"\66:\7\t\2\2\67:\7\n\2\28:\7\13\2\29\62\3\2\2\29\63\3\2\2\29\64\3\2\2"+
-		"\29\65\3\2\2\29\66\3\2\2\29\67\3\2\2\298\3\2\2\2:\13\3\2\2\2\b\16\26\35"+
-		")\609";
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\7\n\4\2\t\2\3\2\6"+
+		"\2\6\n\2\r\2\16\2\7\3\2\2\2\3\2\2\2\2\t\2\5\3\2\2\2\4\6\7\3\2\2\5\4\3"+
+		"\2\2\2\6\7\3\2\2\2\7\5\3\2\2\2\7\b\3\2\2\2\b\3\3\2\2\2\3\7";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
