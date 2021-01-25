@@ -1,6 +1,6 @@
-parser grammar Rule;
+parser grammar MappingRule;
 
-options { tokenVocab=RuleToken; }
+options { tokenVocab=MappingRuleToken; }
 
 mapping_rule_section
     : mapping_rule*

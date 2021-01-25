@@ -1,6 +1,8 @@
 package com.freelog.ccg;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import org.antlr.v4.Tool;
 import org.antlr.v4.runtime.ANTLRInputStream;
@@ -22,7 +24,8 @@ public class B {
                 Paths.get(String.format("src/test/java/com/freelog/ccg/%s", grammarName)).toString(),
                 "-visitor",
                 "-package",
-                "com.freelog.ccg"
+                "com.freelog.ccg",
+                "-Dlanguage=JavaScript"
         ));
 
         String[] toolArgsArray = new String[toolArgs.size()];
@@ -35,8 +38,8 @@ public class B {
 
     @Test
     public void b() {
-        compile("RuleToken.g4");
-        compile("Rule.g4");
+        compile("MappingRuleToken.g4");
+        compile("MappingRule.g4");
     }
 
     public static void main(String[] args) throws Exception {
@@ -44,21 +47,32 @@ public class B {
         ANTLRInputStream input = new ANTLRInputStream(is);
 
         // 新建词法分析器
-        RuleToken lexer = new RuleToken(input);
+        MappingRuleToken lexer = new MappingRuleToken(input);
         // 新建词法符号缓冲区
         CommonTokenStream stream = new CommonTokenStream(lexer);
         // 新建语法分析器
-        Rule parser = new Rule(stream);
+        MappingRule parser = new MappingRule(stream);
+        MappingRuleErrorListener errorListener = new MappingRuleErrorListener();
+        parser.addErrorListener(errorListener);
+        // 关闭恢复机制
 //        parser.setErrorHandler(new BailErrorStrategy());
 
         ParseTree tree = parser.mapping_rule_section();
 
-        RuleCustomVisitor visitor = new RuleCustomVisitor();
+        MappingRuleCustomVisitor visitor = new MappingRuleCustomVisitor();
         visitor.visit(tree);
+        visitor.verify();
 
         String output = JSON.toJSONString(visitor.mappingRules, SerializerFeature.WriteMapNullValue, SerializerFeature.PrettyFormat);
         String outputFile = "zhaojn.json";
         Files.writeString(Paths.get(outputFile), output);
+
+        JSONObject result = new JSONObject();
+        result.put("rules", visitor.mappingRules);
+        result.put("errors", new JSONArray().fluentAddAll(errorListener.errors).fluentAddAll(visitor.errors));
+        result.put("errorObjects", errorListener.errorObjects);
+
+        System.out.println(JSON.toJSONString(result, SerializerFeature.WriteMapNullValue, SerializerFeature.PrettyFormat));
 
 //        TreeVisualizer.viewAST(Arrays.asList(parser.getRuleNames()), tree);
     }

@@ -1,4 +1,4 @@
-// Generated from src\test\java\com\freelog\ccg\RuleToken.g4 by ANTLR 4.8
+// Generated from src\test\java\com\freelog\ccg\MappingRuleToken.g4 by ANTLR 4.8
 package com.freelog.ccg;
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
@@ -10,7 +10,7 @@ import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.misc.*;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
-public class RuleToken extends Lexer {
+public class MappingRuleToken extends Lexer {
 	static { RuntimeMetaData.checkVersion("4.8", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
@@ -93,13 +93,13 @@ public class RuleToken extends Lexer {
 	}
 
 
-	public RuleToken(CharStream input) {
+	public MappingRuleToken(CharStream input) {
 		super(input);
 		_interp = new LexerATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
 
 	@Override
-	public String getGrammarFileName() { return "RuleToken.g4"; }
+	public String getGrammarFileName() { return "MappingRuleToken.g4"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }

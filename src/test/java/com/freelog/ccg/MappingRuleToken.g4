@@ -1,4 +1,4 @@
-lexer grammar RuleToken;
+lexer grammar MappingRuleToken;
 
 // 映射规则
 ADD : 'add' ;

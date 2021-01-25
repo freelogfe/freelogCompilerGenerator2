@@ -1,4 +1,4 @@
-// Generated from src\test\java\com\freelog\ccg\Rule.g4 by ANTLR 4.8
+// Generated from src\test\java\com\freelog\ccg\MappingRule.g4 by ANTLR 4.8
 package com.freelog.ccg;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
@@ -10,7 +10,7 @@ import java.util.Iterator;
 import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
-public class Rule extends Parser {
+public class MappingRule extends Parser {
 	static { RuntimeMetaData.checkVersion("4.8", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
@@ -90,7 +90,7 @@ public class Rule extends Parser {
 	}
 
 	@Override
-	public String getGrammarFileName() { return "Rule.g4"; }
+	public String getGrammarFileName() { return "MappingRule.g4"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }
@@ -101,7 +101,7 @@ public class Rule extends Parser {
 	@Override
 	public ATN getATN() { return _ATN; }
 
-	public Rule(TokenStream input) {
+	public MappingRule(TokenStream input) {
 		super(input);
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
@@ -119,15 +119,15 @@ public class Rule extends Parser {
 		@Override public int getRuleIndex() { return RULE_mapping_rule_section; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof RuleListener ) ((RuleListener)listener).enterMapping_rule_section(this);
+			if ( listener instanceof MappingRuleListener ) ((MappingRuleListener)listener).enterMapping_rule_section(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof RuleListener ) ((RuleListener)listener).exitMapping_rule_section(this);
+			if ( listener instanceof MappingRuleListener ) ((MappingRuleListener)listener).exitMapping_rule_section(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof RuleVisitor ) return ((RuleVisitor<? extends T>)visitor).visitMapping_rule_section(this);
+			if ( visitor instanceof MappingRuleVisitor ) return ((MappingRuleVisitor<? extends T>)visitor).visitMapping_rule_section(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -182,15 +182,15 @@ public class Rule extends Parser {
 		@Override public int getRuleIndex() { return RULE_mapping_rule; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof RuleListener ) ((RuleListener)listener).enterMapping_rule(this);
+			if ( listener instanceof MappingRuleListener ) ((MappingRuleListener)listener).enterMapping_rule(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof RuleListener ) ((RuleListener)listener).exitMapping_rule(this);
+			if ( listener instanceof MappingRuleListener ) ((MappingRuleListener)listener).exitMapping_rule(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof RuleVisitor ) return ((RuleVisitor<? extends T>)visitor).visitMapping_rule(this);
+			if ( visitor instanceof MappingRuleVisitor ) return ((MappingRuleVisitor<? extends T>)visitor).visitMapping_rule(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -239,12 +239,12 @@ public class Rule extends Parser {
 	}
 
 	public static class Rule_addContext extends ParserRuleContext {
-		public TerminalNode ADD() { return getToken(Rule.ADD, 0); }
+		public TerminalNode ADD() { return getToken(MappingRule.ADD, 0); }
 		public CandidateContext candidate() {
 			return getRuleContext(CandidateContext.class,0);
 		}
-		public TerminalNode AS() { return getToken(Rule.AS, 0); }
-		public TerminalNode ID() { return getToken(Rule.ID, 0); }
+		public TerminalNode AS() { return getToken(MappingRule.AS, 0); }
+		public TerminalNode ID() { return getToken(MappingRule.ID, 0); }
 		public ActionContext action() {
 			return getRuleContext(ActionContext.class,0);
 		}
@@ -254,15 +254,15 @@ public class Rule extends Parser {
 		@Override public int getRuleIndex() { return RULE_rule_add; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof RuleListener ) ((RuleListener)listener).enterRule_add(this);
+			if ( listener instanceof MappingRuleListener ) ((MappingRuleListener)listener).enterRule_add(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof RuleListener ) ((RuleListener)listener).exitRule_add(this);
+			if ( listener instanceof MappingRuleListener ) ((MappingRuleListener)listener).exitRule_add(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof RuleVisitor ) return ((RuleVisitor<? extends T>)visitor).visitRule_add(this);
+			if ( visitor instanceof MappingRuleVisitor ) return ((MappingRuleVisitor<? extends T>)visitor).visitRule_add(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -297,8 +297,8 @@ public class Rule extends Parser {
 	}
 
 	public static class Rule_alterContext extends ParserRuleContext {
-		public TerminalNode ALTER() { return getToken(Rule.ALTER, 0); }
-		public TerminalNode ID() { return getToken(Rule.ID, 0); }
+		public TerminalNode ALTER() { return getToken(MappingRule.ALTER, 0); }
+		public TerminalNode ID() { return getToken(MappingRule.ID, 0); }
 		public ActionContext action() {
 			return getRuleContext(ActionContext.class,0);
 		}
@@ -308,15 +308,15 @@ public class Rule extends Parser {
 		@Override public int getRuleIndex() { return RULE_rule_alter; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof RuleListener ) ((RuleListener)listener).enterRule_alter(this);
+			if ( listener instanceof MappingRuleListener ) ((MappingRuleListener)listener).enterRule_alter(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof RuleListener ) ((RuleListener)listener).exitRule_alter(this);
+			if ( listener instanceof MappingRuleListener ) ((MappingRuleListener)listener).exitRule_alter(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof RuleVisitor ) return ((RuleVisitor<? extends T>)visitor).visitRule_alter(this);
+			if ( visitor instanceof MappingRuleVisitor ) return ((MappingRuleVisitor<? extends T>)visitor).visitRule_alter(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -347,23 +347,23 @@ public class Rule extends Parser {
 	}
 
 	public static class Rule_activate_themeContext extends ParserRuleContext {
-		public TerminalNode ACTIVATE_THEME() { return getToken(Rule.ACTIVATE_THEME, 0); }
-		public TerminalNode ID() { return getToken(Rule.ID, 0); }
+		public TerminalNode ACTIVATE_THEME() { return getToken(MappingRule.ACTIVATE_THEME, 0); }
+		public TerminalNode ID() { return getToken(MappingRule.ID, 0); }
 		public Rule_activate_themeContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_rule_activate_theme; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof RuleListener ) ((RuleListener)listener).enterRule_activate_theme(this);
+			if ( listener instanceof MappingRuleListener ) ((MappingRuleListener)listener).enterRule_activate_theme(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof RuleListener ) ((RuleListener)listener).exitRule_activate_theme(this);
+			if ( listener instanceof MappingRuleListener ) ((MappingRuleListener)listener).exitRule_activate_theme(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof RuleVisitor ) return ((RuleVisitor<? extends T>)visitor).visitRule_activate_theme(this);
+			if ( visitor instanceof MappingRuleVisitor ) return ((MappingRuleVisitor<? extends T>)visitor).visitRule_activate_theme(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -404,15 +404,15 @@ public class Rule extends Parser {
 		@Override public int getRuleIndex() { return RULE_candidate; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof RuleListener ) ((RuleListener)listener).enterCandidate(this);
+			if ( listener instanceof MappingRuleListener ) ((MappingRuleListener)listener).enterCandidate(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof RuleListener ) ((RuleListener)listener).exitCandidate(this);
+			if ( listener instanceof MappingRuleListener ) ((MappingRuleListener)listener).exitCandidate(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof RuleVisitor ) return ((RuleVisitor<? extends T>)visitor).visitCandidate(this);
+			if ( visitor instanceof MappingRuleVisitor ) return ((MappingRuleVisitor<? extends T>)visitor).visitCandidate(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -456,29 +456,29 @@ public class Rule extends Parser {
 	public static class Resource_nameContext extends ParserRuleContext {
 		public Token userName;
 		public Token resourceName;
-		public TerminalNode DOLLAR() { return getToken(Rule.DOLLAR, 0); }
-		public TerminalNode SLASH() { return getToken(Rule.SLASH, 0); }
-		public List<TerminalNode> ID() { return getTokens(Rule.ID); }
+		public TerminalNode DOLLAR() { return getToken(MappingRule.DOLLAR, 0); }
+		public TerminalNode SLASH() { return getToken(MappingRule.SLASH, 0); }
+		public List<TerminalNode> ID() { return getTokens(MappingRule.ID); }
 		public TerminalNode ID(int i) {
-			return getToken(Rule.ID, i);
+			return getToken(MappingRule.ID, i);
 		}
-		public TerminalNode AT() { return getToken(Rule.AT, 0); }
-		public TerminalNode SEMVER() { return getToken(Rule.SEMVER, 0); }
+		public TerminalNode AT() { return getToken(MappingRule.AT, 0); }
+		public TerminalNode SEMVER() { return getToken(MappingRule.SEMVER, 0); }
 		public Resource_nameContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_resource_name; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof RuleListener ) ((RuleListener)listener).enterResource_name(this);
+			if ( listener instanceof MappingRuleListener ) ((MappingRuleListener)listener).enterResource_name(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof RuleListener ) ((RuleListener)listener).exitResource_name(this);
+			if ( listener instanceof MappingRuleListener ) ((MappingRuleListener)listener).exitResource_name(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof RuleVisitor ) return ((RuleVisitor<? extends T>)visitor).visitResource_name(this);
+			if ( visitor instanceof MappingRuleVisitor ) return ((MappingRuleVisitor<? extends T>)visitor).visitResource_name(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -526,11 +526,11 @@ public class Rule extends Parser {
 	public static class Object_nameContext extends ParserRuleContext {
 		public Token bucketName;
 		public Token objectName;
-		public TerminalNode HASH() { return getToken(Rule.HASH, 0); }
-		public TerminalNode SLASH() { return getToken(Rule.SLASH, 0); }
-		public List<TerminalNode> ID() { return getTokens(Rule.ID); }
+		public TerminalNode HASH() { return getToken(MappingRule.HASH, 0); }
+		public TerminalNode SLASH() { return getToken(MappingRule.SLASH, 0); }
+		public List<TerminalNode> ID() { return getTokens(MappingRule.ID); }
 		public TerminalNode ID(int i) {
-			return getToken(Rule.ID, i);
+			return getToken(MappingRule.ID, i);
 		}
 		public Object_nameContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -538,15 +538,15 @@ public class Rule extends Parser {
 		@Override public int getRuleIndex() { return RULE_object_name; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof RuleListener ) ((RuleListener)listener).enterObject_name(this);
+			if ( listener instanceof MappingRuleListener ) ((MappingRuleListener)listener).enterObject_name(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof RuleListener ) ((RuleListener)listener).exitObject_name(this);
+			if ( listener instanceof MappingRuleListener ) ((MappingRuleListener)listener).exitObject_name(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof RuleVisitor ) return ((RuleVisitor<? extends T>)visitor).visitObject_name(this);
+			if ( visitor instanceof MappingRuleVisitor ) return ((MappingRuleVisitor<? extends T>)visitor).visitObject_name(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -579,8 +579,8 @@ public class Rule extends Parser {
 	}
 
 	public static class ActionContext extends ParserRuleContext {
-		public TerminalNode DO() { return getToken(Rule.DO, 0); }
-		public TerminalNode END() { return getToken(Rule.END, 0); }
+		public TerminalNode DO() { return getToken(MappingRule.DO, 0); }
+		public TerminalNode END() { return getToken(MappingRule.END, 0); }
 		public List<Line_codeContext> line_code() {
 			return getRuleContexts(Line_codeContext.class);
 		}
@@ -593,15 +593,15 @@ public class Rule extends Parser {
 		@Override public int getRuleIndex() { return RULE_action; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof RuleListener ) ((RuleListener)listener).enterAction(this);
+			if ( listener instanceof MappingRuleListener ) ((MappingRuleListener)listener).enterAction(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof RuleListener ) ((RuleListener)listener).exitAction(this);
+			if ( listener instanceof MappingRuleListener ) ((MappingRuleListener)listener).exitAction(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof RuleVisitor ) return ((RuleVisitor<? extends T>)visitor).visitAction(this);
+			if ( visitor instanceof MappingRuleVisitor ) return ((MappingRuleVisitor<? extends T>)visitor).visitAction(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -697,15 +697,15 @@ public class Rule extends Parser {
 		@Override public int getRuleIndex() { return RULE_line_code; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof RuleListener ) ((RuleListener)listener).enterLine_code(this);
+			if ( listener instanceof MappingRuleListener ) ((MappingRuleListener)listener).enterLine_code(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof RuleListener ) ((RuleListener)listener).exitLine_code(this);
+			if ( listener instanceof MappingRuleListener ) ((MappingRuleListener)listener).exitLine_code(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof RuleVisitor ) return ((RuleVisitor<? extends T>)visitor).visitLine_code(this);
+			if ( visitor instanceof MappingRuleVisitor ) return ((MappingRuleVisitor<? extends T>)visitor).visitLine_code(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -789,14 +789,14 @@ public class Rule extends Parser {
 	}
 
 	public static class Set_labelsContext extends ParserRuleContext {
-		public TerminalNode SET_LABELS() { return getToken(Rule.SET_LABELS, 0); }
-		public List<TerminalNode> ID() { return getTokens(Rule.ID); }
+		public TerminalNode SET_LABELS() { return getToken(MappingRule.SET_LABELS, 0); }
+		public List<TerminalNode> ID() { return getTokens(MappingRule.ID); }
 		public TerminalNode ID(int i) {
-			return getToken(Rule.ID, i);
+			return getToken(MappingRule.ID, i);
 		}
-		public List<TerminalNode> COMMA() { return getTokens(Rule.COMMA); }
+		public List<TerminalNode> COMMA() { return getTokens(MappingRule.COMMA); }
 		public TerminalNode COMMA(int i) {
-			return getToken(Rule.COMMA, i);
+			return getToken(MappingRule.COMMA, i);
 		}
 		public Set_labelsContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -804,15 +804,15 @@ public class Rule extends Parser {
 		@Override public int getRuleIndex() { return RULE_set_labels; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof RuleListener ) ((RuleListener)listener).enterSet_labels(this);
+			if ( listener instanceof MappingRuleListener ) ((MappingRuleListener)listener).enterSet_labels(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof RuleListener ) ((RuleListener)listener).exitSet_labels(this);
+			if ( listener instanceof MappingRuleListener ) ((MappingRuleListener)listener).exitSet_labels(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof RuleVisitor ) return ((RuleVisitor<? extends T>)visitor).visitSet_labels(this);
+			if ( visitor instanceof MappingRuleVisitor ) return ((MappingRuleVisitor<? extends T>)visitor).visitSet_labels(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -873,24 +873,24 @@ public class Rule extends Parser {
 	public static class ReplaceContext extends ParserRuleContext {
 		public CandidateContext target;
 		public CandidateContext source;
-		public TerminalNode REPLACE() { return getToken(Rule.REPLACE, 0); }
-		public TerminalNode WITH() { return getToken(Rule.WITH, 0); }
+		public TerminalNode REPLACE() { return getToken(MappingRule.REPLACE, 0); }
+		public TerminalNode WITH() { return getToken(MappingRule.WITH, 0); }
 		public List<CandidateContext> candidate() {
 			return getRuleContexts(CandidateContext.class);
 		}
 		public CandidateContext candidate(int i) {
 			return getRuleContext(CandidateContext.class,i);
 		}
-		public TerminalNode UNDER() { return getToken(Rule.UNDER, 0); }
+		public TerminalNode UNDER() { return getToken(MappingRule.UNDER, 0); }
 		public List<ScopeContext> scope() {
 			return getRuleContexts(ScopeContext.class);
 		}
 		public ScopeContext scope(int i) {
 			return getRuleContext(ScopeContext.class,i);
 		}
-		public List<TerminalNode> COMMA() { return getTokens(Rule.COMMA); }
+		public List<TerminalNode> COMMA() { return getTokens(MappingRule.COMMA); }
 		public TerminalNode COMMA(int i) {
-			return getToken(Rule.COMMA, i);
+			return getToken(MappingRule.COMMA, i);
 		}
 		public ReplaceContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -898,15 +898,15 @@ public class Rule extends Parser {
 		@Override public int getRuleIndex() { return RULE_replace; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof RuleListener ) ((RuleListener)listener).enterReplace(this);
+			if ( listener instanceof MappingRuleListener ) ((MappingRuleListener)listener).enterReplace(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof RuleListener ) ((RuleListener)listener).exitReplace(this);
+			if ( listener instanceof MappingRuleListener ) ((MappingRuleListener)listener).exitReplace(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof RuleVisitor ) return ((RuleVisitor<? extends T>)visitor).visitReplace(this);
+			if ( visitor instanceof MappingRuleVisitor ) return ((MappingRuleVisitor<? extends T>)visitor).visitReplace(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -968,22 +968,22 @@ public class Rule extends Parser {
 	}
 
 	public static class ShowContext extends ParserRuleContext {
-		public TerminalNode SHOW() { return getToken(Rule.SHOW, 0); }
+		public TerminalNode SHOW() { return getToken(MappingRule.SHOW, 0); }
 		public ShowContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_show; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof RuleListener ) ((RuleListener)listener).enterShow(this);
+			if ( listener instanceof MappingRuleListener ) ((MappingRuleListener)listener).enterShow(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof RuleListener ) ((RuleListener)listener).exitShow(this);
+			if ( listener instanceof MappingRuleListener ) ((MappingRuleListener)listener).exitShow(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof RuleVisitor ) return ((RuleVisitor<? extends T>)visitor).visitShow(this);
+			if ( visitor instanceof MappingRuleVisitor ) return ((MappingRuleVisitor<? extends T>)visitor).visitShow(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1010,22 +1010,22 @@ public class Rule extends Parser {
 	}
 
 	public static class HideContext extends ParserRuleContext {
-		public TerminalNode HIDE() { return getToken(Rule.HIDE, 0); }
+		public TerminalNode HIDE() { return getToken(MappingRule.HIDE, 0); }
 		public HideContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_hide; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof RuleListener ) ((RuleListener)listener).enterHide(this);
+			if ( listener instanceof MappingRuleListener ) ((MappingRuleListener)listener).enterHide(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof RuleListener ) ((RuleListener)listener).exitHide(this);
+			if ( listener instanceof MappingRuleListener ) ((MappingRuleListener)listener).exitHide(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof RuleVisitor ) return ((RuleVisitor<? extends T>)visitor).visitHide(this);
+			if ( visitor instanceof MappingRuleVisitor ) return ((MappingRuleVisitor<? extends T>)visitor).visitHide(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1052,23 +1052,23 @@ public class Rule extends Parser {
 	}
 
 	public static class Set_titleContext extends ParserRuleContext {
-		public TerminalNode SET_TITLE() { return getToken(Rule.SET_TITLE, 0); }
-		public TerminalNode ID() { return getToken(Rule.ID, 0); }
+		public TerminalNode SET_TITLE() { return getToken(MappingRule.SET_TITLE, 0); }
+		public TerminalNode ID() { return getToken(MappingRule.ID, 0); }
 		public Set_titleContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_set_title; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof RuleListener ) ((RuleListener)listener).enterSet_title(this);
+			if ( listener instanceof MappingRuleListener ) ((MappingRuleListener)listener).enterSet_title(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof RuleListener ) ((RuleListener)listener).exitSet_title(this);
+			if ( listener instanceof MappingRuleListener ) ((MappingRuleListener)listener).exitSet_title(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof RuleVisitor ) return ((RuleVisitor<? extends T>)visitor).visitSet_title(this);
+			if ( visitor instanceof MappingRuleVisitor ) return ((MappingRuleVisitor<? extends T>)visitor).visitSet_title(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1097,23 +1097,23 @@ public class Rule extends Parser {
 	}
 
 	public static class Set_coverContext extends ParserRuleContext {
-		public TerminalNode SET_COVER() { return getToken(Rule.SET_COVER, 0); }
-		public TerminalNode ID() { return getToken(Rule.ID, 0); }
+		public TerminalNode SET_COVER() { return getToken(MappingRule.SET_COVER, 0); }
+		public TerminalNode ID() { return getToken(MappingRule.ID, 0); }
 		public Set_coverContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_set_cover; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof RuleListener ) ((RuleListener)listener).enterSet_cover(this);
+			if ( listener instanceof MappingRuleListener ) ((MappingRuleListener)listener).enterSet_cover(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof RuleListener ) ((RuleListener)listener).exitSet_cover(this);
+			if ( listener instanceof MappingRuleListener ) ((MappingRuleListener)listener).exitSet_cover(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof RuleVisitor ) return ((RuleVisitor<? extends T>)visitor).visitSet_cover(this);
+			if ( visitor instanceof MappingRuleVisitor ) return ((MappingRuleVisitor<? extends T>)visitor).visitSet_cover(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1145,10 +1145,10 @@ public class Rule extends Parser {
 		public Token key;
 		public Token value;
 		public Token description;
-		public TerminalNode ADD_ATTR() { return getToken(Rule.ADD_ATTR, 0); }
-		public List<TerminalNode> ID() { return getTokens(Rule.ID); }
+		public TerminalNode ADD_ATTR() { return getToken(MappingRule.ADD_ATTR, 0); }
+		public List<TerminalNode> ID() { return getTokens(MappingRule.ID); }
 		public TerminalNode ID(int i) {
-			return getToken(Rule.ID, i);
+			return getToken(MappingRule.ID, i);
 		}
 		public Add_attrContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1156,15 +1156,15 @@ public class Rule extends Parser {
 		@Override public int getRuleIndex() { return RULE_add_attr; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof RuleListener ) ((RuleListener)listener).enterAdd_attr(this);
+			if ( listener instanceof MappingRuleListener ) ((MappingRuleListener)listener).enterAdd_attr(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof RuleListener ) ((RuleListener)listener).exitAdd_attr(this);
+			if ( listener instanceof MappingRuleListener ) ((MappingRuleListener)listener).exitAdd_attr(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof RuleVisitor ) return ((RuleVisitor<? extends T>)visitor).visitAdd_attr(this);
+			if ( visitor instanceof MappingRuleVisitor ) return ((MappingRuleVisitor<? extends T>)visitor).visitAdd_attr(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1206,23 +1206,23 @@ public class Rule extends Parser {
 	}
 
 	public static class Delete_attrContext extends ParserRuleContext {
-		public TerminalNode DELETE_ATTR() { return getToken(Rule.DELETE_ATTR, 0); }
-		public TerminalNode ID() { return getToken(Rule.ID, 0); }
+		public TerminalNode DELETE_ATTR() { return getToken(MappingRule.DELETE_ATTR, 0); }
+		public TerminalNode ID() { return getToken(MappingRule.ID, 0); }
 		public Delete_attrContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_delete_attr; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof RuleListener ) ((RuleListener)listener).enterDelete_attr(this);
+			if ( listener instanceof MappingRuleListener ) ((MappingRuleListener)listener).enterDelete_attr(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof RuleListener ) ((RuleListener)listener).exitDelete_attr(this);
+			if ( listener instanceof MappingRuleListener ) ((MappingRuleListener)listener).exitDelete_attr(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof RuleVisitor ) return ((RuleVisitor<? extends T>)visitor).visitDelete_attr(this);
+			if ( visitor instanceof MappingRuleVisitor ) return ((MappingRuleVisitor<? extends T>)visitor).visitDelete_attr(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1257,9 +1257,9 @@ public class Rule extends Parser {
 		public CandidateContext candidate(int i) {
 			return getRuleContext(CandidateContext.class,i);
 		}
-		public List<TerminalNode> GT() { return getTokens(Rule.GT); }
+		public List<TerminalNode> GT() { return getTokens(MappingRule.GT); }
 		public TerminalNode GT(int i) {
-			return getToken(Rule.GT, i);
+			return getToken(MappingRule.GT, i);
 		}
 		public ScopeContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1267,15 +1267,15 @@ public class Rule extends Parser {
 		@Override public int getRuleIndex() { return RULE_scope; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof RuleListener ) ((RuleListener)listener).enterScope(this);
+			if ( listener instanceof MappingRuleListener ) ((MappingRuleListener)listener).enterScope(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof RuleListener ) ((RuleListener)listener).exitScope(this);
+			if ( listener instanceof MappingRuleListener ) ((MappingRuleListener)listener).exitScope(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof RuleVisitor ) return ((RuleVisitor<? extends T>)visitor).visitScope(this);
+			if ( visitor instanceof MappingRuleVisitor ) return ((MappingRuleVisitor<? extends T>)visitor).visitScope(this);
 			else return visitor.visitChildren(this);
 		}
 	}
