@@ -31,7 +31,9 @@ GT : '>' ;
 COMMA : ',' ;
 
 // 词组
-ID : (ALPHABET | DIGIT | '-' | '_' | '.')+ ;
+ID : (ALPHABET | CHINESE_WORD | DIGIT | '-' | '_' | '.')+ ;
+// 字符串
+STRING : '"' (ESC | ~["\\])* '"' ;
 WS : [ \t\r\n]+ -> skip ;
 
 mode SEMVER_MODE;
@@ -39,8 +41,11 @@ mode SEMVER_MODE;
 // 版本
 SEMVER : ('^' | '~')? POSITIVE_INT '.' POSITIVE_INT '.' POSITIVE_INT -> mode(DEFAULT_MODE) ;
 
+fragment ESC : '\\' (["\\/bfnrt] | UNICODE) ;
+fragment UNICODE : 'u' HEX HEX HEX HEX ;
 fragment INT : '-'? POSITIVE_INT ;
 fragment POSITIVE_INT : [1-9] [0-9]* ;
-//fragment HEXDIGIT : [a-fA-F0-9];
 fragment DIGIT : [0-9] ;
+fragment HEX : [a-fA-F0-9] ;
 fragment ALPHABET : [a-zA-Z] ;
+fragment CHINESE_WORD : '\u4e00'..'\u9fef' ;

@@ -4,8 +4,10 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.freelog.cg.tool.TreeVisualizer;
 import org.antlr.v4.Tool;
 import org.antlr.v4.runtime.ANTLRInputStream;
+import org.antlr.v4.runtime.BailErrorStrategy;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.junit.Test;
@@ -52,6 +54,7 @@ public class B {
         CommonTokenStream stream = new CommonTokenStream(lexer);
         // 新建语法分析器
         MappingRule parser = new MappingRule(stream);
+        parser.removeErrorListeners();
         MappingRuleErrorListener errorListener = new MappingRuleErrorListener();
         parser.addErrorListener(errorListener);
         // 关闭恢复机制
@@ -74,6 +77,6 @@ public class B {
 
         System.out.println(JSON.toJSONString(result, SerializerFeature.WriteMapNullValue, SerializerFeature.PrettyFormat));
 
-//        TreeVisualizer.viewAST(Arrays.asList(parser.getRuleNames()), tree);
+        TreeVisualizer.viewAST(Arrays.asList(parser.getRuleNames()), tree);
     }
 }

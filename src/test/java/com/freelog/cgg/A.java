@@ -5,6 +5,8 @@ import org.antlr.v4.Tool;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.BailErrorStrategy;
 import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.DiagnosticErrorListener;
+import org.antlr.v4.runtime.atn.PredictionMode;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.junit.Test;
@@ -45,18 +47,25 @@ public class A {
         // 新建语法分析器
         AParser parser = new CAParser(stream);
         parser.setErrorHandler(new BailErrorStrategy());
+
+        parser.removeErrorListeners();
+        // 添加歧义错误监听器
+        parser.addErrorListener(new DiagnosticErrorListener());
+        parser.getInterpreter().setPredictionMode(PredictionMode.LL_EXACT_AMBIG_DETECTION);
+
 //        parser.addParseListener(new CAListener(stream));
 
 //        parser.setBuildParseTree(false);
         ParseTree tree = parser.rows();
+        System.out.println(parser.memory);
 
-        ParseTreeWalker walker = new ParseTreeWalker();
-        CAListener listener = new CAListener(stream);
-        walker.walk(listener, tree);
+//        ParseTreeWalker walker = new ParseTreeWalker();
+//        CAListener listener = new CAListener(stream);
+//        walker.walk(listener, tree);
 
         CAVisitor visitor = new CAVisitor();
         visitor.visit(tree);
 
-        TreeVisualizer.viewAST(Arrays.asList(parser.getRuleNames()), tree);
+//        TreeVisualizer.viewAST(Arrays.asList(parser.getRuleNames()), tree);
     }
 }

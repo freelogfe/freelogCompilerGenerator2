@@ -1,77 +1,13 @@
 [
 	{
+		"cover":"\"刘开\"",
 		"candidate":{
-			"versionRange":"1.1.1",
-			"name":"u2/r10.0",
+			"versionRange":"latest",
+			"name":"u1/r1",
 			"type":"resource"
 		},
-		"exhibitName":"p3",
-		"replaces":[
-			{
-				"replacer":{
-					"name":"bb0/mm0",
-					"type":"object"
-				},
-				"replaced":{
-					"versionRange":"1.1.1",
-					"name":"uu9/rr9",
-					"type":"resource"
-				},
-				"scopes":[
-					[
-						{
-							"versionRange":"*",
-							"name":"u6/m6",
-							"type":"resource"
-						},
-						{
-							"versionRange":"*",
-							"name":"u7/m7",
-							"type":"resource"
-						}
-					],
-					[
-						{
-							"versionRange":"*",
-							"name":"u8/m8",
-							"type":"resource"
-						}
-					]
-				]
-			}
-		],
-		"online":true,
-		"text":"add$u2/r10.0@1.1.1asp3doset_labelst1,t2,t3replace$uu9/rr9@1.1.1with#bb0/mm0under$u6/m6>$u7/m7,$u8/m8showend",
-		"operation":"add",
-		"labels":[
-			"t1",
-			"t2",
-			"t3"
-		]
-	},
-	{
-		"cover":"000",
-		"exhibitName":"p4",
-		"online":false,
-		"text":"alterp4dohideset_titleabcset_cover000add_attr123delete_attr4end",
-		"title":"abc",
-		"operation":"alter",
-		"attrs":[
-			{
-				"description":"3",
-				"operation":"add",
-				"value":"2",
-				"key":"1"
-			},
-			{
-				"operation":"delete",
-				"key":"4"
-			}
-		]
-	},
-	{
-		"themeName":"123",
-		"text":"activate_theme123",
-		"operation":"activate_theme"
+		"exhibitName":"e1",
+		"text":"add $u1/r1 as e1 set_cover \"刘开\"",
+		"operation":"add"
 	}
 ]

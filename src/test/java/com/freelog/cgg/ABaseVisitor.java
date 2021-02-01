@@ -1,5 +1,8 @@
 // Generated from src\test\java\com\freelog\cgg\A.g4 by ANTLR 4.8
 package com.freelog.cgg;
+
+    import java.util.*;
+
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
 /**
@@ -18,4 +21,18 @@ public class ABaseVisitor<T> extends AbstractParseTreeVisitor<T> implements AVis
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitRows(AParser.RowsContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitStat(AParser.StatContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitE(AParser.EContext ctx) { return visitChildren(ctx); }
 }

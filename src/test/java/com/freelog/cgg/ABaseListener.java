@@ -1,6 +1,9 @@
 // Generated from src\test\java\com\freelog\cgg\A.g4 by ANTLR 4.8
 package com.freelog.cgg;
 
+    import java.util.*;
+
+
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
@@ -23,6 +26,30 @@ public class ABaseListener implements AListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitRows(AParser.RowsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterStat(AParser.StatContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitStat(AParser.StatContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterE(AParser.EContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitE(AParser.EContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

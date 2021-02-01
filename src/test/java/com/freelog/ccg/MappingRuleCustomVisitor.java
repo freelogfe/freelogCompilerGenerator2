@@ -2,6 +2,7 @@ package com.freelog.ccg;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import org.antlr.v4.runtime.misc.Interval;
 import org.antlr.v4.runtime.tree.TerminalNode;
 import org.apache.commons.lang3.StringUtils;
 
@@ -27,7 +28,7 @@ public class MappingRuleCustomVisitor extends MappingRuleBaseVisitor<Void> {
     @Override
     public Void visitRule_add(MappingRule.Rule_addContext ctx) {
         rule = new JSONObject();
-        rule.put("text", ctx.getText());
+        rule.put("text", ctx.start.getInputStream().getText(new Interval(ctx.start.getStartIndex(), ctx.stop.getStopIndex())));
         rule.put("operation", "add");
         rule.put("exhibitName", ctx.ID().getText());
         rule.put("candidate", wrapCandidate(ctx.candidate(), null));
@@ -40,7 +41,7 @@ public class MappingRuleCustomVisitor extends MappingRuleBaseVisitor<Void> {
     @Override
     public Void visitRule_alter(MappingRule.Rule_alterContext ctx) {
         rule = new JSONObject();
-        rule.put("text", ctx.getText());
+        rule.put("text", ctx.start.getInputStream().getText(new Interval(ctx.start.getStartIndex(), ctx.stop.getStopIndex())));
         rule.put("operation", "alter");
         rule.put("exhibitName", ctx.ID().getText());
 
@@ -52,7 +53,7 @@ public class MappingRuleCustomVisitor extends MappingRuleBaseVisitor<Void> {
     @Override
     public Void visitRule_activate_theme(MappingRule.Rule_activate_themeContext ctx) {
         rule = new JSONObject();
-        rule.put("text", ctx.getText());
+        rule.put("text", ctx.start.getInputStream().getText(new Interval(ctx.start.getStartIndex(), ctx.stop.getStopIndex())));
         rule.put("operation", "activate_theme");
         rule.put("themeName", ctx.ID().getText());
 
@@ -121,14 +122,15 @@ public class MappingRuleCustomVisitor extends MappingRuleBaseVisitor<Void> {
 
     @Override
     public Void visitSet_title(MappingRule.Set_titleContext ctx) {
-        rule.put("title", ctx.ID().getText());
+        rule.put("title", ctx.title.getText());
 
         return super.visitSet_title(ctx);
     }
 
     @Override
     public Void visitSet_cover(MappingRule.Set_coverContext ctx) {
-        rule.put("cover", ctx.ID().getText());
+        String cover = ctx.cover.getText();
+        rule.put("cover", cover.substring(1, cover.length() - 1));
 
         return super.visitSet_cover(ctx);
     }
@@ -163,7 +165,7 @@ public class MappingRuleCustomVisitor extends MappingRuleBaseVisitor<Void> {
 
         JSONObject attr = new JSONObject();
         attr.put("operation", "delete");
-        attr.put("key", ctx.ID().getText());
+        attr.put("key", ctx.key.getText());
 
         attrs.add(attr);
         rule.put("attrs", attrs);
