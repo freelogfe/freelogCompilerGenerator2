@@ -1,7 +1,9 @@
 policy_grammar(serviceName, keep_id) ::= <<
-grammar <serviceName>Policy;
+parser grammar <serviceName>Policy;
 
 import Entity, Expression, Event;
+
+options { tokenVocab=LexToken; }
 
 policy : audience_strict declaration_section? state_definition_section EOF ;
 

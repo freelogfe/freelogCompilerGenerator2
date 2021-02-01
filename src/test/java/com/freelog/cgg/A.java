@@ -56,8 +56,7 @@ public class A {
 //        parser.addParseListener(new CAListener(stream));
 
 //        parser.setBuildParseTree(false);
-        ParseTree tree = parser.rows();
-        System.out.println(parser.memory);
+        ParseTree tree = parser.abc();
 
 //        ParseTreeWalker walker = new ParseTreeWalker();
 //        CAListener listener = new CAListener(stream);

@@ -1,8 +1,8 @@
-grammar Expression;
+parser grammar Expression;
 
-import ExpressionToken, EnvironmentVariable;
+import EnvironmentVariable;
 
-expression_test : expression + EOF ;
+options { tokenVocab=LexToken; }
 
 expression_assignment: expression_handle '(' (ID (',' ID)*)? ')' '=' expression ;
 

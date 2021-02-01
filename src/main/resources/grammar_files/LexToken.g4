@@ -1,23 +1,71 @@
 lexer grammar LexToken;
 
-ID
-  : ALPHABET (ALPHABET | INT | '_')*
+FOR : 'for' ;
+PUBLIC : 'public' ;
+NODES : 'nodes' ;
+REGISTERED_USERS : 'registered_users' ;
+REQUIRE : 'require' ;
+CONTRACT : 'contract' ;
+WITH : 'with' ;
+SERVICE_STATE_SCOPE
+    : 'always'
+    ;
+TERMINATE : 'terminate' ;
+SUM : 'sum' ;
+PI : 'pi' ;
+EULER : 'e' ;
+
+COMMA : ',' ;
+POINT : '.' ;
+COLON : ':' ;
+LT : '<' ;
+GT : '>' ;
+LPAREN : '(' ;
+RPAREN : ')' ;
+LBRACKET : '[' ;
+RBRACKET : ']' ;
+PLUS : '+' ;
+MINUS : '-' ;
+TIMES : '*' ;
+DIV : '/' ;
+POW : '^' ;
+EQ : '=' ;
+EQUANDGT : '=>' ;
+
+// EntityToken
+ACCOUNT_NUMBER : '#' (ALPHABET|DIGIT)+ ;
+SUBJECT_SERVICE_NAME : '^' ID ;
+UOID : '@' ID ;
+SUBJECT_ID : '%' HEX_DIGIT+ ;
+
+// ExpressionToken
+SCIENTIFIC_NUMBER
+   : NUMBER (('E' | 'e') SIGN? NUMBER)?
+   ;
+
+// EnvironmentVariableToken
+VARIABLE_CONTRACT : 'self' '.' VARIABLE_CONTRACT_ATTRIBUTE ;
+VARIABLE_CONTRACT_ATTRIBUTE
+  : 'exhibited' // 展品计数
   ;
 
+// EventToken
+EVENT_SERVICE_NAME : '~' ID ;
+
+// LexToken
 INT : DIGIT+ ;
+ID : ALPHABET (ALPHABET | DIGIT | '_')* ;
 
 USER_ID : PHONE_NUMBER_CN_MOBILE | EMAIL ;
-
 PHONE_NUMBER_CN_MOBILE : ELEVEN_DIGITS ;
 EMAIL : LOCAL_SUBPART ('.' LOCAL_SUBPART)* '@' DOMAIN_SUBPART ('.' DOMAIN_SUBPART)* ;
 
 PERIOD : ('cycle'|'cycles') | ('week'|'weeks') | ('month'|'months') | ('year'|'years') ;
-
-TIME : TWO_DIGITS ':' TWO_DIGITS (':' TWO_DIGITS)? ;
 DATE : FOUR_DIGITS '-' TWO_DIGITS '-' TWO_DIGITS ;
-
+TIME : TWO_DIGITS ':' TWO_DIGITS (':' TWO_DIGITS)? ;
 MONEY_AMOUNT : '$' DIGIT+ ('.' DIGIT DIGIT?)? ;
 
+WS : [ \t\r\n]+ -> skip ;
 
 /*
  * fragments
@@ -31,9 +79,11 @@ fragment FOUR_DIGITS : TWO_DIGITS TWO_DIGITS ;
 fragment NIGHT_DIGITS : FOUR_DIGITS FOUR_DIGITS DIGIT ;
 fragment ELEVEN_DIGITS : FOUR_DIGITS FOUR_DIGITS THREE_DIGITS ;
 
+fragment SIGN : '+' | '-' ;
+fragment NUMBER : DIGIT+ (',' DIGIT+)? ;
 fragment DIGIT : [0-9] ;
-fragment ALPHABET : [a-zA-Z] ;
 fragment HEX_DIGIT : [0-9a-fA-F] ;
+fragment ALPHABET : [a-zA-Z] ;
 
 fragment A : ('A'|'a') ;
 fragment B : ('B'|'b') ;
@@ -61,26 +111,3 @@ fragment W : ('W'|'w') ;
 fragment X : ('X'|'x') ;
 fragment Y : ('Y'|'y') ;
 fragment Z : ('Z'|'z') ;
-
-fragment LPAREN : '(' ;
-fragment RPAREN : ')' ;
-fragment PLUS : '+' ;
-fragment MINUS : '-' ;
-fragment TIMES : '*' ;
-fragment DIV : '/' ;
-fragment GT : '>' ;
-fragment LT : '<' ;
-fragment EQ : '=' ;
-fragment COMMA : ',' ;
-fragment POINT : '.' ;
-fragment POW : '^' ;
-
-fragment NUMBER
-   : ('0' .. '9') + ('.' ('0' .. '9') +)?
-   ;
-
-fragment SIGN
-   : ('+' | '-')
-   ;
-
-WS : [ \t\r\n]+ -> skip ;

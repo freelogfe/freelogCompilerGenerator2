@@ -1,8 +1,8 @@
-grammar Event;
+parser grammar Event;
 
-import EventToken;
+options { tokenVocab=LexToken; }
 
-event : event_service '.' (event_path '.')? event_name (event_args)?;
+event : event_service '.' (event_path '.')? event_name (event_args)? ;
 
 event_service : EVENT_SERVICE_NAME ;
 

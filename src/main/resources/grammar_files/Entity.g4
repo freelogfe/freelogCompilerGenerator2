@@ -1,14 +1,13 @@
-grammar Entity;
+parser grammar Entity;
 
-import EntityToken;
+options { tokenVocab=LexToken; }
 
-// this rule serve as starting rule for testing Entities only
-entity_bracket : 
+entity_bracket :
     ( account
     | subject
     | subject_service
     | user_organization_name
-    )* EOF
+    )*
     ;
 
 account : ACCOUNT_NUMBER ;

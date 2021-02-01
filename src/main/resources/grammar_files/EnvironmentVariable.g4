@@ -1,6 +1,6 @@
-grammar EnvironmentVariable;
+parser grammar EnvironmentVariable;
 
-import EnvironmentVariableToken;
+options { tokenVocab=LexToken; }
 
 environment_variable
   : VARIABLE_CONTRACT

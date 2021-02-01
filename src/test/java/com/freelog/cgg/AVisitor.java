@@ -1,8 +1,5 @@
 // Generated from src\test\java\com\freelog\cgg\A.g4 by ANTLR 4.8
 package com.freelog.cgg;
-
-    import java.util.*;
-
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -14,21 +11,9 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  */
 public interface AVisitor<T> extends ParseTreeVisitor<T> {
 	/**
-	 * Visit a parse tree produced by {@link AParser#rows}.
+	 * Visit a parse tree produced by {@link AParser#abc}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitRows(AParser.RowsContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link AParser#stat}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitStat(AParser.StatContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link AParser#e}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitE(AParser.EContext ctx);
+	T visitAbc(AParser.AbcContext ctx);
 }

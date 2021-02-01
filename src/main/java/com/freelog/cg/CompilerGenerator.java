@@ -55,6 +55,7 @@ public class CompilerGenerator {
     public void generate() {
         renderGrammarFromTemplate();
         copyGrammar();
+        parserGrammarTokens();
         parseGrammar();
     }
 
@@ -93,6 +94,25 @@ public class CompilerGenerator {
         }
     }
 
+    private void parserGrammarTokens() {
+        Path grammarPath = Paths.get(this.tmpDir, "LexToken.g4");
+        List<String> toolArgs = new LinkedList<String>(Arrays.asList(
+                grammarPath.toString(),
+                "-Dlanguage=" + this.targetLang
+        ));
+
+        if (this.packageName != null) {
+            toolArgs.add("-package");
+            toolArgs.add(this.packageName);
+        }
+
+        String[] toolArgsArray = new String[toolArgs.size()];
+        toolArgs.toArray(toolArgsArray);
+
+        Tool tool = new Tool(toolArgsArray);
+        tool.processGrammarsOnCommandLine();
+    }
+
     private void parseGrammar() {
         String grammarFile = this.partialNode.equals("") ? this.serviceName + "Policy.g4" : this.partialNode + ".g4";
         Path grammarPath = Paths.get(this.tmpDir, grammarFile);
@@ -112,7 +132,6 @@ public class CompilerGenerator {
 
         String[] toolArgsArray = new String[toolArgs.size()];
         toolArgs.toArray(toolArgsArray);
-//        System.out.println("array\n" + Arrays.toString(toolArgsArray));
 
         Tool tool = new Tool(toolArgsArray);
         tool.processGrammarsOnCommandLine();
