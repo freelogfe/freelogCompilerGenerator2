@@ -10,23 +10,24 @@ policy : audience_strict declaration_section? state_definition_section EOF ;
 audience_strict : 'for' audience_clause ;
 
 audience_clause
-  : users
-  | audience_clause ','  audience_clause
+  : audience
+  | audience_clause COMMA  audience_clause
   ;
-
-users
-  : 'public'
-  | 'nodes'
-  | 'registered_users'
-  ;
+audience
+    : 'public'
+    | 'nodes'
+    | 'userGroup'
+    | 'registeredUsers'
+    | USER_ID
+    ;
 
 requirement : 'require' (contract_with_subject) ;
 
-contract_with_subject : 'contract' 'with' subject ;
+contract_with_subject : 'contract with' subject ;
 
-declaration_section: declaration_statements+ ;
+declaration_section: declaration_statement+ ;
 
-declaration_statements
+declaration_statement
   : service_state_constant
   | expression_assignment
   ;
@@ -49,7 +50,7 @@ state_name
   : ID
   ;
 
-service_state_definition : '[' service_state (',' service_state)* ']' ;
+service_state_definition : '[' service_state (COMMA service_state)* ']' ;
 
 service_state : ID ;
 

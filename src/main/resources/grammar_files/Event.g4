@@ -2,12 +2,10 @@ parser grammar Event;
 
 options { tokenVocab=LexToken; }
 
-event : event_service '.' (event_path '.')? event_name (event_args)? ;
+//event : '~' EVENT_DEFINITION ;
 
-event_service : EVENT_SERVICE_NAME ;
+event : '~'eventService=EVENT_SERVICE_PATH_NAME EVENT_POINT (event_path EVENT_POINT)? eventName=EVENT_SERVICE_PATH_NAME EVENT_LPAREN event_args? EVENT_RPAREN ;
 
-event_path : (ID '.')+ ID ;
+event_path : EVENT_SERVICE_PATH_NAME (EVENT_POINT EVENT_SERVICE_PATH_NAME)* ;
 
-event_name : ID ;
-
-event_args : '(' ID (',' ID)* ')' ;
+event_args : EVENT_ARG (EVENT_COMMA EVENT_ARG)* ;

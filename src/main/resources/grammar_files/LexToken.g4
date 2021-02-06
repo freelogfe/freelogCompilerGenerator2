@@ -1,12 +1,13 @@
 lexer grammar LexToken;
 
+// 关键词组
 FOR : 'for' ;
 PUBLIC : 'public' ;
 NODES : 'nodes' ;
-REGISTERED_USERS : 'registered_users' ;
+USER_GROUP : 'userGroup' ;
+REGISTERED_USERS : 'registeredUsers' ;
 REQUIRE : 'require' ;
-CONTRACT : 'contract' ;
-WITH : 'with' ;
+CONTRACT_WITH : 'contract with' ;
 SERVICE_STATE_SCOPE
     : 'always'
     ;
@@ -15,6 +16,7 @@ SUM : 'sum' ;
 PI : 'pi' ;
 EULER : 'e' ;
 
+// 关键符号
 COMMA : ',' ;
 POINT : '.' ;
 COLON : ':' ;
@@ -30,7 +32,12 @@ TIMES : '*' ;
 DIV : '/' ;
 POW : '^' ;
 EQ : '=' ;
+TILDE : '~' -> pushMode(EVENT_MODE) ;
 EQUANDGT : '=>' ;
+
+USER_ID : PHONE_NUMBER_CN_MOBILE | EMAIL ;
+PHONE_NUMBER_CN_MOBILE : ELEVEN_DIGITS ;
+EMAIL : LOCAL_SUBPART+ '@' DOMAIN_SUBPART ('.' DOMAIN_SUBPART)* ;
 
 // EntityToken
 ACCOUNT_NUMBER : '#' (ALPHABET|DIGIT)+ ;
@@ -49,16 +56,9 @@ VARIABLE_CONTRACT_ATTRIBUTE
   : 'exhibited' // 展品计数
   ;
 
-// EventToken
-EVENT_SERVICE_NAME : '~' ID ;
-
 // LexToken
 INT : DIGIT+ ;
 ID : ALPHABET (ALPHABET | DIGIT | '_')* ;
-
-USER_ID : PHONE_NUMBER_CN_MOBILE | EMAIL ;
-PHONE_NUMBER_CN_MOBILE : ELEVEN_DIGITS ;
-EMAIL : LOCAL_SUBPART ('.' LOCAL_SUBPART)* '@' DOMAIN_SUBPART ('.' DOMAIN_SUBPART)* ;
 
 PERIOD : ('cycle'|'cycles') | ('week'|'weeks') | ('month'|'months') | ('year'|'years') ;
 DATE : FOUR_DIGITS '-' TWO_DIGITS '-' TWO_DIGITS ;
@@ -67,11 +67,23 @@ MONEY_AMOUNT : '$' DIGIT+ ('.' DIGIT DIGIT?)? ;
 
 WS : [ \t\r\n]+ -> skip ;
 
+mode EVENT_MODE;
+
+EVENT_SERVICE_PATH_NAME : ALPHABET (ALPHABET | DIGIT | '_')* ;
+EVENT_ARG : STRING ;
+
+EVENT_COMMA : ',' ;
+EVENT_POINT : '.' ;
+EVENT_LPAREN : '(' ;
+EVENT_RPAREN : ')' -> popMode ;
+
+EVENT_WS : [ \t\r\n]+ -> skip ;
+
 /*
  * fragments
  */
-fragment LOCAL_SUBPART : [a-zA-Z0-9\-_~!$&()*+,;=:]+ ;
-fragment DOMAIN_SUBPART : [a-zA-Z0-9\-]+ ;
+fragment LOCAL_SUBPART : [a-zA-Z0-9\-_]+ ;
+fragment DOMAIN_SUBPART : [a-zA-Z0-9\-_]+ ;
 
 fragment TWO_DIGITS : DIGIT DIGIT ;
 fragment THREE_DIGITS : TWO_DIGITS DIGIT ;
@@ -79,11 +91,15 @@ fragment FOUR_DIGITS : TWO_DIGITS TWO_DIGITS ;
 fragment NIGHT_DIGITS : FOUR_DIGITS FOUR_DIGITS DIGIT ;
 fragment ELEVEN_DIGITS : FOUR_DIGITS FOUR_DIGITS THREE_DIGITS ;
 
+fragment STRING : '"' (ESC | ~["\\])* '"' ;
+fragment ESC : '\\' (["\\/bfnrt] | UNICODE) ;
+fragment UNICODE : 'u' HEX_DIGIT HEX_DIGIT HEX_DIGIT HEX_DIGIT ;
 fragment SIGN : '+' | '-' ;
-fragment NUMBER : DIGIT+ (',' DIGIT+)? ;
+fragment NUMBER : DIGIT+ ('.' DIGIT+)? ;
 fragment DIGIT : [0-9] ;
 fragment HEX_DIGIT : [0-9a-fA-F] ;
 fragment ALPHABET : [a-zA-Z] ;
+fragment CHINESE_WORD : '\u4e00'..'\u9fef' ;
 
 fragment A : ('A'|'a') ;
 fragment B : ('B'|'b') ;

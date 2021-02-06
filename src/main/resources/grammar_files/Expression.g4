@@ -4,7 +4,7 @@ import EnvironmentVariable;
 
 options { tokenVocab=LexToken; }
 
-expression_assignment: expression_handle '(' (ID (',' ID)*)? ')' '=' expression ;
+expression_assignment: expression_handle LPAREN (ID (COMMA ID)*)? RPAREN '=' expression ;
 
 expression_handle : ID ;
 
@@ -28,7 +28,7 @@ signedAtom
    ;
 
 built_in_function
-  : funcname '(' expression (',' expression)* ')'
+  : funcname LPAREN expression (COMMA expression)* RPAREN
   ;
 
 funcname
@@ -38,7 +38,7 @@ funcname
 atom
   : scientific
   | constant
-  | '(' expression ')'
+  | LPAREN expression RPAREN
   | INT
   | variable
   ;
@@ -62,7 +62,7 @@ expression_call_or_literal
   | expression
   ;
 
-expression_call : expression_handle '(' (expression_call_argument (',' expression_call_argument)*)* ')' ;
+expression_call : expression_handle LPAREN (expression_call_argument (COMMA expression_call_argument)*)* RPAREN ;
 
 expression_call_argument
   : INT

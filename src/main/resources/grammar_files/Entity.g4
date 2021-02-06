@@ -12,7 +12,7 @@ entity_bracket :
 
 account : ACCOUNT_NUMBER ;
 
-subject : subject_service '.' user_organization_name '.' SUBJECT_ID ;
+subject : subject_service POINT user_organization_name POINT SUBJECT_ID ;
 
 subject_service : SUBJECT_SERVICE_NAME ;
 
