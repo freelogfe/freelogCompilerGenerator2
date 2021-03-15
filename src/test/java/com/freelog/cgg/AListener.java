@@ -8,13 +8,23 @@ import org.antlr.v4.runtime.tree.ParseTreeListener;
  */
 public interface AListener extends ParseTreeListener {
 	/**
-	 * Enter a parse tree produced by {@link AParser#abc}.
+	 * Enter a parse tree produced by {@link AParser#file}.
 	 * @param ctx the parse tree
 	 */
-	void enterAbc(AParser.AbcContext ctx);
+	void enterFile(AParser.FileContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link AParser#abc}.
+	 * Exit a parse tree produced by {@link AParser#file}.
 	 * @param ctx the parse tree
 	 */
-	void exitAbc(AParser.AbcContext ctx);
+	void exitFile(AParser.FileContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link AParser#line}.
+	 * @param ctx the parse tree
+	 */
+	void enterLine(AParser.LineContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AParser#line}.
+	 * @param ctx the parse tree
+	 */
+	void exitLine(AParser.LineContext ctx);
 }

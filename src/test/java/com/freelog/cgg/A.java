@@ -2,13 +2,9 @@ package com.freelog.cgg;
 
 import com.freelog.cg.tool.TreeVisualizer;
 import org.antlr.v4.Tool;
-import org.antlr.v4.runtime.ANTLRInputStream;
-import org.antlr.v4.runtime.BailErrorStrategy;
-import org.antlr.v4.runtime.CommonTokenStream;
-import org.antlr.v4.runtime.DiagnosticErrorListener;
+import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.atn.PredictionMode;
 import org.antlr.v4.runtime.tree.ParseTree;
-import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.junit.Test;
 
 import java.io.InputStream;
@@ -46,25 +42,26 @@ public class A {
         CommonTokenStream stream = new CommonTokenStream(lexer);
         // 新建语法分析器
         AParser parser = new CAParser(stream);
-        parser.setErrorHandler(new BailErrorStrategy());
-
+        parser.getInterpreter().setPredictionMode(PredictionMode.SLL);
         parser.removeErrorListeners();
-        // 添加歧义错误监听器
-        parser.addErrorListener(new DiagnosticErrorListener());
-        parser.getInterpreter().setPredictionMode(PredictionMode.LL_EXACT_AMBIG_DETECTION);
+        parser.setErrorHandler(new BailErrorStrategy());
+        ParseTree tree = null;
+        try {
+            tree = parser.file();
+        } catch (RuntimeException e) {
+            if (e.getClass() == RuntimeException.class && e.getCause() instanceof RecognitionException)
+                stream.reset();
+            parser.addErrorListener(ConsoleErrorListener.INSTANCE);
+            // 添加歧义错误监听器
+            parser.addErrorListener(new DiagnosticErrorListener());
+            parser.getInterpreter().setPredictionMode(PredictionMode.LL_EXACT_AMBIG_DETECTION);
 
-//        parser.addParseListener(new CAListener(stream));
-
-//        parser.setBuildParseTree(false);
-        ParseTree tree = parser.abc();
-
-//        ParseTreeWalker walker = new ParseTreeWalker();
-//        CAListener listener = new CAListener(stream);
-//        walker.walk(listener, tree);
+            tree = parser.file();
+        }
 
         CAVisitor visitor = new CAVisitor();
         visitor.visit(tree);
 
-//        TreeVisualizer.viewAST(Arrays.asList(parser.getRuleNames()), tree);
+        TreeVisualizer.viewAST(Arrays.asList(parser.getRuleNames()), tree);
     }
 }

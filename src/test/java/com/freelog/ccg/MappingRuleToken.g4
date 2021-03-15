@@ -39,11 +39,12 @@ WS : [ \t\r\n]+ -> skip ;
 mode SEMVER_MODE;
 
 // 版本
-SEMVER : ('^' | '~')? POSITIVE_INT '.' POSITIVE_INT '.' POSITIVE_INT -> mode(DEFAULT_MODE) ;
+SEMVER : ('^' | '~')? NATURAL_INT '.' NATURAL_INT '.' NATURAL_INT -> mode(DEFAULT_MODE) ;
 
 fragment ESC : '\\' (["\\/bfnrt] | UNICODE) ;
 fragment UNICODE : 'u' HEX HEX HEX HEX ;
-fragment INT : '-'? POSITIVE_INT ;
+fragment INT : '-'? POSITIVE_INT | '0' ;
+fragment NATURAL_INT : POSITIVE_INT | '0' ;
 fragment POSITIVE_INT : [1-9] [0-9]* ;
 fragment DIGIT : [0-9] ;
 fragment HEX : [a-fA-F0-9] ;

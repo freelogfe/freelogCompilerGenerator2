@@ -16,13 +16,25 @@ public class ABaseListener implements AListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAbc(AParser.AbcContext ctx) { }
+	@Override public void enterFile(AParser.FileContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAbc(AParser.AbcContext ctx) { }
+	@Override public void exitFile(AParser.FileContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterLine(AParser.LineContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLine(AParser.LineContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

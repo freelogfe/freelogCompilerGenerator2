@@ -1,8 +1,14 @@
 grammar A;
 import AToken;
 
-abc : A | AB ;
-A : 'a' {System.out.println(1);} ;
-AB : 'ab' {System.out.println(2);} ;
+@lexer::members{
+    public static final int COMMENT = 1;
+}
 
-WS : [ \t\r\n]+ -> skip ;
+file : line* EOF ;
+line : ID+ '\r'? '\n' ;
+
+ID : [a-z];
+
+WS : [ \t]+ -> skip ;
+SL_COMMENT : '//' ~[\r\n]* -> channel(1) ;

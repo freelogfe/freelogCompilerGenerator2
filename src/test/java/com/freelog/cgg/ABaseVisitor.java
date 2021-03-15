@@ -17,5 +17,12 @@ public class ABaseVisitor<T> extends AbstractParseTreeVisitor<T> implements AVis
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitAbc(AParser.AbcContext ctx) { return visitChildren(ctx); }
+	@Override public T visitFile(AParser.FileContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitLine(AParser.LineContext ctx) { return visitChildren(ctx); }
 }

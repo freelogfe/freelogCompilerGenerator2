@@ -1,13 +1,84 @@
 [
 	{
-		"cover":"\"刘开\"",
 		"candidate":{
-			"versionRange":"latest",
-			"name":"u1/r1",
+			"name":"chtes/反对熬夜",
+			"type":"object"
+		},
+		"exhibitName":"反对熬夜001",
+		"text":"add #chtes/反对熬夜 as 反对熬夜001\r\ndo\r\nend",
+		"operation":"add"
+	},
+	{
+		"candidate":{
+			"versionRange":"0.1.0",
+			"name":"ww-zh/PB-预览presentation",
 			"type":"resource"
 		},
-		"exhibitName":"e1",
-		"text":"add $u1/r1 as e1 set_cover \"刘开\"",
+		"exhibitName":"PB-预览presentation_7pmh",
+		"text":"add $ww-zh/PB-预览presentation@0.1.0 as PB-预览presentation_7pmh\r\ndo\r\nend",
+		"operation":"add"
+	},
+	{
+		"exhibitName":"反对熬夜",
+		"online":true,
+		"text":"alter 反对熬夜\r\ndo\r\nshow\r\nset_tags tag1,tag2\r\nend",
+		"operation":"alter"
+	},
+	{
+		"themeName":"PB-预览presentation_7pmh",
+		"text":"activate_theme PB-预览presentation_7pmh",
+		"operation":"activate_theme"
+	},
+	{
+		"candidate":{
+			"versionRange":"0.1.0",
+			"name":"chtes/测试节点依赖替换",
+			"type":"resource"
+		},
+		"exhibitName":"依赖替换",
+		"replaces":[
+			{
+				"replacer":{
+					"versionRange":"latest",
+					"name":"chtes/反对熬夜",
+					"type":"resource"
+				},
+				"replaced":{
+					"versionRange":"*",
+					"name":"chtes/image04",
+					"type":"resource"
+				},
+				"scopes":[
+					[
+						{
+							"versionRange":"*",
+							"name":"chtes/测试节点依赖替换",
+							"type":"resource"
+						}
+					]
+				]
+			}
+		],
+		"text":"add $chtes/测试节点依赖替换@0.1.0 as 依赖替换\r\n do\r\n  replace $chtes/image04 with $chtes/反对熬夜 under $chtes/测试节点依赖替换\r\n end",
+		"operation":"add"
+	},
+	{
+		"candidate":{
+			"name":"mocktest/测试mock",
+			"type":"object"
+		},
+		"exhibitName":"测试mock",
+		"online":true,
+		"text":"add #mocktest/测试mock as 测试mock\r\n do\r\nshow\r\n end",
+		"operation":"add"
+	},
+	{
+		"candidate":{
+			"name":"ch8705/反对熬夜",
+			"type":"object"
+		},
+		"exhibitName":"以下为交互生成规则",
+		"text":"add #ch8705/反对熬夜\r\ndo\r\nend\r\n\r\n\r\n//以下为交互生成规则",
 		"operation":"add"
 	}
 ]

@@ -7,7 +7,6 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.freelog.cg.tool.TreeVisualizer;
 import org.antlr.v4.Tool;
 import org.antlr.v4.runtime.ANTLRInputStream;
-import org.antlr.v4.runtime.BailErrorStrategy;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.junit.Test;
@@ -27,7 +26,7 @@ public class B {
                 "-visitor",
                 "-package",
                 "com.freelog.ccg",
-                "-Dlanguage=JavaScript"
+                "-Dlanguage=Java"
         ));
 
         String[] toolArgsArray = new String[toolArgs.size()];
@@ -50,6 +49,9 @@ public class B {
 
         // 新建词法分析器
         MappingRuleToken lexer = new MappingRuleToken(input);
+        lexer.removeErrorListeners();
+        MappingRuleErrorLexerListener lexerErrorListener = new MappingRuleErrorLexerListener();
+        lexer.addErrorListener(lexerErrorListener);
         // 新建词法符号缓冲区
         CommonTokenStream stream = new CommonTokenStream(lexer);
         // 新建语法分析器
@@ -61,6 +63,14 @@ public class B {
 //        parser.setErrorHandler(new BailErrorStrategy());
 
         ParseTree tree = parser.mapping_rule_section();
+        if (lexerErrorListener.errors.size() != 0) {
+            JSONObject result = new JSONObject();
+            result.put("errors", lexerErrorListener.errors);
+            result.put("errorObjects", lexerErrorListener.errorObjects);
+
+            System.out.println(JSON.toJSONString(result, SerializerFeature.WriteMapNullValue, SerializerFeature.PrettyFormat));
+            return;
+        }
 
         MappingRuleCustomVisitor visitor = new MappingRuleCustomVisitor();
         visitor.visit(tree);

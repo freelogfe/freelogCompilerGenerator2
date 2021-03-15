@@ -8,7 +8,7 @@ var grammarFileName = "MappingRule.g4";
 
 
 var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
-    "\u0003\u001c\u009f\u0004\u0002\t\u0002\u0004\u0003\t\u0003\u0004\u0004",
+    "\u0003\u001d\u009f\u0004\u0002\t\u0002\u0004\u0003\t\u0003\u0004\u0004",
     "\t\u0004\u0004\u0005\t\u0005\u0004\u0006\t\u0006\u0004\u0007\t\u0007",
     "\u0004\b\t\b\u0004\t\t\t\u0004\n\t\n\u0004\u000b\t\u000b\u0004\f\t\f",
     "\u0004\r\t\r\u0004\u000e\t\u000e\u0004\u000f\t\u000f\u0004\u0010\t\u0010",
@@ -55,7 +55,7 @@ var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
     "CE\u0005\u0010\t\u0002DB\u0003\u0002\u0002\u0002DC\u0003\u0002\u0002",
     "\u0002E\r\u0003\u0002\u0002\u0002FG\u0007\u0013\u0002\u0002GH\u0007",
     "\u0019\u0002\u0002HI\u0007\u0016\u0002\u0002IL\u0007\u0019\u0002\u0002",
-    "JK\u0007\u0014\u0002\u0002KM\u0007\u001c\u0002\u0002LJ\u0003\u0002\u0002",
+    "JK\u0007\u0014\u0002\u0002KM\u0007\u001d\u0002\u0002LJ\u0003\u0002\u0002",
     "\u0002LM\u0003\u0002\u0002\u0002M\u000f\u0003\u0002\u0002\u0002NO\u0007",
     "\u0015\u0002\u0002OP\u0007\u0019\u0002\u0002PQ\u0007\u0016\u0002\u0002",
     "QR\u0007\u0019\u0002\u0002R\u0011\u0003\u0002\u0002\u0002SW\u0007\u0007",
@@ -115,7 +115,7 @@ var symbolicNames = [ null, "ADD", "ALTER", "ACTIVATE_THEME", "AS", "DO",
                       "END", "SET_LABELS", "REPLACE", "SHOW", "HIDE", "SET_TITLE", 
                       "SET_COVER", "ADD_ATTR", "DELETE_ATTR", "WITH", "UNDER", 
                       "DOLLAR", "AT", "HASH", "SLASH", "GT", "COMMA", "ID", 
-                      "STRING", "WS", "SEMVER" ];
+                      "STRING", "WS", "ILLEGAL_TOKEN", "SEMVER" ];
 
 var ruleNames =  [ "mapping_rule_section", "mapping_rule", "rule_add", "rule_alter", 
                    "rule_activate_theme", "candidate", "resource_name", 
@@ -167,7 +167,8 @@ MappingRule.COMMA = 22;
 MappingRule.ID = 23;
 MappingRule.STRING = 24;
 MappingRule.WS = 25;
-MappingRule.SEMVER = 26;
+MappingRule.ILLEGAL_TOKEN = 26;
+MappingRule.SEMVER = 27;
 
 MappingRule.RULE_mapping_rule_section = 0;
 MappingRule.RULE_mapping_rule = 1;

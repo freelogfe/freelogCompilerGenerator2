@@ -17,7 +17,7 @@ public class ALexer extends Lexer {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		A=1, AB=2, WS=3;
+		T__0=1, T__1=2, ID=3, WS=4, SL_COMMENT=5;
 	public static String[] channelNames = {
 		"DEFAULT_TOKEN_CHANNEL", "HIDDEN"
 	};
@@ -28,20 +28,20 @@ public class ALexer extends Lexer {
 
 	private static String[] makeRuleNames() {
 		return new String[] {
-			"A", "AB", "WS"
+			"T__0", "T__1", "ID", "WS", "SL_COMMENT"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, "'a'", "'ab'"
+			null, "'\r'", "'\n'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, "A", "AB", "WS"
+			null, null, null, "ID", "WS", "SL_COMMENT"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -79,6 +79,9 @@ public class ALexer extends Lexer {
 	}
 
 
+	    public static final int COMMENT = 1;
+
+
 	public ALexer(CharStream input) {
 		super(input);
 		_interp = new LexerATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
@@ -102,41 +105,19 @@ public class ALexer extends Lexer {
 	@Override
 	public ATN getATN() { return _ATN; }
 
-	@Override
-	public void action(RuleContext _localctx, int ruleIndex, int actionIndex) {
-		switch (ruleIndex) {
-		case 0:
-			A_action((RuleContext)_localctx, actionIndex);
-			break;
-		case 1:
-			AB_action((RuleContext)_localctx, actionIndex);
-			break;
-		}
-	}
-	private void A_action(RuleContext _localctx, int actionIndex) {
-		switch (actionIndex) {
-		case 0:
-			System.out.println(1);
-			break;
-		}
-	}
-	private void AB_action(RuleContext _localctx, int actionIndex) {
-		switch (actionIndex) {
-		case 1:
-			System.out.println(2);
-			break;
-		}
-	}
-
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\2\5\30\b\1\4\2\t\2"+
-		"\4\3\t\3\4\4\t\4\3\2\3\2\3\2\3\3\3\3\3\3\3\3\3\3\3\4\6\4\23\n\4\r\4\16"+
-		"\4\24\3\4\3\4\2\2\5\3\3\5\4\7\5\3\2\3\5\2\13\f\17\17\"\"\2\30\2\3\3\2"+
-		"\2\2\2\5\3\2\2\2\2\7\3\2\2\2\3\t\3\2\2\2\5\f\3\2\2\2\7\22\3\2\2\2\t\n"+
-		"\7c\2\2\n\13\b\2\2\2\13\4\3\2\2\2\f\r\7c\2\2\r\16\7d\2\2\16\17\3\2\2\2"+
-		"\17\20\b\3\3\2\20\6\3\2\2\2\21\23\t\2\2\2\22\21\3\2\2\2\23\24\3\2\2\2"+
-		"\24\22\3\2\2\2\24\25\3\2\2\2\25\26\3\2\2\2\26\27\b\4\4\2\27\b\3\2\2\2"+
-		"\4\2\24\5\3\2\2\3\3\3\b\2\2";
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\2\7%\b\1\4\2\t\2\4"+
+		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\3\2\3\2\3\3\3\3\3\4\3\4\3\5\6\5\25\n\5"+
+		"\r\5\16\5\26\3\5\3\5\3\6\3\6\3\6\3\6\7\6\37\n\6\f\6\16\6\"\13\6\3\6\3"+
+		"\6\2\2\7\3\3\5\4\7\5\t\6\13\7\3\2\5\3\2c|\4\2\13\13\"\"\4\2\f\f\17\17"+
+		"\2&\2\3\3\2\2\2\2\5\3\2\2\2\2\7\3\2\2\2\2\t\3\2\2\2\2\13\3\2\2\2\3\r\3"+
+		"\2\2\2\5\17\3\2\2\2\7\21\3\2\2\2\t\24\3\2\2\2\13\32\3\2\2\2\r\16\7\17"+
+		"\2\2\16\4\3\2\2\2\17\20\7\f\2\2\20\6\3\2\2\2\21\22\t\2\2\2\22\b\3\2\2"+
+		"\2\23\25\t\3\2\2\24\23\3\2\2\2\25\26\3\2\2\2\26\24\3\2\2\2\26\27\3\2\2"+
+		"\2\27\30\3\2\2\2\30\31\b\5\2\2\31\n\3\2\2\2\32\33\7\61\2\2\33\34\7\61"+
+		"\2\2\34 \3\2\2\2\35\37\n\4\2\2\36\35\3\2\2\2\37\"\3\2\2\2 \36\3\2\2\2"+
+		" !\3\2\2\2!#\3\2\2\2\" \3\2\2\2#$\b\6\3\2$\f\3\2\2\2\5\2\26 \4\b\2\2\2"+
+		"\3\2";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

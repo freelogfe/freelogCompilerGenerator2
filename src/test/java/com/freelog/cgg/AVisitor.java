@@ -11,9 +11,15 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  */
 public interface AVisitor<T> extends ParseTreeVisitor<T> {
 	/**
-	 * Visit a parse tree produced by {@link AParser#abc}.
+	 * Visit a parse tree produced by {@link AParser#file}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAbc(AParser.AbcContext ctx);
+	T visitFile(AParser.FileContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link AParser#line}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLine(AParser.LineContext ctx);
 }
