@@ -65,6 +65,8 @@ DATE : FOUR_DIGITS '-' TWO_DIGITS '-' TWO_DIGITS ;
 TIME : TWO_DIGITS ':' TWO_DIGITS (':' TWO_DIGITS)? ;
 MONEY_AMOUNT : '$' DIGIT+ ('.' DIGIT DIGIT?)? ;
 
+COMMENT         : '/*' .*? '*/' -> skip ;
+COMMENT_LINE    : '//' .*? '\r'? '\n' -> skip ;
 WS : [ \t\r\n]+ -> skip ;
 
 mode EVENT_MODE;
