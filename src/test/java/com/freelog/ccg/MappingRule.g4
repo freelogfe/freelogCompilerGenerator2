@@ -42,7 +42,7 @@ set_labels
 replace : REPLACE target=candidate WITH source=candidate (UNDER scope (',' scope)*)? ;
 show : SHOW ;
 hide : HIDE ;
-set_title : SET_TITLE title=ID ;
+set_title : SET_TITLE title=STRING ;
 set_cover : SET_COVER cover=STRING ;
 add_attr : ADD_ATTR key=ID value=ID description=ID? ;
 delete_attr : DELETE_ATTR key=ID ;

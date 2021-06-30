@@ -1,32 +1,15 @@
-add #chtes/���԰�ҹ as ���԰�ҹ001
-do
-end
-
-add $ww-zh/PB-Ԥ��presentation@0.1.0 as PB-Ԥ��presentation_7pmh
-do
-end
-
-alter ���԰�ҹ
-do
-show
-set_tags tag1,tag2
-end
-
-activate_theme PB-Ԥ��presentation_7pmh
-
-add $chtes/���Խڵ������滻@0.1.0 as �����滻
- do
-  replace $chtes/image04 with $chtes/���԰�ҹ under $chtes/���Խڵ������滻
- end
-
-add #mocktest/����mock as ����mock
- do
-show
- end
-
-add #ch8705/���԰�ҹ
-do
-end
-
-
-//����Ϊ�������ɹ���
+add $u2/r10.0@1.1.1 as p3
+  do
+    set_labels t1,t2,t3
+    replace $uu9/rr9@1.1.1 with #bb0/mm0 under $u6/m6>$u7/m7, $u8/m8
+    show
+  end
+alter p4
+  do
+    hide
+    set_title set_titles
+    set_cover set_covers
+    add_attr 1 2 3
+    delete_attr 4
+  end
+activate_theme 123

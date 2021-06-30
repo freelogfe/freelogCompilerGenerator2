@@ -1057,7 +1057,7 @@ public class MappingRule extends Parser {
 	public static class Set_titleContext extends ParserRuleContext {
 		public Token title;
 		public TerminalNode SET_TITLE() { return getToken(MappingRule.SET_TITLE, 0); }
-		public TerminalNode ID() { return getToken(MappingRule.ID, 0); }
+		public TerminalNode STRING() { return getToken(MappingRule.STRING, 0); }
 		public Set_titleContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -1086,7 +1086,7 @@ public class MappingRule extends Parser {
 			setState(133);
 			match(SET_TITLE);
 			setState(134);
-			((Set_titleContext)_localctx).title = match(ID);
+			((Set_titleContext)_localctx).title = match(STRING);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1360,7 +1360,7 @@ public class MappingRule extends Parser {
 		"\2\2\2~|\3\2\2\2~\177\3\2\2\2\177\u0082\3\2\2\2\u0080~\3\2\2\2\u0081x"+
 		"\3\2\2\2\u0081\u0082\3\2\2\2\u0082\31\3\2\2\2\u0083\u0084\7\13\2\2\u0084"+
 		"\33\3\2\2\2\u0085\u0086\7\f\2\2\u0086\35\3\2\2\2\u0087\u0088\7\r\2\2\u0088"+
-		"\u0089\7\31\2\2\u0089\37\3\2\2\2\u008a\u008b\7\16\2\2\u008b\u008c\7\32"+
+		"\u0089\7\32\2\2\u0089\37\3\2\2\2\u008a\u008b\7\16\2\2\u008b\u008c\7\32"+
 		"\2\2\u008c!\3\2\2\2\u008d\u008e\7\17\2\2\u008e\u008f\7\31\2\2\u008f\u0091"+
 		"\7\31\2\2\u0090\u0092\7\31\2\2\u0091\u0090\3\2\2\2\u0091\u0092\3\2\2\2"+
 		"\u0092#\3\2\2\2\u0093\u0094\7\20\2\2\u0094\u0095\7\31\2\2\u0095%\3\2\2"+

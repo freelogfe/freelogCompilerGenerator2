@@ -1,84 +1,72 @@
 [
 	{
 		"candidate":{
-			"name":"chtes/反对熬夜",
-			"type":"object"
-		},
-		"exhibitName":"反对熬夜001",
-		"text":"add #chtes/反对熬夜 as 反对熬夜001\r\ndo\r\nend",
-		"operation":"add"
-	},
-	{
-		"candidate":{
-			"versionRange":"0.1.0",
-			"name":"ww-zh/PB-预览presentation",
+			"versionRange":"1.1.1",
+			"name":"u2/r10.0",
 			"type":"resource"
 		},
-		"exhibitName":"PB-预览presentation_7pmh",
-		"text":"add $ww-zh/PB-预览presentation@0.1.0 as PB-预览presentation_7pmh\r\ndo\r\nend",
-		"operation":"add"
-	},
-	{
-		"exhibitName":"反对熬夜",
-		"online":true,
-		"text":"alter 反对熬夜\r\ndo\r\nshow\r\nset_tags tag1,tag2\r\nend",
-		"operation":"alter"
-	},
-	{
-		"themeName":"PB-预览presentation_7pmh",
-		"text":"activate_theme PB-预览presentation_7pmh",
-		"operation":"activate_theme"
-	},
-	{
-		"candidate":{
-			"versionRange":"0.1.0",
-			"name":"chtes/测试节点依赖替换",
-			"type":"resource"
-		},
-		"exhibitName":"依赖替换",
+		"exhibitName":"p3",
 		"replaces":[
 			{
 				"replacer":{
-					"versionRange":"latest",
-					"name":"chtes/反对熬夜",
-					"type":"resource"
+					"name":"bb0/mm0",
+					"type":"object"
 				},
 				"replaced":{
-					"versionRange":"*",
-					"name":"chtes/image04",
+					"versionRange":"1.1.1",
+					"name":"uu9/rr9",
 					"type":"resource"
 				},
 				"scopes":[
 					[
 						{
 							"versionRange":"*",
-							"name":"chtes/测试节点依赖替换",
+							"name":"u6/m6",
+							"type":"resource"
+						},
+						{
+							"versionRange":"*",
+							"name":"u7/m7",
+							"type":"resource"
+						}
+					],
+					[
+						{
+							"versionRange":"*",
+							"name":"u8/m8",
 							"type":"resource"
 						}
 					]
 				]
 			}
 		],
-		"text":"add $chtes/测试节点依赖替换@0.1.0 as 依赖替换\r\n do\r\n  replace $chtes/image04 with $chtes/反对熬夜 under $chtes/测试节点依赖替换\r\n end",
-		"operation":"add"
-	},
-	{
-		"candidate":{
-			"name":"mocktest/测试mock",
-			"type":"object"
-		},
-		"exhibitName":"测试mock",
 		"online":true,
-		"text":"add #mocktest/测试mock as 测试mock\r\n do\r\nshow\r\n end",
-		"operation":"add"
+		"text":"add $u2/r10.0@1.1.1 as p3\r\n  do\r\n    set_labels t1,t2,t3\r\n    replace $uu9/rr9@1.1.1 with #bb0/mm0 under $u6/m6>$u7/m7, $u8/m8\r\n    show\r\n  end",
+		"operation":"add",
+		"labels":[
+			"t1",
+			"t2",
+			"t3"
+		]
 	},
 	{
-		"candidate":{
-			"name":"ch8705/反对熬夜",
-			"type":"object"
-		},
-		"exhibitName":"以下为交互生成规则",
-		"text":"add #ch8705/反对熬夜\r\ndo\r\nend\r\n\r\n\r\n//以下为交互生成规则",
-		"operation":"add"
+		"cover":null,
+		"exhibitName":"p4",
+		"online":false,
+		"text":"alter p4\r\n  do\r\n    hide\r\n    set_title set_titles\r\n    set_cover set_covers\r\n    add_attr \r\n    delete_attr 4\r\n  end",
+		"title":null,
+		"operation":"alter",
+		"attrs":[
+			{
+				"operation":"add",
+				"value":"<missing ID>",
+				"key":"4"
+			}
+		]
+	},
+	{
+		"themeName":"123",
+		"text":"activate_theme 123",
+		"operation":"activate_theme"
 	}
 ]

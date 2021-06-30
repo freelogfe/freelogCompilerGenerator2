@@ -122,16 +122,23 @@ public class MappingRuleCustomVisitor extends MappingRuleBaseVisitor<Void> {
 
     @Override
     public Void visitSet_title(MappingRule.Set_titleContext ctx) {
-        rule.put("title", ctx.title.getText());
-
+        if (ctx.title == null) {
+            rule.put("title", null);
+        } else {
+            String title = ctx.title.getText();
+            rule.put("title", title.substring(1, title.length() - 1));
+        }
         return super.visitSet_title(ctx);
     }
 
     @Override
     public Void visitSet_cover(MappingRule.Set_coverContext ctx) {
-        String cover = ctx.cover.getText();
-        rule.put("cover", cover.substring(1, cover.length() - 1));
-
+        if (ctx.cover == null) {
+            rule.put("cover", null);
+        } else {
+            String cover = ctx.cover.getText();
+            rule.put("cover", cover.substring(1, cover.length() - 1));
+        }
         return super.visitSet_cover(ctx);
     }
 
@@ -174,19 +181,27 @@ public class MappingRuleCustomVisitor extends MappingRuleBaseVisitor<Void> {
     }
 
     public JSONObject wrapCandidate(MappingRule.CandidateContext ctx, String releaseDefaultVersion) {
+        if (ctx == null) {
+            return null;
+        }
         if (releaseDefaultVersion == null) {
             releaseDefaultVersion = "latest";
         }
 
         JSONObject candidate = new JSONObject();
-
         if (ctx.resource_name() != null) {
             MappingRule.Resource_nameContext rctx = ctx.resource_name();
+            if (rctx == null) {
+                return null;
+            }
             candidate.put("name", String.format("%s%s%s", rctx.userName.getText(), rctx.SLASH().getText(), rctx.resourceName.getText()));
             candidate.put("versionRange", rctx.SEMVER() != null ? rctx.SEMVER().getText() : releaseDefaultVersion);
             candidate.put("type", "resource");
         } else {
             MappingRule.Object_nameContext octx = ctx.object_name();
+            if (octx == null) {
+                return null;
+            }
             candidate.put("name", String.format("%s%s%s", octx.bucketName.getText(), octx.SLASH().getText(), octx.objectName.getText()));
             candidate.put("type", "object");
         }
@@ -214,6 +229,9 @@ public class MappingRuleCustomVisitor extends MappingRuleBaseVisitor<Void> {
             }
 
             JSONObject candidate = rule.getJSONObject("candidate");
+            if (candidate == null) {
+                return;
+            }
             String type = candidate.getString("type");
             String name = candidate.getString("name");
             if (type.equals("resource")) {

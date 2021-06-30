@@ -31,7 +31,8 @@ GT : '>' ;
 COMMA : ',' ;
 
 // 词组
-ID : (ALPHABET | CHINESE_WORD | DIGIT | '-' | '_' | '.')+ ;
+//ID : (ALPHABET | CHINESE_WORD | DIGIT | '-' | '_' | '.')+ ;
+ID : ~[$@#/>," \t\r\n]+ ;
 // 字符串
 STRING : '"' (ESC | ~["\\])* '"' ;
 WS : [ \t\r\n]+ -> skip ;
