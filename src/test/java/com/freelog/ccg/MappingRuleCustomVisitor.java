@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class MappingRuleCustomVisitor extends MappingRuleBaseVisitor<Void> {
 
@@ -23,6 +24,18 @@ public class MappingRuleCustomVisitor extends MappingRuleBaseVisitor<Void> {
     public Void visitMapping_rule_section(MappingRule.Mapping_rule_sectionContext ctx) {
         mappingRules = new JSONArray();
         return super.visitMapping_rule_section(ctx);
+    }
+
+    @Override
+    public Void visitMapping_rule_part(MappingRule.Mapping_rule_partContext ctx) {
+        Void result = super.visitMapping_rule_part(ctx);
+
+        List<MappingRule.Comment_sectionContext> ctxCss = ctx.comment_section();
+        if (ctxCss.size() != 0) {
+            rule.put("comments", ctxCss.stream().map(MappingRule.Comment_sectionContext::getText).collect(Collectors.toList()));
+        }
+
+        return result;
     }
 
     @Override
@@ -191,7 +204,7 @@ public class MappingRuleCustomVisitor extends MappingRuleBaseVisitor<Void> {
         JSONObject candidate = new JSONObject();
         if (ctx.resource_name() != null) {
             MappingRule.Resource_nameContext rctx = ctx.resource_name();
-            if (rctx == null) {
+            if (rctx == null || rctx.resourceName == null) {
                 return null;
             }
             candidate.put("name", String.format("%s%s%s", rctx.userName.getText(), rctx.SLASH().getText(), rctx.resourceName.getText()));
@@ -199,7 +212,7 @@ public class MappingRuleCustomVisitor extends MappingRuleBaseVisitor<Void> {
             candidate.put("type", "resource");
         } else {
             MappingRule.Object_nameContext octx = ctx.object_name();
-            if (octx == null) {
+            if (octx == null || octx.objectName == null) {
                 return null;
             }
             candidate.put("name", String.format("%s%s%s", octx.bucketName.getText(), octx.SLASH().getText(), octx.objectName.getText()));

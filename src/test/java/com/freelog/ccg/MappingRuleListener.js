@@ -20,12 +20,30 @@ MappingRuleListener.prototype.exitMapping_rule_section = function(ctx) {
 };
 
 
+// Enter a parse tree produced by MappingRule#mapping_rule_part.
+MappingRuleListener.prototype.enterMapping_rule_part = function(ctx) {
+};
+
+// Exit a parse tree produced by MappingRule#mapping_rule_part.
+MappingRuleListener.prototype.exitMapping_rule_part = function(ctx) {
+};
+
+
 // Enter a parse tree produced by MappingRule#mapping_rule.
 MappingRuleListener.prototype.enterMapping_rule = function(ctx) {
 };
 
 // Exit a parse tree produced by MappingRule#mapping_rule.
 MappingRuleListener.prototype.exitMapping_rule = function(ctx) {
+};
+
+
+// Enter a parse tree produced by MappingRule#comment_section.
+MappingRuleListener.prototype.enterComment_section = function(ctx) {
+};
+
+// Exit a parse tree produced by MappingRule#comment_section.
+MappingRuleListener.prototype.exitComment_section = function(ctx) {
 };
 
 

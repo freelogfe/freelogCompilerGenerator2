@@ -2,13 +2,17 @@ parser grammar MappingRule;
 
 options { tokenVocab=MappingRuleToken; }
 
-mapping_rule_section : mapping_rule* EOF ;
+mapping_rule_section : mapping_rule_part* EOF ;
+
+mapping_rule_part : comment_section* mapping_rule ;
 
 mapping_rule
     : rule_add
     | rule_alter
     | rule_activate_theme
     ;
+
+comment_section : COMMENT | COMMENT_LINE ;
 
 rule_add : ADD candidate AS ID action ;
 rule_alter : ALTER ID action ;

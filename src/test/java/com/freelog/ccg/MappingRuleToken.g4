@@ -35,6 +35,9 @@ COMMA : ',' ;
 ID : ~[$@#/>," \t\r\n]+ ;
 // 字符串
 STRING : '"' (ESC | ~["\\])* '"' ;
+// 注释
+COMMENT         : '/*' .*? '*/' ('\r'? '\n')? ;
+COMMENT_LINE    : '//' .*? '\r'? '\n' ;
 WS : [ \t\r\n]+ -> skip ;
 
 mode SEMVER_MODE;

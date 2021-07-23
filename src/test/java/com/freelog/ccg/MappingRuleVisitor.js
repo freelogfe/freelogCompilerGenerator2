@@ -18,8 +18,20 @@ MappingRuleVisitor.prototype.visitMapping_rule_section = function(ctx) {
 };
 
 
+// Visit a parse tree produced by MappingRule#mapping_rule_part.
+MappingRuleVisitor.prototype.visitMapping_rule_part = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
 // Visit a parse tree produced by MappingRule#mapping_rule.
 MappingRuleVisitor.prototype.visitMapping_rule = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by MappingRule#comment_section.
+MappingRuleVisitor.prototype.visitComment_section = function(ctx) {
   return this.visitChildren(ctx);
 };
 

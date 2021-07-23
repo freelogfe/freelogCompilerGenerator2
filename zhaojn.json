@@ -6,6 +6,10 @@
 			"type":"resource"
 		},
 		"exhibitName":"p3",
+		"comments":[
+			"// 昨夜西风凋碧树\r\n",
+			"// 一条大河波浪宽\r\n"
+		],
 		"replaces":[
 			{
 				"replacer":{
@@ -50,16 +54,24 @@
 		]
 	},
 	{
-		"cover":null,
+		"cover":"set_covers",
 		"exhibitName":"p4",
+		"comments":[
+			"/*\r\n * 无物结同心\r\n * 烟花不堪剪\r\n */\r\n"
+		],
 		"online":false,
-		"text":"alter p4\r\n  do\r\n    hide\r\n    set_title set_titles\r\n    set_cover set_covers\r\n    add_attr \r\n    delete_attr 4\r\n  end",
-		"title":null,
+		"text":"alter p4\r\n  do\r\n    hide\r\n    set_title \"set_titles\"\r\n    set_cover \"set_covers\"\r\n    add_attr 1 2 3\r\n    delete_attr 4\r\n  end",
+		"title":"set_titles",
 		"operation":"alter",
 		"attrs":[
 			{
+				"description":"3",
 				"operation":"add",
-				"value":"<missing ID>",
+				"value":"2",
+				"key":"1"
+			},
+			{
+				"operation":"delete",
 				"key":"4"
 			}
 		]

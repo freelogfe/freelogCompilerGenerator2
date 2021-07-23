@@ -27,7 +27,7 @@ public class B {
                 "-visitor",
                 "-package",
                 "com.freelog.ccg",
-                "-Dlanguage=Java"
+                "-Dlanguage=JavaScript"
         ));
 
         String[] toolArgsArray = new String[toolArgs.size()];

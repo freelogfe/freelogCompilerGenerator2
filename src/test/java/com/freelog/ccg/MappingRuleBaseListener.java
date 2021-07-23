@@ -28,6 +28,18 @@ public class MappingRuleBaseListener implements MappingRuleListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterMapping_rule_part(MappingRule.Mapping_rule_partContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMapping_rule_part(MappingRule.Mapping_rule_partContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterMapping_rule(MappingRule.Mapping_ruleContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -35,6 +47,18 @@ public class MappingRuleBaseListener implements MappingRuleListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitMapping_rule(MappingRule.Mapping_ruleContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterComment_section(MappingRule.Comment_sectionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitComment_section(MappingRule.Comment_sectionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

@@ -18,6 +18,16 @@ public interface MappingRuleListener extends ParseTreeListener {
 	 */
 	void exitMapping_rule_section(MappingRule.Mapping_rule_sectionContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link MappingRule#mapping_rule_part}.
+	 * @param ctx the parse tree
+	 */
+	void enterMapping_rule_part(MappingRule.Mapping_rule_partContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MappingRule#mapping_rule_part}.
+	 * @param ctx the parse tree
+	 */
+	void exitMapping_rule_part(MappingRule.Mapping_rule_partContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link MappingRule#mapping_rule}.
 	 * @param ctx the parse tree
 	 */
@@ -27,6 +37,16 @@ public interface MappingRuleListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitMapping_rule(MappingRule.Mapping_ruleContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MappingRule#comment_section}.
+	 * @param ctx the parse tree
+	 */
+	void enterComment_section(MappingRule.Comment_sectionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MappingRule#comment_section}.
+	 * @param ctx the parse tree
+	 */
+	void exitComment_section(MappingRule.Comment_sectionContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link MappingRule#rule_add}.
 	 * @param ctx the parse tree
