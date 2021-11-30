@@ -7,7 +7,6 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.freelog.cg.tool.TreeVisualizer;
 import org.antlr.v4.Tool;
 import org.antlr.v4.runtime.ANTLRInputStream;
-import org.antlr.v4.runtime.BailErrorStrategy;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.junit.Test;
@@ -28,6 +27,7 @@ public class B {
                 "-package",
                 "com.freelog.ccg",
                 "-Dlanguage=JavaScript"
+//                "-Dlanguage=Java"
         ));
 
         String[] toolArgsArray = new String[toolArgs.size()];

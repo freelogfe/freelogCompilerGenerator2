@@ -18,16 +18,6 @@ public interface MappingRuleListener extends ParseTreeListener {
 	 */
 	void exitMapping_rule_section(MappingRule.Mapping_rule_sectionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link MappingRule#mapping_rule_part}.
-	 * @param ctx the parse tree
-	 */
-	void enterMapping_rule_part(MappingRule.Mapping_rule_partContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link MappingRule#mapping_rule_part}.
-	 * @param ctx the parse tree
-	 */
-	void exitMapping_rule_part(MappingRule.Mapping_rule_partContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link MappingRule#mapping_rule}.
 	 * @param ctx the parse tree
 	 */
@@ -77,6 +67,16 @@ public interface MappingRuleListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitRule_activate_theme(MappingRule.Rule_activate_themeContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MappingRule#rule_comment_section}.
+	 * @param ctx the parse tree
+	 */
+	void enterRule_comment_section(MappingRule.Rule_comment_sectionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MappingRule#rule_comment_section}.
+	 * @param ctx the parse tree
+	 */
+	void exitRule_comment_section(MappingRule.Rule_comment_sectionContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link MappingRule#candidate}.
 	 * @param ctx the parse tree
@@ -207,6 +207,16 @@ public interface MappingRuleListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitDelete_attr(MappingRule.Delete_attrContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MappingRule#line_code_comment_section}.
+	 * @param ctx the parse tree
+	 */
+	void enterLine_code_comment_section(MappingRule.Line_code_comment_sectionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MappingRule#line_code_comment_section}.
+	 * @param ctx the parse tree
+	 */
+	void exitLine_code_comment_section(MappingRule.Line_code_comment_sectionContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link MappingRule#scope}.
 	 * @param ctx the parse tree

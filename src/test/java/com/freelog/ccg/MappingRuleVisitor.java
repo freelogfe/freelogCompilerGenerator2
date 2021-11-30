@@ -17,12 +17,6 @@ public interface MappingRuleVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitMapping_rule_section(MappingRule.Mapping_rule_sectionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link MappingRule#mapping_rule_part}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitMapping_rule_part(MappingRule.Mapping_rule_partContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link MappingRule#mapping_rule}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -52,6 +46,12 @@ public interface MappingRuleVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitRule_activate_theme(MappingRule.Rule_activate_themeContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MappingRule#rule_comment_section}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRule_comment_section(MappingRule.Rule_comment_sectionContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link MappingRule#candidate}.
 	 * @param ctx the parse tree
@@ -130,6 +130,12 @@ public interface MappingRuleVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitDelete_attr(MappingRule.Delete_attrContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MappingRule#line_code_comment_section}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLine_code_comment_section(MappingRule.Line_code_comment_sectionContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link MappingRule#scope}.
 	 * @param ctx the parse tree

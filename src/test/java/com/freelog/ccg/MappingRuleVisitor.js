@@ -18,12 +18,6 @@ MappingRuleVisitor.prototype.visitMapping_rule_section = function(ctx) {
 };
 
 
-// Visit a parse tree produced by MappingRule#mapping_rule_part.
-MappingRuleVisitor.prototype.visitMapping_rule_part = function(ctx) {
-  return this.visitChildren(ctx);
-};
-
-
 // Visit a parse tree produced by MappingRule#mapping_rule.
 MappingRuleVisitor.prototype.visitMapping_rule = function(ctx) {
   return this.visitChildren(ctx);
@@ -50,6 +44,12 @@ MappingRuleVisitor.prototype.visitRule_alter = function(ctx) {
 
 // Visit a parse tree produced by MappingRule#rule_activate_theme.
 MappingRuleVisitor.prototype.visitRule_activate_theme = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by MappingRule#rule_comment_section.
+MappingRuleVisitor.prototype.visitRule_comment_section = function(ctx) {
   return this.visitChildren(ctx);
 };
 
@@ -128,6 +128,12 @@ MappingRuleVisitor.prototype.visitAdd_attr = function(ctx) {
 
 // Visit a parse tree produced by MappingRule#delete_attr.
 MappingRuleVisitor.prototype.visitDelete_attr = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by MappingRule#line_code_comment_section.
+MappingRuleVisitor.prototype.visitLine_code_comment_section = function(ctx) {
   return this.visitChildren(ctx);
 };
 

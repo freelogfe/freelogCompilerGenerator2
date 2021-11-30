@@ -28,18 +28,6 @@ public class MappingRuleBaseListener implements MappingRuleListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterMapping_rule_part(MappingRule.Mapping_rule_partContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitMapping_rule_part(MappingRule.Mapping_rule_partContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterMapping_rule(MappingRule.Mapping_ruleContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -95,6 +83,18 @@ public class MappingRuleBaseListener implements MappingRuleListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitRule_activate_theme(MappingRule.Rule_activate_themeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterRule_comment_section(MappingRule.Rule_comment_sectionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitRule_comment_section(MappingRule.Rule_comment_sectionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -251,6 +251,18 @@ public class MappingRuleBaseListener implements MappingRuleListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitDelete_attr(MappingRule.Delete_attrContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterLine_code_comment_section(MappingRule.Line_code_comment_sectionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLine_code_comment_section(MappingRule.Line_code_comment_sectionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

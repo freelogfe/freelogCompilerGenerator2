@@ -1,16 +1,34 @@
 [
 	{
+		"text":"// 昨夜西风凋碧树\r\n",
+		"operation":"comment"
+	},
+	{
+		"text":"// 一条大河波浪宽\r\n",
+		"operation":"comment"
+	},
+	{
 		"candidate":{
 			"versionRange":"1.1.1",
 			"name":"u2/r10.0",
 			"type":"resource"
 		},
 		"exhibitName":"p3",
-		"comments":[
-			"// 昨夜西风凋碧树\r\n",
-			"// 一条大河波浪宽\r\n"
-		],
-		"replaces":[
+		"text":"add $u2/r10.0@1.1.1 as p3\r\n  do\r\n    // 千金之子，坐不垂堂\r\n    set_labels t1,t2,t3\r\n    replace $uu9/rr9@1.1.1 with #bb0/mm0 under $u6/m6>$u7/m7, $u8/m8\r\n    show\r\n  end",
+		"operation":"add",
+		"actions":[
+			{
+				"operation":"comment",
+				"content":"// 千金之子，坐不垂堂\r\n"
+			},
+			{
+				"operation":"set_labels",
+				"content":[
+					"t1",
+					"t2",
+					"t3"
+				]
+			},
 			{
 				"replacer":{
 					"name":"bb0/mm0",
@@ -41,44 +59,56 @@
 							"type":"resource"
 						}
 					]
-				]
+				],
+				"operation":"replace"
+			},
+			{
+				"operation":"online",
+				"content":true
 			}
-		],
-		"online":true,
-		"text":"add $u2/r10.0@1.1.1 as p3\r\n  do\r\n    set_labels t1,t2,t3\r\n    replace $uu9/rr9@1.1.1 with #bb0/mm0 under $u6/m6>$u7/m7, $u8/m8\r\n    show\r\n  end",
-		"operation":"add",
-		"labels":[
-			"t1",
-			"t2",
-			"t3"
 		]
 	},
 	{
-		"cover":"set_covers",
+		"text":"/*\r\n * 无物结同心\r\n * 烟花不堪剪\r\n */\r\n",
+		"operation":"comment"
+	},
+	{
 		"exhibitName":"p4",
-		"comments":[
-			"/*\r\n * 无物结同心\r\n * 烟花不堪剪\r\n */\r\n"
-		],
-		"online":false,
 		"text":"alter p4\r\n  do\r\n    hide\r\n    set_title \"set_titles\"\r\n    set_cover \"set_covers\"\r\n    add_attr 1 2 3\r\n    delete_attr 4\r\n  end",
-		"title":"set_titles",
 		"operation":"alter",
-		"attrs":[
+		"actions":[
 			{
-				"description":"3",
-				"operation":"add",
-				"value":"2",
-				"key":"1"
+				"operation":"online",
+				"content":false
 			},
 			{
-				"operation":"delete",
-				"key":"4"
+				"operation":"set_title",
+				"content":"set_titles"
+			},
+			{
+				"operation":"set_cover",
+				"content":"set_covers"
+			},
+			{
+				"operation":"add_attr",
+				"content":{
+					"description":"3",
+					"value":"2",
+					"key":"1"
+				}
+			},
+			{
+				"operation":"delete_attr",
+				"content":{
+					"key":"4"
+				}
 			}
 		]
 	},
 	{
 		"themeName":"123",
 		"text":"activate_theme 123",
-		"operation":"activate_theme"
+		"operation":"activate_theme",
+		"actions":[]
 	}
 ]

@@ -2,14 +2,13 @@ parser grammar MappingRule;
 
 options { tokenVocab=MappingRuleToken; }
 
-mapping_rule_section : mapping_rule_part* EOF ;
-
-mapping_rule_part : comment_section* mapping_rule ;
+mapping_rule_section : mapping_rule* EOF ;
 
 mapping_rule
     : rule_add
     | rule_alter
     | rule_activate_theme
+    | rule_comment_section
     ;
 
 comment_section : COMMENT | COMMENT_LINE ;
@@ -17,6 +16,7 @@ comment_section : COMMENT | COMMENT_LINE ;
 rule_add : ADD candidate AS ID action ;
 rule_alter : ALTER ID action ;
 rule_activate_theme : ACTIVATE_THEME ID ;
+rule_comment_section : comment_section ;
 
 candidate
     : resource_name
@@ -38,6 +38,7 @@ line_code
     | set_cover
     | add_attr
     | delete_attr
+    | line_code_comment_section
     ;
 set_labels
     : SET_LABELS
@@ -50,5 +51,6 @@ set_title : SET_TITLE title=STRING ;
 set_cover : SET_COVER cover=STRING ;
 add_attr : ADD_ATTR key=ID value=ID description=ID? ;
 delete_attr : DELETE_ATTR key=ID ;
+line_code_comment_section : comment_section ;
 
 scope : candidate ('>' candidate)* ;

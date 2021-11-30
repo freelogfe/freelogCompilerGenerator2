@@ -20,15 +20,6 @@ MappingRuleListener.prototype.exitMapping_rule_section = function(ctx) {
 };
 
 
-// Enter a parse tree produced by MappingRule#mapping_rule_part.
-MappingRuleListener.prototype.enterMapping_rule_part = function(ctx) {
-};
-
-// Exit a parse tree produced by MappingRule#mapping_rule_part.
-MappingRuleListener.prototype.exitMapping_rule_part = function(ctx) {
-};
-
-
 // Enter a parse tree produced by MappingRule#mapping_rule.
 MappingRuleListener.prototype.enterMapping_rule = function(ctx) {
 };
@@ -71,6 +62,15 @@ MappingRuleListener.prototype.enterRule_activate_theme = function(ctx) {
 
 // Exit a parse tree produced by MappingRule#rule_activate_theme.
 MappingRuleListener.prototype.exitRule_activate_theme = function(ctx) {
+};
+
+
+// Enter a parse tree produced by MappingRule#rule_comment_section.
+MappingRuleListener.prototype.enterRule_comment_section = function(ctx) {
+};
+
+// Exit a parse tree produced by MappingRule#rule_comment_section.
+MappingRuleListener.prototype.exitRule_comment_section = function(ctx) {
 };
 
 
@@ -188,6 +188,15 @@ MappingRuleListener.prototype.enterDelete_attr = function(ctx) {
 
 // Exit a parse tree produced by MappingRule#delete_attr.
 MappingRuleListener.prototype.exitDelete_attr = function(ctx) {
+};
+
+
+// Enter a parse tree produced by MappingRule#line_code_comment_section.
+MappingRuleListener.prototype.enterLine_code_comment_section = function(ctx) {
+};
+
+// Exit a parse tree produced by MappingRule#line_code_comment_section.
+MappingRuleListener.prototype.exitLine_code_comment_section = function(ctx) {
 };
 
 

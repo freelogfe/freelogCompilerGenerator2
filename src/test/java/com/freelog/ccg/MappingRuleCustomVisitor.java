@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class MappingRuleCustomVisitor extends MappingRuleBaseVisitor<Void> {
 
@@ -23,19 +22,9 @@ public class MappingRuleCustomVisitor extends MappingRuleBaseVisitor<Void> {
     @Override
     public Void visitMapping_rule_section(MappingRule.Mapping_rule_sectionContext ctx) {
         mappingRules = new JSONArray();
+        errors = new JSONArray();
+
         return super.visitMapping_rule_section(ctx);
-    }
-
-    @Override
-    public Void visitMapping_rule_part(MappingRule.Mapping_rule_partContext ctx) {
-        Void result = super.visitMapping_rule_part(ctx);
-
-        List<MappingRule.Comment_sectionContext> ctxCss = ctx.comment_section();
-        if (ctxCss.size() != 0) {
-            rule.put("comments", ctxCss.stream().map(MappingRule.Comment_sectionContext::getText).collect(Collectors.toList()));
-        }
-
-        return result;
     }
 
     @Override
@@ -43,6 +32,7 @@ public class MappingRuleCustomVisitor extends MappingRuleBaseVisitor<Void> {
         rule = new JSONObject();
         rule.put("text", ctx.start.getInputStream().getText(new Interval(ctx.start.getStartIndex(), ctx.stop.getStopIndex())));
         rule.put("operation", "add");
+        rule.put("actions", new JSONArray());
         rule.put("exhibitName", ctx.ID().getText());
         rule.put("candidate", wrapCandidate(ctx.candidate(), null));
 
@@ -56,6 +46,7 @@ public class MappingRuleCustomVisitor extends MappingRuleBaseVisitor<Void> {
         rule = new JSONObject();
         rule.put("text", ctx.start.getInputStream().getText(new Interval(ctx.start.getStartIndex(), ctx.stop.getStopIndex())));
         rule.put("operation", "alter");
+        rule.put("actions", new JSONArray());
         rule.put("exhibitName", ctx.ID().getText());
 
         mappingRules.add(rule);
@@ -68,6 +59,7 @@ public class MappingRuleCustomVisitor extends MappingRuleBaseVisitor<Void> {
         rule = new JSONObject();
         rule.put("text", ctx.start.getInputStream().getText(new Interval(ctx.start.getStartIndex(), ctx.stop.getStopIndex())));
         rule.put("operation", "activate_theme");
+        rule.put("actions", new JSONArray());
         rule.put("themeName", ctx.ID().getText());
 
         mappingRules.add(rule);
@@ -76,16 +68,39 @@ public class MappingRuleCustomVisitor extends MappingRuleBaseVisitor<Void> {
     }
 
     @Override
+    public Void visitRule_comment_section(MappingRule.Rule_comment_sectionContext ctx) {
+        rule = new JSONObject();
+        rule.put("text", ctx.start.getInputStream().getText(new Interval(ctx.start.getStartIndex(), ctx.stop.getStopIndex())));
+        rule.put("operation", "comment");
+
+        mappingRules.add(rule);
+
+        return super.visitRule_comment_section(ctx);
+    }
+
+    @Override
     public Void visitSet_labels(MappingRule.Set_labelsContext ctx) {
+        JSONArray actions = rule.getJSONArray("actions");
+
+        JSONObject action = new JSONObject();
+        boolean exist = false;
+        for (int i = 0; i < actions.size(); i++) {
+            JSONObject tmp = actions.getJSONObject(i);
+            if (tmp.getString("operation").equals("set_labels")) {
+                action = tmp;
+                exist = true;
+                break;
+            }
+        }
         JSONArray labels = new JSONArray();
         for (TerminalNode label : ctx.ID()) {
             labels.add(label.getText());
         }
+        action.put("content", labels);
 
-        if (labels.size() != 0) {
-            rule.put("labels", labels);
-        } else {
-            rule.remove("labels");
+        if (!exist) {
+            action.put("operation", "set_labels");
+            actions.add(action);
         }
 
         return super.visitSet_labels(ctx);
@@ -93,13 +108,12 @@ public class MappingRuleCustomVisitor extends MappingRuleBaseVisitor<Void> {
 
     @Override
     public Void visitReplace(MappingRule.ReplaceContext ctx) {
-        JSONArray replaces = rule.getJSONArray("replaces");
-        if (replaces == null) {
-            replaces = new JSONArray();
-        }
-        JSONObject replace = new JSONObject();
-        replace.put("replaced", wrapCandidate(ctx.target, "*"));
-        replace.put("replacer", wrapCandidate(ctx.source, null));
+        JSONArray actions = rule.getJSONArray("actions");
+
+        JSONObject action = new JSONObject();
+        action.put("operation", "replace");
+        action.put("replaced", wrapCandidate(ctx.target, "*"));
+        action.put("replacer", wrapCandidate(ctx.source, null));
 
         JSONArray scopes = new JSONArray();
         for (MappingRule.ScopeContext scope : ctx.scope()) {
@@ -110,87 +124,172 @@ public class MappingRuleCustomVisitor extends MappingRuleBaseVisitor<Void> {
             scopes.add(chain);
         }
         if (scopes.size() != 0) {
-            replace.put("scopes", scopes);
+            action.put("scopes", scopes);
         }
 
-        replaces.add(replace);
-        rule.put("replaces", replaces);
+        actions.add(action);
 
         return super.visitReplace(ctx);
     }
 
     @Override
     public Void visitShow(MappingRule.ShowContext ctx) {
-        rule.put("online", true);
+        JSONArray actions = rule.getJSONArray("actions");
+        JSONObject action = new JSONObject();
+        boolean exist = false;
+        for (int i = 0; i < actions.size(); i++) {
+            JSONObject tmp = actions.getJSONObject(i);
+            if (tmp.getString("operation").equals("online")) {
+                action = tmp;
+                exist = true;
+                break;
+            }
+        }
+        action.put("content", true);
+
+        if (!exist) {
+            action.put("operation", "online");
+            actions.add(action);
+        }
 
         return super.visitShow(ctx);
     }
 
     @Override
     public Void visitHide(MappingRule.HideContext ctx) {
-        rule.put("online", false);
+        JSONArray actions = rule.getJSONArray("actions");
+        JSONObject action = new JSONObject();
+        boolean exist = false;
+        for (int i = 0; i < actions.size(); i++) {
+            JSONObject tmp = actions.getJSONObject(i);
+            if (tmp.getString("operation").equals("online")) {
+                action = tmp;
+                exist = true;
+                break;
+            }
+        }
+        action.put("content", false);
+
+        if (!exist) {
+            action.put("operation", "online");
+            actions.add(action);
+        }
 
         return super.visitHide(ctx);
     }
 
     @Override
     public Void visitSet_title(MappingRule.Set_titleContext ctx) {
+        JSONArray actions = rule.getJSONArray("actions");
+        JSONObject action = new JSONObject();
+        boolean exist = false;
+        for (int i = 0; i < actions.size(); i++) {
+            JSONObject tmp = actions.getJSONObject(i);
+            if (tmp.getString("operation").equals("set_title")) {
+                action = tmp;
+                exist = true;
+                break;
+            }
+        }
         if (ctx.title == null) {
-            rule.put("title", null);
+            action.put("content", null);
         } else {
             String title = ctx.title.getText();
-            rule.put("title", title.substring(1, title.length() - 1));
+            action.put("content", title.substring(1, title.length() - 1));
         }
+
+        if (!exist) {
+            action.put("operation", "set_title");
+            actions.add(action);
+        }
+
         return super.visitSet_title(ctx);
     }
 
     @Override
     public Void visitSet_cover(MappingRule.Set_coverContext ctx) {
-        if (ctx.cover == null) {
-            rule.put("cover", null);
-        } else {
-            String cover = ctx.cover.getText();
-            rule.put("cover", cover.substring(1, cover.length() - 1));
+        JSONArray actions = rule.getJSONArray("actions");
+        JSONObject action = new JSONObject();
+        boolean exist = false;
+        for (int i = 0; i < actions.size(); i++) {
+            JSONObject tmp = actions.getJSONObject(i);
+            if (tmp.getString("operation").equals("set_cover")) {
+                action = tmp;
+                exist = true;
+                break;
+            }
         }
+        if (ctx.cover == null) {
+            action.put("content", null);
+        } else {
+            String title = ctx.cover.getText();
+            action.put("content", title.substring(1, title.length() - 1));
+        }
+
+        if (!exist) {
+            action.put("operation", "set_cover");
+            actions.add(action);
+        }
+
         return super.visitSet_cover(ctx);
     }
 
     @Override
     public Void visitAdd_attr(MappingRule.Add_attrContext ctx) {
-        JSONArray attrs = rule.getJSONArray("attrs");
-        if (attrs == null) {
-            attrs = new JSONArray();
-        }
+        JSONArray actions = rule.getJSONArray("actions");
 
-        JSONObject attr = new JSONObject();
-        attr.put("operation", "add");
-        attr.put("key", ctx.key.getText());
-        attr.put("value", ctx.value.getText());
+        JSONObject content = new JSONObject();
+        content.put("key", ctx.key.getText());
+        content.put("value", ctx.value.getText());
         if (ctx.description != null) {
-            attr.put("description", ctx.description.getText());
+            content.put("description", ctx.description.getText());
+        }
+        for (int i = 0; i < actions.size(); i++) {
+            JSONObject tmp = actions.getJSONObject(i);
+            if (tmp.getString("operation").equals("add_attr")) {
+                if (tmp.getJSONObject("content").getString("key").equals(content.getString("key"))) {
+                    errors.add(String.format("添加属性中，不能重复添加 attr: %s", content.getString("key")));
+                    break;
+                }
+            }
         }
 
-        attrs.add(attr);
-        rule.put("attrs", attrs);
+        JSONObject action = new JSONObject();
+        action.put("operation", "add_attr");
+        action.put("content", content);
+
+        actions.add(action);
 
         return super.visitAdd_attr(ctx);
     }
 
     @Override
     public Void visitDelete_attr(MappingRule.Delete_attrContext ctx) {
-        JSONArray attrs = rule.getJSONArray("attrs");
-        if (attrs == null) {
-            attrs = new JSONArray();
-        }
+        JSONArray actions = rule.getJSONArray("actions");
 
-        JSONObject attr = new JSONObject();
-        attr.put("operation", "delete");
-        attr.put("key", ctx.key.getText());
+        JSONObject content = new JSONObject();
+        content.put("key", ctx.key.getText());
 
-        attrs.add(attr);
-        rule.put("attrs", attrs);
+        JSONObject action = new JSONObject();
+        action.put("operation", "delete_attr");
+        action.put("content", content);
+
+        actions.add(action);
 
         return super.visitDelete_attr(ctx);
+    }
+
+    @Override
+    public Void visitLine_code_comment_section(MappingRule.Line_code_comment_sectionContext ctx) {
+        JSONArray actions = rule.getJSONArray("actions");
+
+        JSONObject action = new JSONObject();
+        action.put("operation", "comment");
+        action.put("content", ctx.start.getInputStream().getText(new Interval(ctx.start.getStartIndex(), ctx.stop.getStopIndex())));
+
+        actions.add(action);
+
+        return super.visitLine_code_comment_section(ctx);
     }
 
     public JSONObject wrapCandidate(MappingRule.CandidateContext ctx, String releaseDefaultVersion) {
@@ -223,8 +322,6 @@ public class MappingRuleCustomVisitor extends MappingRuleBaseVisitor<Void> {
     }
 
     public void verify() {
-        errors = new JSONArray();
-
         verifyRuleAdd();
         verifyExhibitName4Rule();
         verifyRuleActivateTheme();
