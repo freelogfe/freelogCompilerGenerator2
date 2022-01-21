@@ -2,7 +2,7 @@ parser grammar MappingRule;
 
 options { tokenVocab=MappingRuleToken; }
 
-mapping_rule_section : mapping_rule* EOF ;
+mapping_rule_section : mapping_rule* EOF? ;
 
 mapping_rule
     : rule_add
@@ -24,6 +24,7 @@ candidate
     ;
 resource_name : '$' userName=ID '/' resourceName=ID ('@' SEMVER)? ;
 object_name : '#' bucketName=ID '/' objectName=ID ;
+
 
 action
     : DO line_code* END

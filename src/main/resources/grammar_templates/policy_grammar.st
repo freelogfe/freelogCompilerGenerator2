@@ -5,7 +5,7 @@ import Entity, Expression, Event;
 
 options { tokenVocab=LexToken; }
 
-policy : audience_strict declaration_section? state_definition_section EOF ;
+policy : audience_strict declaration_section? state_definition_section EOF? ;
 
 audience_strict : 'for' audience_clause ;
 
