@@ -132,6 +132,18 @@ MappingRuleVisitor.prototype.visitDelete_attr = function(ctx) {
 };
 
 
+// Visit a parse tree produced by MappingRule#add_rely.
+MappingRuleVisitor.prototype.visitAdd_rely = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by MappingRule#delete_rely.
+MappingRuleVisitor.prototype.visitDelete_rely = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
 // Visit a parse tree produced by MappingRule#line_code_comment_section.
 MappingRuleVisitor.prototype.visitLine_code_comment_section = function(ctx) {
   return this.visitChildren(ctx);
@@ -140,6 +152,12 @@ MappingRuleVisitor.prototype.visitLine_code_comment_section = function(ctx) {
 
 // Visit a parse tree produced by MappingRule#scope.
 MappingRuleVisitor.prototype.visitScope = function(ctx) {
+  return this.visitChildren(ctx);
+};
+
+
+// Visit a parse tree produced by MappingRule#rely_target.
+MappingRuleVisitor.prototype.visitRely_target = function(ctx) {
   return this.visitChildren(ctx);
 };
 

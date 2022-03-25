@@ -256,6 +256,30 @@ public class MappingRuleBaseListener implements MappingRuleListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterAdd_rely(MappingRule.Add_relyContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAdd_rely(MappingRule.Add_relyContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDelete_rely(MappingRule.Delete_relyContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDelete_rely(MappingRule.Delete_relyContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterLine_code_comment_section(MappingRule.Line_code_comment_sectionContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -275,6 +299,18 @@ public class MappingRuleBaseListener implements MappingRuleListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitScope(MappingRule.ScopeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterRely_target(MappingRule.Rely_targetContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitRely_target(MappingRule.Rely_targetContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

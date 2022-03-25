@@ -208,6 +208,26 @@ public interface MappingRuleListener extends ParseTreeListener {
 	 */
 	void exitDelete_attr(MappingRule.Delete_attrContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link MappingRule#add_rely}.
+	 * @param ctx the parse tree
+	 */
+	void enterAdd_rely(MappingRule.Add_relyContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MappingRule#add_rely}.
+	 * @param ctx the parse tree
+	 */
+	void exitAdd_rely(MappingRule.Add_relyContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MappingRule#delete_rely}.
+	 * @param ctx the parse tree
+	 */
+	void enterDelete_rely(MappingRule.Delete_relyContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MappingRule#delete_rely}.
+	 * @param ctx the parse tree
+	 */
+	void exitDelete_rely(MappingRule.Delete_relyContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link MappingRule#line_code_comment_section}.
 	 * @param ctx the parse tree
 	 */
@@ -227,4 +247,14 @@ public interface MappingRuleListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitScope(MappingRule.ScopeContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MappingRule#rely_target}.
+	 * @param ctx the parse tree
+	 */
+	void enterRely_target(MappingRule.Rely_targetContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MappingRule#rely_target}.
+	 * @param ctx the parse tree
+	 */
+	void exitRely_target(MappingRule.Rely_targetContext ctx);
 }

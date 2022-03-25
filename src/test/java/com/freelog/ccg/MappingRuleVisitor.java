@@ -131,6 +131,18 @@ public interface MappingRuleVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDelete_attr(MappingRule.Delete_attrContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link MappingRule#add_rely}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAdd_rely(MappingRule.Add_relyContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MappingRule#delete_rely}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDelete_rely(MappingRule.Delete_relyContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link MappingRule#line_code_comment_section}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -142,4 +154,10 @@ public interface MappingRuleVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitScope(MappingRule.ScopeContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MappingRule#rely_target}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRely_target(MappingRule.Rely_targetContext ctx);
 }

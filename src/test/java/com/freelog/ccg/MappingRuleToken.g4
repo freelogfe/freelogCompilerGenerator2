@@ -18,9 +18,13 @@ SET_TITLE : 'set_title' ;
 SET_COVER : 'set_cover' ;
 ADD_ATTR : 'add_attr' ;
 DELETE_ATTR : 'delete_attr' ;
+ADD_RELY : 'add_rely' ;
+DELETE_RELY : 'delete_rely' ;
 
 WITH : 'with' ;
 UNDER : 'under' ;
+TO : 'to' ;
+FROM : 'from' ;
 
 // 符号
 DOLLAR : '$' ;
@@ -28,11 +32,11 @@ AT : '@' -> mode(SEMVER_MODE) ;
 HASH : '#' ;
 SLASH : '/' ;
 GT : '>' ;
-COMMA : ',' ;
+SEPARATOR : '|' ;
 
 // 词组
 //ID : (ALPHABET | CHINESE_WORD | DIGIT | '-' | '_' | '.')+ ;
-ID : ~[$@#/>," \t\r\n]+ ;
+ID : ~[$@#/>|" \t\r\n]+ ;
 // 字符串
 STRING : '"' (ESC | ~["\\])* '"' ;
 // 注释

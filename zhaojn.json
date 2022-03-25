@@ -14,7 +14,7 @@
 			"type":"resource"
 		},
 		"exhibitName":"p3",
-		"text":"add $u2/r10.0@1.1.1 as p3\r\n  do\r\n    // 千金之子，坐不垂堂\r\n    set_labels t1,t2,t3\r\n    replace $uu9/rr9@1.1.1 with #bb0/mm0 under $u6/m6>$u7/m7, $u8/m8\r\n    show\r\n  end",
+		"text":"add $u2/r10.0@1.1.1 as p3\r\n  do\r\n    // 千金之子，坐不垂堂\r\n    set_labels t1 | t2 | t3\r\n    replace $uu9/rr9@1.1.1 with #bb0/mm0 under $u6/m6>$u7/m7 | $u8/m8\r\n    // 添加依赖\r\n    add_rely $uu9/rr9@1.1.1\r\n    // 添加依赖到某个依赖下\r\n    add_rely $uu9/rr9@1.1.1 | $uu9/rr9@1.1.1 to #bb0/mm0>#bb0/mm0\r\n    // 移除依赖\r\n    delete_rely $uu9/rr9@1.1.1\r\n    // 移除某个依赖的依赖\r\n    delete_rely $uu9/rr9@1.1.1 from #bb0/mm0\r\n    show\r\n  end",
 		"operation":"add",
 		"actions":[
 			{
@@ -61,6 +61,57 @@
 					]
 				],
 				"operation":"replace"
+			},
+			{
+				"operation":"comment",
+				"content":"// 添加依赖\r\n"
+			},
+			{
+				"operation":"add_rely",
+				"content":{
+					"resources":[
+						"$uu9/rr9@1.1.1"
+					]
+				}
+			},
+			{
+				"operation":"comment",
+				"content":"// 添加依赖到某个依赖下\r\n"
+			},
+			{
+				"operation":"add_rely",
+				"content":{
+					"resources":[
+						"$uu9/rr9@1.1.1",
+						"$uu9/rr9@1.1.1"
+					],
+					"target":"#bb0/mm0>#bb0/mm0"
+				}
+			},
+			{
+				"operation":"comment",
+				"content":"// 移除依赖\r\n"
+			},
+			{
+				"operation":"delete_rely",
+				"content":{
+					"resources":[
+						"$uu9/rr9@1.1.1"
+					]
+				}
+			},
+			{
+				"operation":"comment",
+				"content":"// 移除某个依赖的依赖\r\n"
+			},
+			{
+				"operation":"delete_rely",
+				"content":{
+					"resources":[
+						"$uu9/rr9@1.1.1"
+					],
+					"target":"#bb0/mm0"
+				}
 			},
 			{
 				"operation":"online",

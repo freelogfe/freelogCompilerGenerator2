@@ -3,8 +3,16 @@
 add $u2/r10.0@1.1.1 as p3
   do
     // 千金之子，坐不垂堂
-    set_labels t1,t2,t3
-    replace $uu9/rr9@1.1.1 with #bb0/mm0 under $u6/m6>$u7/m7, $u8/m8
+    set_labels t1 | t2 | t3
+    replace $uu9/rr9@1.1.1 with #bb0/mm0 under $u6/m6>$u7/m7 | $u8/m8
+    // 添加依赖
+    add_rely $uu9/rr9@1.1.1
+    // 添加依赖到某个依赖下
+    add_rely $uu9/rr9@1.1.1 | $uu9/rr9@1.1.1 to #bb0/mm0>#bb0/mm0
+    // 移除依赖
+    delete_rely $uu9/rr9@1.1.1
+    // 移除某个依赖的依赖
+    delete_rely $uu9/rr9@1.1.1 from #bb0/mm0
     show
   end
 /*

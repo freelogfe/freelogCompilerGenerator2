@@ -191,6 +191,24 @@ MappingRuleListener.prototype.exitDelete_attr = function(ctx) {
 };
 
 
+// Enter a parse tree produced by MappingRule#add_rely.
+MappingRuleListener.prototype.enterAdd_rely = function(ctx) {
+};
+
+// Exit a parse tree produced by MappingRule#add_rely.
+MappingRuleListener.prototype.exitAdd_rely = function(ctx) {
+};
+
+
+// Enter a parse tree produced by MappingRule#delete_rely.
+MappingRuleListener.prototype.enterDelete_rely = function(ctx) {
+};
+
+// Exit a parse tree produced by MappingRule#delete_rely.
+MappingRuleListener.prototype.exitDelete_rely = function(ctx) {
+};
+
+
 // Enter a parse tree produced by MappingRule#line_code_comment_section.
 MappingRuleListener.prototype.enterLine_code_comment_section = function(ctx) {
 };
@@ -206,6 +224,15 @@ MappingRuleListener.prototype.enterScope = function(ctx) {
 
 // Exit a parse tree produced by MappingRule#scope.
 MappingRuleListener.prototype.exitScope = function(ctx) {
+};
+
+
+// Enter a parse tree produced by MappingRule#rely_target.
+MappingRuleListener.prototype.enterRely_target = function(ctx) {
+};
+
+// Exit a parse tree produced by MappingRule#rely_target.
+MappingRuleListener.prototype.exitRely_target = function(ctx) {
 };
 
 

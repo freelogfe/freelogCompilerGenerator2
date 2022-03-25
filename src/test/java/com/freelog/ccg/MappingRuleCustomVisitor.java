@@ -280,6 +280,56 @@ public class MappingRuleCustomVisitor extends MappingRuleBaseVisitor<Void> {
     }
 
     @Override
+    public Void visitAdd_rely(MappingRule.Add_relyContext ctx) {
+        JSONArray actions = rule.getJSONArray("actions");
+
+        JSONObject content = new JSONObject();
+        JSONArray resources = new JSONArray();
+        ctx.candidate().forEach(cCtx -> {
+            resources.add(cCtx.getText());
+        });
+        content.put("resources", resources);
+        if (ctx.rely_target() != null) {
+            content.put("target", ctx.rely_target().getText());
+        } else {
+            content.put("target", null);
+        }
+
+        JSONObject action = new JSONObject();
+        action.put("operation", "add_rely");
+        action.put("content", content);
+
+        actions.add(action);
+
+        return super.visitAdd_rely(ctx);
+    }
+
+    @Override
+    public Void visitDelete_rely(MappingRule.Delete_relyContext ctx) {
+        JSONArray actions = rule.getJSONArray("actions");
+
+        JSONObject content = new JSONObject();
+        JSONArray resources = new JSONArray();
+        ctx.candidate().forEach(cCtx -> {
+            resources.add(cCtx.getText());
+        });
+        content.put("resources", resources);
+        if (ctx.rely_target() != null) {
+            content.put("target", ctx.rely_target().getText());
+        } else {
+            content.put("target", null);
+        }
+
+        JSONObject action = new JSONObject();
+        action.put("operation", "delete_rely");
+        action.put("content", content);
+
+        actions.add(action);
+
+        return super.visitDelete_rely(ctx);
+    }
+
+    @Override
     public Void visitLine_code_comment_section(MappingRule.Line_code_comment_sectionContext ctx) {
         JSONArray actions = rule.getJSONArray("actions");
 
