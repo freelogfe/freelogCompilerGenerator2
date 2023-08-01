@@ -7,11 +7,11 @@ import static java.util.Map.entry;
 public class TargetDependentInjection {
 
     public static Map<String, String> javaInjections = Map.ofEntries(
-            entry("keep_id", "")
+//            entry("keep_id", "")
     );
 
     public static Map<String, String> javaScriptInjections = Map.ofEntries(
-            entry("keep_id", "this._ctx.start._text = this._ctx.getText().substr(1)")
+//            entry("keep_id", "this._ctx.start._text = this._ctx.getText().substr(1)")
     );
 
     public static Map<String, Map<String, String>> injections = Map.ofEntries(

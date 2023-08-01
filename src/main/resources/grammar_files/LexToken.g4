@@ -6,6 +6,7 @@ PUBLIC : 'public' ;
 NODES : 'nodes' ;
 USER_GROUP : 'userGroup' ;
 REGISTERED_USERS : 'registeredUsers' ;
+INCLUDE : 'include' ;
 REQUIRE : 'require' ;
 CONTRACT_WITH : 'contract with' ;
 SERVICE_STATE_SCOPE
@@ -40,10 +41,10 @@ PHONE_NUMBER_CN_MOBILE : ELEVEN_DIGITS ;
 EMAIL : LOCAL_SUBPART+ '@' DOMAIN_SUBPART ('.' DOMAIN_SUBPART)* ;
 
 // EntityToken
-ACCOUNT_NUMBER : '#' (ALPHABET|DIGIT)+ ;
-SUBJECT_SERVICE_NAME : '^' ID ;
-UOID : '@' ID ;
-SUBJECT_ID : '%' HEX_DIGIT+ ;
+//ACCOUNT_NUMBER : '#' (ALPHABET|DIGIT)+ ;
+//SUBJECT_SERVICE_NAME : '^' ID ;
+//UOID : '@' ID ;
+//SUBJECT_ID : '%' HEX_DIGIT+ ;
 
 // ExpressionToken
 SCIENTIFIC_NUMBER

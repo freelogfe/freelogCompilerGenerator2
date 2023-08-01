@@ -108,11 +108,11 @@ var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
     "\u009d\u0007\r\u0002\u0002\u009d\u009e\u0007\u001e\u0002\u0002\u009e",
     "#\u0003\u0002\u0002\u0002\u009f\u00a0\u0007\u000e\u0002\u0002\u00a0",
     "\u00a1\u0007\u001e\u0002\u0002\u00a1%\u0003\u0002\u0002\u0002\u00a2",
-    "\u00a3\u0007\u000f\u0002\u0002\u00a3\u00a4\u0007\u001d\u0002\u0002\u00a4",
-    "\u00a6\u0007\u001d\u0002\u0002\u00a5\u00a7\u0007\u001d\u0002\u0002\u00a6",
+    "\u00a3\u0007\u000f\u0002\u0002\u00a3\u00a4\u0007\u001e\u0002\u0002\u00a4",
+    "\u00a6\u0007\u001e\u0002\u0002\u00a5\u00a7\u0007\u001e\u0002\u0002\u00a6",
     "\u00a5\u0003\u0002\u0002\u0002\u00a6\u00a7\u0003\u0002\u0002\u0002\u00a7",
     "\'\u0003\u0002\u0002\u0002\u00a8\u00a9\u0007\u0010\u0002\u0002\u00a9",
-    "\u00aa\u0007\u001d\u0002\u0002\u00aa)\u0003\u0002\u0002\u0002\u00ab",
+    "\u00aa\u0007\u001e\u0002\u0002\u00aa)\u0003\u0002\u0002\u0002\u00ab",
     "\u00ac\u0007\u0011\u0002\u0002\u00ac\u00b1\u0005\u0010\t\u0002\u00ad",
     "\u00ae\u0007\u001c\u0002\u0002\u00ae\u00b0\u0005\u0010\t\u0002\u00af",
     "\u00ad\u0003\u0002\u0002\u0002\u00b0\u00b3\u0003\u0002\u0002\u0002\u00b1",
@@ -1989,14 +1989,14 @@ Add_attrContext.prototype.ADD_ATTR = function() {
     return this.getToken(MappingRule.ADD_ATTR, 0);
 };
 
-Add_attrContext.prototype.ID = function(i) {
+Add_attrContext.prototype.STRING = function(i) {
 	if(i===undefined) {
 		i = null;
 	}
     if(i===null) {
-        return this.getTokens(MappingRule.ID);
+        return this.getTokens(MappingRule.STRING);
     } else {
-        return this.getToken(MappingRule.ID, i);
+        return this.getToken(MappingRule.STRING, i);
     }
 };
 
@@ -2036,15 +2036,15 @@ MappingRule.prototype.add_attr = function() {
         this.state = 160;
         this.match(MappingRule.ADD_ATTR);
         this.state = 161;
-        localctx.key = this.match(MappingRule.ID);
+        localctx.key = this.match(MappingRule.STRING);
         this.state = 162;
-        localctx.value = this.match(MappingRule.ID);
+        localctx.value = this.match(MappingRule.STRING);
         this.state = 164;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
-        if(_la===MappingRule.ID) {
+        if(_la===MappingRule.STRING) {
             this.state = 163;
-            localctx.description = this.match(MappingRule.ID);
+            localctx.description = this.match(MappingRule.STRING);
         }
 
     } catch (re) {
@@ -2083,8 +2083,8 @@ Delete_attrContext.prototype.DELETE_ATTR = function() {
     return this.getToken(MappingRule.DELETE_ATTR, 0);
 };
 
-Delete_attrContext.prototype.ID = function() {
-    return this.getToken(MappingRule.ID, 0);
+Delete_attrContext.prototype.STRING = function() {
+    return this.getToken(MappingRule.STRING, 0);
 };
 
 Delete_attrContext.prototype.enterRule = function(listener) {
@@ -2121,7 +2121,7 @@ MappingRule.prototype.delete_attr = function() {
         this.state = 166;
         this.match(MappingRule.DELETE_ATTR);
         this.state = 167;
-        localctx.key = this.match(MappingRule.ID);
+        localctx.key = this.match(MappingRule.STRING);
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
 	        localctx.exception = re;

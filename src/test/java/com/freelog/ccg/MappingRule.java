@@ -1306,9 +1306,9 @@ public class MappingRule extends Parser {
 		public Token value;
 		public Token description;
 		public TerminalNode ADD_ATTR() { return getToken(MappingRule.ADD_ATTR, 0); }
-		public List<TerminalNode> ID() { return getTokens(MappingRule.ID); }
-		public TerminalNode ID(int i) {
-			return getToken(MappingRule.ID, i);
+		public List<TerminalNode> STRING() { return getTokens(MappingRule.STRING); }
+		public TerminalNode STRING(int i) {
+			return getToken(MappingRule.STRING, i);
 		}
 		public Add_attrContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1339,16 +1339,16 @@ public class MappingRule extends Parser {
 			setState(160);
 			match(ADD_ATTR);
 			setState(161);
-			((Add_attrContext)_localctx).key = match(ID);
+			((Add_attrContext)_localctx).key = match(STRING);
 			setState(162);
-			((Add_attrContext)_localctx).value = match(ID);
+			((Add_attrContext)_localctx).value = match(STRING);
 			setState(164);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if (_la==ID) {
+			if (_la==STRING) {
 				{
 				setState(163);
-				((Add_attrContext)_localctx).description = match(ID);
+				((Add_attrContext)_localctx).description = match(STRING);
 				}
 			}
 
@@ -1368,7 +1368,7 @@ public class MappingRule extends Parser {
 	public static class Delete_attrContext extends ParserRuleContext {
 		public Token key;
 		public TerminalNode DELETE_ATTR() { return getToken(MappingRule.DELETE_ATTR, 0); }
-		public TerminalNode ID() { return getToken(MappingRule.ID, 0); }
+		public TerminalNode STRING() { return getToken(MappingRule.STRING, 0); }
 		public Delete_attrContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -1397,7 +1397,7 @@ public class MappingRule extends Parser {
 			setState(166);
 			match(DELETE_ATTR);
 			setState(167);
-			((Delete_attrContext)_localctx).key = match(ID);
+			((Delete_attrContext)_localctx).key = match(STRING);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1814,9 +1814,9 @@ public class MappingRule extends Parser {
 		"\3\2\2\2\u0096\u0097\3\2\2\2\u0097\35\3\2\2\2\u0098\u0099\7\13\2\2\u0099"+
 		"\37\3\2\2\2\u009a\u009b\7\f\2\2\u009b!\3\2\2\2\u009c\u009d\7\r\2\2\u009d"+
 		"\u009e\7\36\2\2\u009e#\3\2\2\2\u009f\u00a0\7\16\2\2\u00a0\u00a1\7\36\2"+
-		"\2\u00a1%\3\2\2\2\u00a2\u00a3\7\17\2\2\u00a3\u00a4\7\35\2\2\u00a4\u00a6"+
-		"\7\35\2\2\u00a5\u00a7\7\35\2\2\u00a6\u00a5\3\2\2\2\u00a6\u00a7\3\2\2\2"+
-		"\u00a7\'\3\2\2\2\u00a8\u00a9\7\20\2\2\u00a9\u00aa\7\35\2\2\u00aa)\3\2"+
+		"\2\u00a1%\3\2\2\2\u00a2\u00a3\7\17\2\2\u00a3\u00a4\7\36\2\2\u00a4\u00a6"+
+		"\7\36\2\2\u00a5\u00a7\7\36\2\2\u00a6\u00a5\3\2\2\2\u00a6\u00a7\3\2\2\2"+
+		"\u00a7\'\3\2\2\2\u00a8\u00a9\7\20\2\2\u00a9\u00aa\7\36\2\2\u00aa)\3\2"+
 		"\2\2\u00ab\u00ac\7\21\2\2\u00ac\u00b1\5\20\t\2\u00ad\u00ae\7\34\2\2\u00ae"+
 		"\u00b0\5\20\t\2\u00af\u00ad\3\2\2\2\u00b0\u00b3\3\2\2\2\u00b1\u00af\3"+
 		"\2\2\2\u00b1\u00b2\3\2\2\2\u00b2\u00b6\3\2\2\2\u00b3\u00b1\3\2\2\2\u00b4"+

@@ -239,8 +239,12 @@ public class MappingRuleCustomVisitor extends MappingRuleBaseVisitor<Void> {
         JSONArray actions = rule.getJSONArray("actions");
 
         JSONObject content = new JSONObject();
-        content.put("key", ctx.key.getText());
-        content.put("value", ctx.value.getText());
+        if (ctx.key != null) {
+            content.put("key", ctx.key.getText());
+        }
+        if (ctx.value != null) {
+            content.put("value", ctx.value.getText());
+        }
         if (ctx.description != null) {
             content.put("description", ctx.description.getText());
         }
@@ -268,7 +272,9 @@ public class MappingRuleCustomVisitor extends MappingRuleBaseVisitor<Void> {
         JSONArray actions = rule.getJSONArray("actions");
 
         JSONObject content = new JSONObject();
-        content.put("key", ctx.key.getText());
+        if (ctx.key != null) {
+            content.put("key", ctx.key.getText());
+        }
 
         JSONObject action = new JSONObject();
         action.put("operation", "delete_attr");

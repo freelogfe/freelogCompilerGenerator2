@@ -71,7 +71,8 @@
 				"content":{
 					"resources":[
 						"$uu9/rr9@1.1.1"
-					]
+					],
+					"target":null
 				}
 			},
 			{
@@ -97,7 +98,8 @@
 				"content":{
 					"resources":[
 						"$uu9/rr9@1.1.1"
-					]
+					],
+					"target":null
 				}
 			},
 			{
@@ -142,17 +144,11 @@
 			},
 			{
 				"operation":"add_attr",
-				"content":{
-					"description":"3",
-					"value":"2",
-					"key":"1"
-				}
+				"content":{}
 			},
 			{
 				"operation":"delete_attr",
-				"content":{
-					"key":"4"
-				}
+				"content":{}
 			}
 		]
 	},

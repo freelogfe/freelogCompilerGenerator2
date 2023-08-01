@@ -2,18 +2,26 @@ parser grammar Entity;
 
 options { tokenVocab=LexToken; }
 
-entity_bracket :
-    ( account
-    | subject
-    | subject_service
-    | user_organization_name
-    )*
-    ;
+subject_icon
+  : ID
+  ;
 
-account : ACCOUNT_NUMBER ;
+subject_icon_lv
+  : ID
+  ;
 
-subject : subject_service POINT user_organization_name POINT SUBJECT_ID ;
+//entity_bracket :
+//    ( account
+//    | subject
+//    | subject_service
+//    | user_organization_name
+//    )*
+//    ;
 
-subject_service : SUBJECT_SERVICE_NAME ;
+//account : ACCOUNT_NUMBER ;
 
-user_organization_name : UOID ;
+//subject : subject_service POINT user_organization_name POINT SUBJECT_ID ;
+
+//subject_service : SUBJECT_SERVICE_NAME ;
+
+//user_organization_name : UOID ;

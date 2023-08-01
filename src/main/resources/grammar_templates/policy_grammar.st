@@ -1,11 +1,11 @@
-policy_grammar(serviceName, keep_id) ::= <<
+policy_grammar(serviceName) ::= <<
 parser grammar <serviceName>Policy;
 
 import Entity, Expression, Event;
 
 options { tokenVocab=LexToken; }
 
-policy : audience_strict declaration_section? state_definition_section EOF? ;
+policy : audience_strict state_definition_section EOF? ;
 
 audience_strict : 'for' audience_clause ;
 
@@ -21,9 +21,7 @@ audience
     | USER_ID
     ;
 
-requirement : 'require' (contract_with_subject) ;
-
-contract_with_subject : 'contract with' subject ;
+subject_icon_strict : 'include' subject_icon 'require' subject_icon_lv ;
 
 declaration_section: declaration_statement+ ;
 
@@ -58,7 +56,5 @@ state_transition
   : event '=>' state_name
   | terminate='terminate'
   ;
-
-subject_id : subject { <keep_id> } ;
 
 >>
