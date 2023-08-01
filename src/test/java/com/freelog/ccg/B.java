@@ -18,6 +18,9 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * 映射规则
+ */
 public class B {
 
     public void compile(String grammarName) {
