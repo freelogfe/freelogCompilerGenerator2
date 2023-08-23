@@ -2,13 +2,12 @@ package com.freelog.cgg;
 
 import com.freelog.cg.tool.Rig;
 import org.apache.commons.io.FileUtils;
-import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TestRig {
+public class ExpressionDefinitionTestRig {
 
-    private static final Logger logger = LoggerFactory.getLogger(TestRig.class);
+    private static final Logger logger = LoggerFactory.getLogger(ExpressionDefinitionTestRig.class);
 
     public static void main(String[] args) throws Exception {
         Rig rig = new Rig();
@@ -18,7 +17,7 @@ public class TestRig {
         rig.trace = true;
         rig.printTree = true;
         rig.gui = true;
-        rig.inputFiles.add(FileUtils.getFile(TestRig.class.getClassLoader().getResource("A.sc").getPath()).getAbsolutePath());
+        rig.inputFiles.add(FileUtils.getFile(ExpressionDefinitionTestRig.class.getClassLoader().getResource("ExpressionDefinition.sc").getPath()).getAbsolutePath());
 
         rig.process();
     }

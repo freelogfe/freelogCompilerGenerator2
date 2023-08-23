@@ -18,10 +18,10 @@ import java.util.List;
 /**
  * 表达式
  */
-public class A {
+public class ExpressionDefinitionTest {
 
     @Test
-    public void a() {
+    public void testAnalyse() {
         List<String> toolArgs = new LinkedList<String>(Arrays.asList(
                 Paths.get("src/test/java/com/freelog/cgg/ExpressionDefinition.g4").toString(),
                 "-visitor",
@@ -39,7 +39,7 @@ public class A {
     }
 
     public static void main(String[] args) throws Exception {
-        InputStream is = A.class.getClassLoader().getResourceAsStream("A.sc");
+        InputStream is = ExpressionDefinitionTest.class.getClassLoader().getResourceAsStream("ExpressionDefinition.sc");
         ANTLRInputStream input = new ANTLRInputStream(is);
 
         // 新建词法分析器

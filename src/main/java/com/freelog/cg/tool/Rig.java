@@ -36,6 +36,10 @@ public class Rig {
     public static final String LEXER_START_RULE_NAME = "tokens";
 
     public String grammarName;
+    // 语法解析器名称
+    public String parserName;
+    // 词法解析器名称
+    public String lexerName;
     public String startRuleName;
     public final List<String> inputFiles = new ArrayList<String>();
     public boolean printTree = false;
@@ -49,7 +53,10 @@ public class Rig {
 
     public void process() throws Exception {
 //		System.out.println("exec "+grammarName+"."+startRuleName);
-        String lexerName = grammarName + "Lexer";
+        String lexerName = this.lexerName;
+        if (lexerName == null) {
+            lexerName = grammarName + "Lexer";
+        }
         ClassLoader cl = Thread.currentThread().getContextClassLoader();
         Class<? extends Lexer> lexerClass = null;
         try {
@@ -71,7 +78,10 @@ public class Rig {
         Class<? extends Parser> parserClass = null;
         Parser parser = null;
         if (!startRuleName.equals(LEXER_START_RULE_NAME)) {
-            String parserName = grammarName + "Parser";
+            String parserName = this.parserName;
+            if (parserName == null) {
+                parserName = grammarName + "Parser";
+            }
             parserClass = cl.loadClass(parserName).asSubclass(Parser.class);
             Constructor<? extends Parser> parserCtor = parserClass.getConstructor(TokenStream.class);
             parser = parserCtor.newInstance((TokenStream) null);
