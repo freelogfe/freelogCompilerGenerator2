@@ -14,12 +14,13 @@ public class CompilerGeneratorBuilder {
     public String targetLang = "JavaScript";
     public Boolean noVisitor = false;
     public Boolean noListener = false;
+    public Boolean exactOutput = false;
     public String partialNode = "";
     public String packageName = null;
 
     public CompilerGenerator build() 
     {
-        CompilerGenerator cg = new CompilerGenerator(this.serviceName, this.grammarDir, this.outputDir, this.targetLang, this.partialNode, this.noVisitor, this.noListener, this.packageName);
+        CompilerGenerator cg = new CompilerGenerator(this.serviceName, this.grammarDir, this.outputDir, this.targetLang, this.partialNode, this.noVisitor, this.noListener,this.exactOutput, this.packageName);
         return cg;
     }
 
@@ -58,8 +59,13 @@ public class CompilerGeneratorBuilder {
         return this;
     }
 
+    public CompilerGeneratorBuilder setExactOutput(Boolean exactOutput) {
+        this.exactOutput = exactOutput;
+        return this;
+    }
+
+
     public CompilerGeneratorBuilder setPackageName(String packageName) {
-        System.out.println(packageName);
         this.packageName = packageName;
         return this;
     }

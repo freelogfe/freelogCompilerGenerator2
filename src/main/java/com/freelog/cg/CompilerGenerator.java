@@ -19,6 +19,7 @@ public class CompilerGenerator {
     public String partialNode;
     public Boolean noVisitor;
     public Boolean noListener;
+    public Boolean exactOutput;
     public String packageName;
 
     public final Map<String, Map<String, String>> all_injections = TargetDependentInjection.injections;
@@ -28,7 +29,7 @@ public class CompilerGenerator {
     public final String templateStartingRule = "policy_grammar";
 
     public CompilerGenerator() {}
-    public CompilerGenerator(String serviceName, String grammarDir, String outputDir, String targetLang, String partialNode, Boolean noVisitor, Boolean noListener, String packageName) {
+    public CompilerGenerator(String serviceName, String grammarDir, String outputDir, String targetLang, String partialNode, Boolean noVisitor, Boolean noListener, Boolean exactOutput, String packageName) {
         this.serviceName = serviceName;
         this.targetLang = targetLang;
         this.outputDir = outputDir;
@@ -36,6 +37,7 @@ public class CompilerGenerator {
         this.partialNode = partialNode;
         this.noVisitor = noVisitor;
         this.noListener = noListener;
+        this.exactOutput = exactOutput;
         this.packageName = packageName;
     }
 
@@ -65,7 +67,7 @@ public class CompilerGenerator {
         String grammar = st.render();
 
         Path outputPath = Paths.get(this.grammarDir, this.serviceName+"Policy.g4");
-        System.out.println(outputPath);
+        //System.out.println("outpath:" + outputPath.toAbsolutePath());
         writeFile(outputPath, grammar);
     }
 
@@ -94,12 +96,20 @@ public class CompilerGenerator {
         String visitorFlag = this.noVisitor ? "-no-visitor" : "-visitor";
         String listenerFlag = this.noListener ? "-no-listener" : "-listener";
         List<String> toolArgs = new LinkedList<String> (Arrays.asList(
-            grammarPath.toString(),
+            "-lib", this.grammarDir,
+            "-o", this.outputDir,
             visitorFlag,
             listenerFlag,
             "-Dlanguage=" + this.targetLang,
-            "-o", this.outputDir
+            grammarPath.toString()
         ));
+
+        //System.out.println("outdir:" + this.outputDir);
+        //System.out.println("grammardir:" + this.grammarDir);
+
+        if (this.exactOutput) {
+            toolArgs.add("-Xexact-output-dir");
+        }
 
         if (this.packageName != null) {
             toolArgs.add("-package");
@@ -128,7 +138,6 @@ public class CompilerGenerator {
         catch (IOException e){
             System.err.println(e);
         }
-
     }
 
     private void copyFile(Path source, Path dest){

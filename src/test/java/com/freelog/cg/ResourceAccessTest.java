@@ -33,7 +33,7 @@ public class ResourceAccessTest
             ResourceAccess.walkResource("grammar_files", new SimpleFileVisitor<Path>() { 
                 @Override
                 public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-                    System.out.println(file);
+                    //System.out.println(file);
                     return FileVisitResult.CONTINUE;
                 }
             });
