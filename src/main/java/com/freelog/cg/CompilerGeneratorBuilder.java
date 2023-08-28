@@ -11,18 +11,18 @@ public class CompilerGeneratorBuilder {
     private static final Logger logger = LoggerFactory.getLogger(CompilerGeneratorBuilder.class);
 
     public String outputDir = "output"; // 输出目录
-    public String serviceName = "";
+    public String serviceName = "Resource";
     public String grammarDir = "generated_grammars"; // 语言目录
     public String targetLang = "JavaScript"; // 目标语言
     public Boolean noVisitor = false; // 是否生成访问器
     public Boolean noListener = false; // 是否生成监听器
+    public Boolean exactOutput = false;
     public String partialNode = "";
     public String packageName = null;
-    public Boolean noGrammar = false; // 不保留语法书
-    public Boolean noOthers = false; // 不保留其他文件
 
     public CompilerGenerator build() {
-        return new CompilerGenerator(this.serviceName, this.targetLang, this.partialNode, this.noVisitor, this.noListener, this.packageName);
+        CompilerGenerator cg = new CompilerGenerator(this.serviceName, this.grammarDir, this.outputDir, this.targetLang, this.partialNode, this.noVisitor, this.noListener, this.exactOutput, this.packageName);
+        return cg;
     }
 
     public CompilerGeneratorBuilder setServiceName(String serviceName) {
@@ -60,18 +60,13 @@ public class CompilerGeneratorBuilder {
         return this;
     }
 
+    public CompilerGeneratorBuilder setExactOutput(Boolean exactOutput) {
+        this.exactOutput = exactOutput;
+        return this;
+    }
+
     public CompilerGeneratorBuilder setPackageName(String packageName) {
         this.packageName = packageName;
-        return this;
-    }
-
-    public CompilerGeneratorBuilder setNoGrammar(Boolean noGrammar) {
-        this.noGrammar = noGrammar;
-        return this;
-    }
-
-    public CompilerGeneratorBuilder setNoOthers(Boolean noOthers) {
-        this.noOthers = noOthers;
         return this;
     }
 

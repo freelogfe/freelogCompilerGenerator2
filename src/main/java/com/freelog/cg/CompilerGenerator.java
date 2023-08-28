@@ -20,11 +20,13 @@ public class CompilerGenerator {
 
     private static final Logger logger = LoggerFactory.getLogger(CompilerGenerator.class);
 
-    public final String tmpDir = "tmp";
     public String serviceName;
+    public String grammarDir;
     public String targetLang;
+    public String outputDir;
     public Boolean noVisitor;
     public Boolean noListener;
+    public Boolean exactOutput;
     public String partialNode;
     public String packageName;
 
@@ -37,12 +39,15 @@ public class CompilerGenerator {
     public CompilerGenerator() {
     }
 
-    public CompilerGenerator(String serviceName, String targetLang, String partialNode, Boolean noVisitor, Boolean noListener, String packageName) {
+    public CompilerGenerator(String serviceName, String grammarDir, String outputDir, String targetLang, String partialNode, Boolean noVisitor, Boolean noListener, Boolean exactOutput, String packageName) {
         this.serviceName = serviceName;
         this.targetLang = targetLang;
+        this.outputDir = outputDir;
+        this.grammarDir = grammarDir;
         this.partialNode = partialNode;
         this.noVisitor = noVisitor;
         this.noListener = noListener;
+        this.exactOutput = exactOutput;
         this.packageName = packageName;
     }
 
@@ -72,7 +77,7 @@ public class CompilerGenerator {
 
         String grammar = st.render();
 
-        Path outputPath = Paths.get(this.tmpDir, this.serviceName + "Policy.g4");
+        Path outputPath = Paths.get(this.grammarDir, this.serviceName + "Policy.g4");
         writeFile(outputPath, grammar);
     }
 
@@ -83,7 +88,7 @@ public class CompilerGenerator {
                 @Override
                 public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
                     if (matcher.matches(file)) {
-                        Path dest = Paths.get(CompilerGenerator.this.tmpDir + "/" + file.getFileName());
+                        Path dest = Paths.get(CompilerGenerator.this.grammarDir + "/" + file.getFileName());
                         copyFile(file, dest);
                     }
                     return FileVisitResult.CONTINUE;
@@ -95,11 +100,16 @@ public class CompilerGenerator {
     }
 
     private void parserGrammarTokens() {
-        Path grammarPath = Paths.get(this.tmpDir, "LexToken.g4");
+        Path grammarPath = Paths.get(this.grammarDir, "LexToken.g4");
         List<String> toolArgs = new LinkedList<String>(Arrays.asList(
                 grammarPath.toString(),
+                "-o", this.outputDir,
                 "-Dlanguage=" + this.targetLang
         ));
+
+        if (this.exactOutput) {
+            toolArgs.add("-Xexact-output-dir");
+        }
 
         if (this.packageName != null) {
             toolArgs.add("-package");
@@ -115,15 +125,21 @@ public class CompilerGenerator {
 
     private void parseGrammar() {
         String grammarFile = this.partialNode.equals("") ? this.serviceName + "Policy.g4" : this.partialNode + ".g4";
-        Path grammarPath = Paths.get(this.tmpDir, grammarFile);
+        Path grammarPath = Paths.get(this.grammarDir, grammarFile);
         String visitorFlag = this.noVisitor ? "-no-visitor" : "-visitor";
         String listenerFlag = this.noListener ? "-no-listener" : "-listener";
         List<String> toolArgs = new LinkedList<String>(Arrays.asList(
                 grammarPath.toString(),
+                "-lib", this.grammarDir,
+                "-o", this.outputDir,
                 visitorFlag,
                 listenerFlag,
                 "-Dlanguage=" + this.targetLang
         ));
+
+        if (this.exactOutput) {
+            toolArgs.add("-Xexact-output-dir");
+        }
 
         if (this.packageName != null) {
             toolArgs.add("-package");

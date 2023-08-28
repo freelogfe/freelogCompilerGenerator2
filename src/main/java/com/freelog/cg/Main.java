@@ -14,9 +14,9 @@ public class Main {
 
         cg.generate();
 
-        GeneratedFileHelper helper = new GeneratedFileHelper(cg_builder, cg);
+        GeneratedFileHelper helper = new GeneratedFileHelper(cg_builder);
         // 结果整理
-        helper.generateAndClean();
+        helper.generateAndClean(cg.outputDir);
     }
 
     // 参数解析

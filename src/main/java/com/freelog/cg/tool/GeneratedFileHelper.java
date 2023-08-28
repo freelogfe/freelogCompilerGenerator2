@@ -1,6 +1,5 @@
 package com.freelog.cg.tool;
 
-import com.freelog.cg.CompilerGenerator;
 import com.freelog.cg.CompilerGeneratorBuilder;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
@@ -17,18 +16,19 @@ public class GeneratedFileHelper {
 
     private CompilerGeneratorBuilder cg_builder;
 
-    private CompilerGenerator cg;
+    public Boolean noGrammar = false; // 不保留语法书
+    public Boolean noOthers = false; // 不保留其他文件
+    public Boolean deleteSource = false;
 
-    public GeneratedFileHelper(CompilerGeneratorBuilder cg_builder, CompilerGenerator cg) {
+    public GeneratedFileHelper(CompilerGeneratorBuilder cg_builder) {
         this.cg_builder = cg_builder;
-        this.cg = cg;
     }
 
-    public void generateAndClean() throws Exception {
+    public void generateAndClean(String dist) throws Exception {
         // 源路径
-        Path sourceDir = Paths.get(cg.tmpDir);
+        Path sourceDir = Paths.get(cg_builder.outputDir);
         // 目标路径
-        Path outputDir = Paths.get(cg_builder.outputDir);
+        Path outputDir = Paths.get(dist);
         if (!Files.isDirectory(outputDir)) {
             Files.createDirectory(outputDir);
         }
@@ -37,18 +37,17 @@ public class GeneratedFileHelper {
         transfer(sourceDir.toString(), outputDir.toString(), cg_builder.targetLang, cg_builder.packageName);
 
         // 语法书输出
-        if (!cg_builder.noGrammar) {
-            Path grammarDir = Paths.get(cg_builder.outputDir, cg_builder.grammarDir);
-            if (!Files.isDirectory(grammarDir)) {
-                Files.createDirectory(grammarDir);
-            }
-            Files.walkFileTree(sourceDir, new SimpleFileVisitor<>() {
+        if (!noGrammar) {
+            Path grammarDir = Paths.get(cg_builder.grammarDir);
+            Files.walkFileTree(grammarDir, new SimpleFileVisitor<>() {
                 PathMatcher matcher = FileSystems.getDefault().getPathMatcher("glob:**.g4");
 
                 @Override
                 public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
                     if (matcher.matches(file)) {
-                        Files.copy(file, Paths.get(grammarDir.toString(), file.getFileName().toString()), StandardCopyOption.REPLACE_EXISTING);
+                        Path target = Paths.get(dist, file.getFileName().toString());
+                        Files.copy(file, target, StandardCopyOption.REPLACE_EXISTING);
+                        logger.info("copyGrammar {} to {}", file, target);
                     }
                     return FileVisitResult.CONTINUE;
                 }
@@ -56,14 +55,16 @@ public class GeneratedFileHelper {
         }
 
         // 其他文件输出
-        if (!cg_builder.noOthers) {
+        if (!noOthers) {
             Files.walkFileTree(sourceDir, new SimpleFileVisitor<>() {
                 PathMatcher matcher = FileSystems.getDefault().getPathMatcher("regex:.*?\\.(tokens|interp)");
 
                 @Override
                 public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
                     if (matcher.matches(file)) {
-                        Files.copy(file, Paths.get(outputDir.toString(), file.getFileName().toString()), StandardCopyOption.REPLACE_EXISTING);
+                        Path target = Paths.get(dist, file.getFileName().toString());
+                        Files.copy(file, target, StandardCopyOption.REPLACE_EXISTING);
+                        logger.info("copyOthers {} to {}", file, target);
                     }
                     return FileVisitResult.CONTINUE;
                 }
@@ -71,7 +72,9 @@ public class GeneratedFileHelper {
         }
 
         // 清理输入目录
-        FileUtils.deleteDirectory(new File(sourceDir.toString()));
+        if (deleteSource) {
+            FileUtils.deleteDirectory(new File(sourceDir.toString()));
+        }
     }
 
     public void transfer(String sourceDir, String targetDir, String targetLang, String packageName) {
@@ -104,10 +107,8 @@ public class GeneratedFileHelper {
                 public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
                     if (matcher.matches(file)) {
                         Path targetFilePath = Paths.get(targetDirPath.toString(), file.getFileName().toString());
-
-                        logger.info(targetFilePath.toString());
-
                         Files.copy(file, targetFilePath, StandardCopyOption.REPLACE_EXISTING);
+                        logger.info("transfer {} to {}", file, targetFilePath);
                     }
                     return FileVisitResult.CONTINUE;
                 }

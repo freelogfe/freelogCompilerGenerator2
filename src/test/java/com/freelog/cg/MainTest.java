@@ -17,34 +17,31 @@ public class MainTest {
                 .setServiceName("User")
                 .setTargetLang("Java")
                 .setPackageName("com.freelog.compiler")
-                .setNoGrammar(true)
-                .setNoOthers(true)
                 .build();
 
         cg.generate();
 
-        GeneratedFileHelper helper = new GeneratedFileHelper(cg_builder, cg);
+        GeneratedFileHelper helper = new GeneratedFileHelper(cg_builder);
         // 结果整理
-        helper.generateAndClean();
+        helper.generateAndClean(targetDir);
     }
 
     @Test
     public void testJavaScript() throws Exception {
-        String targetDir = Paths.get("D:/space_webstorm/resource-policy-lang/gen").toString();
+        String targetDir = Paths.get("output").toString();
 
         CompilerGeneratorBuilder cg_builder = new CompilerGeneratorBuilder();
         CompilerGenerator cg = cg_builder
                 .setOutputDir(targetDir)
-                .setServiceName("resource")
+                .setServiceName("Resource")
                 .setTargetLang("JavaScript")
-                .setNoGrammar(true)
-                .setNoOthers(true)
+                .setExactOutput(true)
                 .build();
 
         cg.generate();
 
-        GeneratedFileHelper helper = new GeneratedFileHelper(cg_builder, cg);
+        GeneratedFileHelper helper = new GeneratedFileHelper(cg_builder);
         // 结果整理
-        helper.generateAndClean();
+        helper.generateAndClean(Paths.get("output_finally").toString());
     }
 }
