@@ -1,39 +1,28 @@
-grammar Expression;
-import LexToken, EnvironmentVariable;
+parser grammar Expression;
 
-expression_test : expression + EOF;
+import EnvironmentVariable;
 
-expression_call_or_literal
-  : expression_call
-  | expression
-  ;
+options { tokenVocab=LexToken; }
 
-expression_assignment: expression_handle '(' (ID (',' ID)*)* ')' '=' expression;
-
-expression_call : expression_handle '(' (expression_call_argument (',' expression_call_argument)*)* ')' ;
-
-expression_call_argument
-  : INT
-  | environment_variable
-  ;
+expression_assignment: expression_handle LPAREN (ID (COMMA ID)*)? RPAREN '=' expression ;
 
 expression_handle : ID ;
 
 expression
-   : multiplyingExpression ((PLUS | MINUS) multiplyingExpression)*
+   : multiplyingExpression (('+' | '-') multiplyingExpression)*
    ;
 
 multiplyingExpression
-   : powExpression ((TIMES | DIV) powExpression)*
+   : powExpression (('*' | '/') powExpression)*
    ;
 
 powExpression
-   : signedAtom (POW signedAtom)*
+   : signedAtom ('^' signedAtom)*
    ;
 
 signedAtom
-   : PLUS signedAtom
-   | MINUS signedAtom
+   : '+' signedAtom
+   | '-' signedAtom
    | built_in_function
    | atom
    ;
@@ -43,9 +32,8 @@ built_in_function
   ;
 
 funcname
-  : SUM
+  : 'sum'
   ;
-
 
 atom
   : scientific
@@ -64,4 +52,19 @@ constant
   | EULER
   ;
 
-variable : ID ;
+variable
+  : environment_variable # VariableEnvironment
+  | ID                   # VariableArg
+  ;
+
+expression_call_or_literal
+  : expression_call
+  | expression
+  ;
+
+expression_call : expression_handle LPAREN (expression_call_argument (COMMA expression_call_argument)*)* RPAREN ;
+
+expression_call_argument
+  : INT
+  | environment_variable
+  ;

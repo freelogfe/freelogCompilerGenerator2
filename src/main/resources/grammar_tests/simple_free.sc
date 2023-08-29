@@ -1,2 +1,0 @@
-authorized init:
-    terminate

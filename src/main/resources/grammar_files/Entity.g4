@@ -1,29 +1,27 @@
-grammar Entity;
-import LexToken;
+parser grammar Entity;
 
-//this rule serve as starting rule for testing Entities only
-entity_bracket : 
-    ( subject_service
-    | event_service
-    | subject
-    | event
-    | policy
-    | account
-    | user_orgnization_name
-    )* EOF
-    ;
+options { tokenVocab=LexToken; }
 
-subject_service :SUBJECT_SERVICE_NAME;
-event_service : EVENT_SERVICE_NAME;
+subject_icon
+  : ID
+  ;
 
-subject : subject_service '.' user_orgnization_name '.' SUBJECT_ID;
-event : event_service '.' (event_path '.')? event_name;
-event_path : (ID '.')+ ID;
-event_name : ID;
+subject_icon_lv
+  : ID
+  ;
 
-policy : subject_service '.' user_orgnization_name '.' ID;
+//entity_bracket :
+//    ( account
+//    | subject
+//    | subject_service
+//    | user_organization_name
+//    )*
+//    ;
 
-account: ACCOUNT_NUMBER;
+//account : ACCOUNT_NUMBER ;
 
-user_orgnization_name: UOID;
+//subject : subject_service POINT user_organization_name POINT SUBJECT_ID ;
 
+//subject_service : SUBJECT_SERVICE_NAME ;
+
+//user_organization_name : UOID ;

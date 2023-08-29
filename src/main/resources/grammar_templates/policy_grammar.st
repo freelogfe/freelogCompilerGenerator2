@@ -1,35 +1,60 @@
-policy_grammar(serviceName, keep_id) ::= <<
-grammar <serviceName>Policy;
+policy_grammar(serviceName) ::= <<
+parser grammar <serviceName>Policy;
 
-import LexToken, <serviceName>Service, Event, Expression, Entity;
+import Entity, Expression, Event;
 
-policy : requirement declaration_section? state_definition_section EOF;
+options { tokenVocab=LexToken; }
 
-requirement : REQUIRE (contract_with_subject);
+policy : audience_strict state_definition_section EOF? ;
 
-contract_with_subject : 'contract' 'with' subject;
+audience_strict : 'for' audience_clause ;
 
-declaration_section: declaration_statements+ ;
+audience_clause
+  : audience
+  | audience_clause COMMA  audience_clause
+  ;
+audience
+    : 'public'
+    | 'nodes'
+    | 'userGroup'
+    | 'registeredUsers'
+    | USER_ID
+    ;
 
-declaration_statements
-  : expression_assignment
+subject_icon_strict : 'include' subject_icon 'require' subject_icon_lv ;
+
+declaration_section: declaration_statement+ ;
+
+declaration_statement
+  : service_state_constant
+  | expression_assignment
+  ;
+
+service_state_constant : service_state_scope service_state ;
+
+service_state_scope
+  : 'always'
   ;
 
 state_definition_section
-  :  state_definition+
+  : state_definition+
   ;
 
 state_definition
-  : service_state? state_name ':' state_transition+
+  : state_name service_state_definition? ':' state_transition+
   ;
+
+state_name
+  : ID
+  ;
+
+service_state_definition : '[' service_state (COMMA service_state)* ']' ;
+
+service_state : ID ;
 
 state_transition
-  : 'proceed' 'to' state_name 'on' event
-  | TERMINATE
+  : event '=>' state_name
+  | terminate='terminate'
   ;
-
-state_name : ID ;
-
-subject_id : subject { <keep_id> };
 
 >>
