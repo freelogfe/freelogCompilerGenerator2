@@ -3,8 +3,9 @@ package com.freelog.cgg;
 import com.alibaba.fastjson.JSONObject;
 import com.freelog.cg.tool.TreeVisualizer;
 import org.antlr.v4.Tool;
-import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.BailErrorStrategy;
+import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.junit.Test;
@@ -40,7 +41,7 @@ public class ExpressionDefinitionTest {
 
     public static void main(String[] args) throws Exception {
         InputStream is = ExpressionDefinitionTest.class.getClassLoader().getResourceAsStream("ExpressionDefinition.sc");
-        ANTLRInputStream input = new ANTLRInputStream(is);
+        CharStream input = CharStreams.fromStream(is);
 
         // 新建词法分析器
         ExpressionDefinitionLexer lexer = new ExpressionDefinitionLexer(input);
