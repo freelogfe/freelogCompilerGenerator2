@@ -1,7 +1,7 @@
 grammar CollectionService;
 
 service_state
-    : 'None'
-    | 'Partial'
-    | 'Full'
+    : NONE
+    | PARTIAL
+    | FULL
     ;

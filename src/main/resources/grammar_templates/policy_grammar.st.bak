@@ -1,7 +1,7 @@
 policy_grammar(serviceName) ::= <<
 parser grammar <serviceName>Policy;
 
-import Entity, Expression, Event;
+import Entity, <serviceName>Service, Expression, Event;
 
 options { tokenVocab=LexToken; }
 

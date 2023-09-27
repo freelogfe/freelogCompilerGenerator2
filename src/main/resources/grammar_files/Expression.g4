@@ -1,4 +1,4 @@
-parser grammar Expression;
+grammar Expression;
 
 import EnvironmentVariable;
 

@@ -1,60 +1,27 @@
 policy_grammar(serviceName) ::= <<
-parser grammar <serviceName>Policy;
+grammar <serviceName>Policy;
 
-import Entity, Expression, Event;
+import Entity, <serviceName>Service, Expression, Event, LexToken;
 
 options { tokenVocab=LexToken; }
 
-policy : audience_strict state_definition_section EOF? ;
-
-audience_strict : 'for' audience_clause ;
-
-audience_clause
-  : audience
-  | audience_clause COMMA  audience_clause
-  ;
-audience
-    : 'public'
-    | 'nodes'
-    | 'userGroup'
-    | 'registeredUsers'
-    | USER_ID
-    ;
-
-subject_icon_strict : 'include' subject_icon 'require' subject_icon_lv ;
-
-declaration_section: declaration_statement+ ;
-
-declaration_statement
-  : service_state_constant
-  | expression_assignment
-  ;
-
-service_state_constant : service_state_scope service_state ;
-
-service_state_scope
-  : 'always'
-  ;
-
-state_definition_section
-  : state_definition+
-  ;
+policy : state_definition+ ;
 
 state_definition
-  : state_name service_state_definition? ':' state_transition+
+  : service_state state_name COLON assignments? state_transition+
   ;
 
 state_name
   : ID
   ;
 
-service_state_definition : '[' service_state (COMMA service_state)* ']' ;
+assignments : assigment+ ;
 
-service_state : ID ;
+assigment : LET ID EQ expression;
 
 state_transition
-  : event '=>' state_name
-  | terminate='terminate'
+  : event XFER state_name
+  | TERMINATE
   ;
 
 >>

@@ -1,13 +1,15 @@
-parser grammar Event;
+grammar Event;
 
 options { tokenVocab=LexToken; }
 
 //event : '~' EVENT_DEFINITION ;
 
-event : '~'event_organization EVENT_POINT eventName=EVENT_SERVICE_PATH_NAME EVENT_LPAREN event_args? EVENT_RPAREN ;
+event : EVENT DOT event_path param_list? ;
 
-event_organization : eventService=EVENT_SERVICE_PATH_NAME (EVENT_POINT event_path)? ;
+event_path : ID (DOT ID)* ;
 
-event_path : EVENT_SERVICE_PATH_NAME (EVENT_POINT EVENT_SERVICE_PATH_NAME)* ;
+param_list : LBRACKET param (COMMA param )* RBRACKET ;
 
-event_args : EVENT_ARG (EVENT_COMMA EVENT_ARG)* ;
+param: ID EQ value ;
+
+value : STRING|NUMERIC_LITERAL|MONEY_AMOUNT|PI|EULER ;

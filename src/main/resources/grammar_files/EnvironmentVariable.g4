@@ -1,4 +1,4 @@
-parser grammar EnvironmentVariable;
+grammar EnvironmentVariable;
 
 options { tokenVocab=LexToken; }
 

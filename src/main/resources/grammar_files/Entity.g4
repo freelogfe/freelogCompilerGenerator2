@@ -1,4 +1,4 @@
-parser grammar Entity;
+grammar Entity;
 
 options { tokenVocab=LexToken; }
 

@@ -16,10 +16,20 @@ TERMINATE : 'terminate' ;
 SUM : 'sum' ;
 PI : 'pi' ;
 EULER : 'e' ;
+LET : 'let' ;
+EVENT : 'Event' ;
+
+//Service States
+NONE : 'None' ;
+PARTIAL : 'Partial' ;
+FULL : 'Full' ;
+
+PERMIT : 'Permit';
+DENY : 'Deny';
 
 // 关键符号
 COMMA : ',' ;
-POINT : '.' ;
+DOT : '.' ;
 COLON : ':' ;
 LT : '<' ;
 GT : '>' ;
@@ -33,18 +43,14 @@ TIMES : '*' ;
 DIV : '/' ;
 POW : '^' ;
 EQ : '=' ;
-TILDE : '~' -> pushMode(EVENT_MODE) ;
-EQUANDGT : '=>' ;
+TILDE : '~' ;
+GTE : '=>' ;
+XFER : '->' ;
 
 USER_ID : PHONE_NUMBER_CN_MOBILE | EMAIL ;
 PHONE_NUMBER_CN_MOBILE : ELEVEN_DIGITS ;
 EMAIL : LOCAL_SUBPART+ '@' DOMAIN_SUBPART ('.' DOMAIN_SUBPART)* ;
 
-// EntityToken
-//ACCOUNT_NUMBER : '#' (ALPHABET|DIGIT)+ ;
-//SUBJECT_SERVICE_NAME : '^' ID ;
-//UOID : '@' ID ;
-//SUBJECT_ID : '%' HEX_DIGIT+ ;
 
 // ExpressionToken
 SCIENTIFIC_NUMBER
@@ -60,6 +66,11 @@ VARIABLE_CONTRACT_ATTRIBUTE
 // LexToken
 INT : DIGIT+ ;
 ID : ALPHABET (ALPHABET | DIGIT | '_')* ;
+STRING : '"' (ESC | ~["\\])* '"' ;
+NUMERIC_LITERAL
+ : DIGIT+ ( '.' DIGIT+ )? ( E ('+'|'-')? DIGIT+ )? ('D' | 'F')?
+ | '.' DIGIT+ ( E ('+'|'-')? DIGIT+ )? ('D' | 'F')?
+ ;
 
 PERIOD : ('cycle'|'cycles') | ('week'|'weeks') | ('month'|'months') | ('year'|'years') ;
 DATE : FOUR_DIGITS '-' TWO_DIGITS '-' TWO_DIGITS ;
@@ -69,18 +80,6 @@ MONEY_AMOUNT : '$' DIGIT+ ('.' DIGIT DIGIT?)? ;
 COMMENT         : '/*' .*? '*/' -> skip ;
 COMMENT_LINE    : '//' .*? '\r'? '\n' -> skip ;
 WS : [ \t\r\n]+ -> skip ;
-
-mode EVENT_MODE;
-
-EVENT_SERVICE_PATH_NAME : ALPHABET (ALPHABET | DIGIT | '_')* ;
-EVENT_ARG : STRING ;
-
-EVENT_COMMA : ',' ;
-EVENT_POINT : '.' ;
-EVENT_LPAREN : '(' ;
-EVENT_RPAREN : ')' -> popMode ;
-
-EVENT_WS : [ \t\r\n]+ -> skip ;
 
 /*
  * fragments
@@ -94,7 +93,7 @@ fragment FOUR_DIGITS : TWO_DIGITS TWO_DIGITS ;
 fragment NIGHT_DIGITS : FOUR_DIGITS FOUR_DIGITS DIGIT ;
 fragment ELEVEN_DIGITS : FOUR_DIGITS FOUR_DIGITS THREE_DIGITS ;
 
-fragment STRING : '"' (ESC | ~["\\])* '"' ;
+
 fragment ESC : '\\' (["\\/bfnrt] | UNICODE) ;
 fragment UNICODE : 'u' HEX_DIGIT HEX_DIGIT HEX_DIGIT HEX_DIGIT ;
 fragment SIGN : '+' | '-' ;
