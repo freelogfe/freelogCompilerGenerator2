@@ -9,21 +9,22 @@ public class MainTest {
 
     @Test
     public void testJava() throws Exception {
-        String targetDir = Paths.get("").toAbsolutePath().getParent() + "/FreelogCompilerJavaTarget2/src/main/java";
+        String targetDir = Paths.get("output").toString();
 
         CompilerGeneratorBuilder cg_builder = new CompilerGeneratorBuilder();
         CompilerGenerator cg = cg_builder
                 .setOutputDir(targetDir)
-                .setServiceName("User")
+                .setServiceName("Resource")
                 .setTargetLang("Java")
-                .setPackageName("com.freelog.compiler")
+                .setExactOutput(true)
+                .setPackageName("com.freelog.compiler.collection")
                 .build();
 
         cg.generate();
 
         GeneratedFileHelper helper = new GeneratedFileHelper(cg_builder);
         // 结果整理
-        helper.generateAndClean(targetDir);
+        helper.generateAndClean(Paths.get("output_finally").toString());
     }
 
     @Test
