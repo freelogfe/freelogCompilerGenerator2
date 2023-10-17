@@ -19,6 +19,8 @@ EULER : 'e' ;
 LET : 'let' ;
 EVENT : 'Event' ;
 
+CASE :'case' ;
+
 //Service States
 NONE : 'None' ;
 PARTIAL : 'Partial' ;
@@ -46,6 +48,8 @@ EQ : '=' ;
 TILDE : '~' ;
 GTE : '=>' ;
 XFER : '->' ;
+TRUE : 'true' ;
+FALSE : 'false' ;
 
 USER_ID : PHONE_NUMBER_CN_MOBILE | EMAIL ;
 PHONE_NUMBER_CN_MOBILE : ELEVEN_DIGITS ;
@@ -62,6 +66,8 @@ VARIABLE_CONTRACT : 'self' '.' VARIABLE_CONTRACT_ATTRIBUTE ;
 VARIABLE_CONTRACT_ATTRIBUTE
   : 'exhibited' // 展品计数
   ;
+THIS : '$this';
+QUERY : 'Query';
 
 // LexToken
 INT : DIGIT+ ;
