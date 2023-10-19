@@ -20,8 +20,16 @@ assignments : assigment+ ;
 assigment : LET ID EQ expression;
 
 state_transition
-  : event XFER state_name
+  : cased_transition+
+  | single_transision
   | TERMINATE
   ;
 
+single_transision
+  : event XFER state_name
+  ;
+
+cased_transition
+  : CASE boolean_expression COLON single_transision
+  ;
 >>

@@ -8,6 +8,11 @@ expression_assignment: expression_handle LPAREN (ID (COMMA ID)*)? RPAREN '=' exp
 
 expression_handle : ID ;
 
+boolean_expression
+  : expression (('>' | '<' | '==') expression) 
+  | boolean_value
+  ;
+
 expression
    : multiplyingExpression (('+' | '-') multiplyingExpression)*
    ;
@@ -55,6 +60,11 @@ constant
 variable
   : environment_variable # VariableEnvironment
   | ID                   # VariableArg
+  ;
+
+boolean_value
+  : TRUE
+  | FALSE
   ;
 
 expression_call_or_literal
