@@ -30,6 +30,11 @@ single_transision
   ;
 
 cased_transition
-  : CASE boolean_expression COLON single_transision
+  : CASE cased_expression COLON single_transision
+  ;
+
+cased_expression
+  : boolean_expression
+  | OTHER
   ;
 >>

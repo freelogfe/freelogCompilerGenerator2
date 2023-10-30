@@ -19,7 +19,8 @@ EULER : 'e' ;
 LET : 'let' ;
 EVENT : 'Event' ;
 
-CASE :'case' ;
+CASE : 'case' ;
+OTHER : 'OTHER' ;
 
 //Service States
 NONE : 'None' ;
@@ -57,17 +58,17 @@ EMAIL : LOCAL_SUBPART+ '@' DOMAIN_SUBPART ('.' DOMAIN_SUBPART)* ;
 
 
 // ExpressionToken
+QUERY : 'Query';
 SCIENTIFIC_NUMBER
    : NUMBER (('E' | 'e') SIGN? NUMBER)?
    ;
 
 // EnvironmentVariableToken
-VARIABLE_CONTRACT : 'self' '.' VARIABLE_CONTRACT_ATTRIBUTE ;
-VARIABLE_CONTRACT_ATTRIBUTE
-  : 'exhibited' // 展品计数
-  ;
-THIS : '$this';
-QUERY : 'Query';
+CONTRACT
+    : 'contract'
+    | '$this'
+    ;
+PAST_MONTH : 'PAST_MONTH';
 
 // LexToken
 INT : DIGIT+ ;

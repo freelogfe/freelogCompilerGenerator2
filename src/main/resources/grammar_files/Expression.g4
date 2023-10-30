@@ -9,7 +9,7 @@ expression_assignment: expression_handle LPAREN (ID (COMMA ID)*)? RPAREN '=' exp
 expression_handle : ID ;
 
 boolean_expression
-  : expression (('>' | '<' | '==') expression) 
+  : expression (('>' | '<' | '==' | '>=' | '<=') expression)
   | boolean_value
   ;
 
@@ -29,6 +29,7 @@ signedAtom
    : '+' signedAtom
    | '-' signedAtom
    | built_in_function
+   | query_invocation
    | atom
    ;
 
@@ -37,7 +38,28 @@ built_in_function
   ;
 
 funcname
-  : 'sum'
+  : ID
+  ;
+
+query_invocation
+  : QUERY (DOT ID)+ param_list
+  ;
+
+param_list
+  : LBRACKET param_assignment (COMMA param_assignment)* RBRACKET
+  ;
+
+param_assignment
+  : contract_invocation
+  | ID EQ expression
+  ;
+
+contract_invocation
+  : contract_caller built_in_function
+  ;
+
+contract_caller:
+  | CONTRACT DOT
   ;
 
 atom
@@ -67,14 +89,14 @@ boolean_value
   | FALSE
   ;
 
-expression_call_or_literal
-  : expression_call
-  | expression
-  ;
-
-expression_call : expression_handle LPAREN (expression_call_argument (COMMA expression_call_argument)*)* RPAREN ;
-
-expression_call_argument
-  : INT
-  | environment_variable
-  ;
+//expression_call_or_literal
+//     : expression_call
+//     | expression
+//     ;
+//
+//   expression_call : expression_handle LPAREN (expression_call_argument (COMMA expression_call_argument)*)* RPAREN ;
+//
+//   expression_call_argument
+//     : INT
+//     | environment_variable
+//     ;
