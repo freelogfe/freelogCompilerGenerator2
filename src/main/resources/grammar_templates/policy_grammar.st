@@ -1,7 +1,7 @@
 policy_grammar(serviceName) ::= <<
 grammar <serviceName>Policy;
 
-import Entity, <serviceName>Service, Expression, Event, LexToken;
+import Entity, CommonService, <serviceName>Service, Expression, Event, LexToken;
 
 options { tokenVocab=LexToken; }
 
@@ -21,7 +21,7 @@ collection_definition
 
 context_variable_section : context_variable_definition+ ;
 
-context_variable_definition : ID ASSIGMENT_SYMBOL expression ;
+context_variable_definition : ID ASSIGMENT_SYMBOL echo_call ;
 
 state_definition
   : state_name service_state_section with_condition_section? COLON assignments? state_transition+

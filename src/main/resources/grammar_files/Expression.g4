@@ -1,6 +1,6 @@
 grammar Expression;
 
-import EnvironmentVariable;
+import CommonService, EnvironmentVariable;
 
 options { tokenVocab=LexToken; }
 
@@ -44,8 +44,6 @@ funcname
   ;
 
 function_call : ID DOT built_in_function ;
-
-echo_call : ECHO DOT environment_variable ;
 
 query_invocation
   : QUERY (DOT ID)+ param_list

@@ -4,15 +4,9 @@ options { tokenVocab=LexToken; }
 
 environment_variable
   : immediate_variable
-  | context_variable
   ;
 
 immediate_variable
     : CONTRACT
     | CONTRACT DOT ID
-    ;
-
-context_variable
-    : '<' ID '>'
-    | '<' ID '>' DOT ID
     ;
