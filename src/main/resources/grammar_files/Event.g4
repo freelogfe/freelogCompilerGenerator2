@@ -10,6 +10,6 @@ event_path : ID (DOT ID)* ;
 
 param_list : LBRACKET param (COMMA param )* RBRACKET ;
 
-param: ID EQ value ;
+param : ID EQ value ;
 
 value : STRING|NUMERIC_LITERAL|MONEY_AMOUNT|PI|EULER ;

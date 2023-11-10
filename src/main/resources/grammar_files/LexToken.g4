@@ -19,6 +19,7 @@ EULER : 'e' ;
 LET : 'let' ;
 EVENT : 'Event' ;
 
+WITH_CONDITION : 'WithCondition' ;
 CASE : 'case' ;
 OTHER : 'OTHER' ;
 
@@ -40,25 +41,30 @@ LPAREN : '(' ;
 RPAREN : ')' ;
 LBRACKET : '[' ;
 RBRACKET : ']' ;
+LBRACE : '{' ;
+RBRACE : '}' ;
 PLUS : '+' ;
 MINUS : '-' ;
 TIMES : '*' ;
 DIV : '/' ;
 POW : '^' ;
 EQ : '=' ;
+DEQ : '==' ;
 TILDE : '~' ;
-GTE : '=>' ;
+LTE : '<=' ;
+GTE : '>=' ;
 XFER : '->' ;
-TRUE : 'true' ;
-FALSE : 'false' ;
+ASSIGMENT_SYMBOL : '<-' ;
 
 USER_ID : PHONE_NUMBER_CN_MOBILE | EMAIL ;
 PHONE_NUMBER_CN_MOBILE : ELEVEN_DIGITS ;
 EMAIL : LOCAL_SUBPART+ '@' DOMAIN_SUBPART ('.' DOMAIN_SUBPART)* ;
 
-
 // ExpressionToken
-QUERY : 'Query';
+TRUE : 'true' ;
+FALSE : 'false' ;
+QUERY : 'Query' ;
+ECHO : 'Echo' ;
 SCIENTIFIC_NUMBER
    : NUMBER (('E' | 'e') SIGN? NUMBER)?
    ;
@@ -68,7 +74,6 @@ CONTRACT
     : 'contract'
     | '$this'
     ;
-PAST_MONTH : 'PAST_MONTH';
 
 // LexToken
 INT : DIGIT+ ;
@@ -99,7 +104,6 @@ fragment THREE_DIGITS : TWO_DIGITS DIGIT ;
 fragment FOUR_DIGITS : TWO_DIGITS TWO_DIGITS ;
 fragment NIGHT_DIGITS : FOUR_DIGITS FOUR_DIGITS DIGIT ;
 fragment ELEVEN_DIGITS : FOUR_DIGITS FOUR_DIGITS THREE_DIGITS ;
-
 
 fragment ESC : '\\' (["\\/bfnrt] | UNICODE) ;
 fragment UNICODE : 'u' HEX_DIGIT HEX_DIGIT HEX_DIGIT HEX_DIGIT ;

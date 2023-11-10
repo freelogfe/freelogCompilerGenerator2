@@ -13,5 +13,6 @@ immediate_variable
     ;
 
 context_variable
-    : PAST_MONTH
+    : '<' ID '>'
+    | '<' ID '>' DOT ID
     ;

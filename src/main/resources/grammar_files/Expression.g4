@@ -4,7 +4,7 @@ import EnvironmentVariable;
 
 options { tokenVocab=LexToken; }
 
-expression_assignment: expression_handle LPAREN (ID (COMMA ID)*)? RPAREN '=' expression ;
+expression_assignment : expression_handle LPAREN (ID (COMMA ID)*)? RPAREN '=' expression ;
 
 expression_handle : ID ;
 
@@ -29,6 +29,8 @@ signedAtom
    : '+' signedAtom
    | '-' signedAtom
    | built_in_function
+   | function_call
+   | echo_call
    | query_invocation
    | atom
    ;
@@ -40,6 +42,10 @@ built_in_function
 funcname
   : ID
   ;
+
+function_call : ID DOT built_in_function ;
+
+echo_call : ECHO DOT environment_variable ;
 
 query_invocation
   : QUERY (DOT ID)+ param_list
@@ -55,11 +61,11 @@ param_assignment
   ;
 
 contract_invocation
-  : contract_caller built_in_function
+  : contract_caller DOT built_in_function
   ;
 
-contract_caller:
-  | CONTRACT DOT
+contract_caller :
+  | environment_variable
   ;
 
 atom
@@ -67,6 +73,7 @@ atom
   | constant
   | LPAREN expression RPAREN
   | INT
+  | STRING
   | variable
   ;
 
