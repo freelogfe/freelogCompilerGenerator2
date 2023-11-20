@@ -1,4 +1,4 @@
-grammar CommonService;
+grammar CommonLibrary;
 
 options { tokenVocab=LexToken; }
 

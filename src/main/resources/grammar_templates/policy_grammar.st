@@ -1,7 +1,7 @@
 policy_grammar(serviceName) ::= <<
 grammar <serviceName>Policy;
 
-import Entity, CommonService, <serviceName>Service, Expression, Event, LexToken;
+import Entity, CommonLibrary, <serviceName>Service, Expression, Event, LexToken;
 
 options { tokenVocab=LexToken; }
 
@@ -45,7 +45,7 @@ with_condition_section
 
 assignments : assigment+ ;
 
-assigment : LET ID EQ expression ;
+assigment : LET ID ASSIGMENT_SYMBOL query_invocation ;
 
 state_transition
   : cased_transition+

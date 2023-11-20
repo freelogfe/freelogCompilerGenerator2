@@ -1,6 +1,6 @@
 grammar Expression;
 
-import CommonService, EnvironmentVariable;
+import CommonLibrary, EnvironmentVariable;
 
 options { tokenVocab=LexToken; }
 
