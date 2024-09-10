@@ -48,17 +48,17 @@ assignments : assigment+ ;
 assigment : LET ID ASSIGMENT_SYMBOL query_invocation ;
 
 state_transition
-  : cased_transition+
-  | single_transision
+  : cased_transition
+  | single_transition
   | TERMINATE
   ;
 
-single_transision
+single_transition
   : event XFER state_name
   ;
 
 cased_transition
-  : CASE cased_expression COLON single_transision
+  : CASE cased_expression COLON single_transition
   ;
 
 cased_expression
