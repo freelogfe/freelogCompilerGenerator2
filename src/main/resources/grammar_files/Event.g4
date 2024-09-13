@@ -1,15 +1,18 @@
 grammar Event;
 
+import Expression;
+
 options { tokenVocab=LexToken; }
 
-//event : '~' EVENT_DEFINITION ;
-
-event : EVENT DOT event_path param_list? ;
+event : EVENT DOT event_path event_param_list ;
 
 event_path : ID (DOT ID)* ;
 
-param_list : LBRACKET param (COMMA param )* RBRACKET ;
+event_param_list : LPAREN (event_param (COMMA event_param )*)? RPAREN ;
 
-param : ID EQ value ;
+event_param
+    : event_value
+    | ID EQ event_value
+    ;
 
-value : STRING|NUMERIC_LITERAL|MONEY_AMOUNT|PI|EULER ;
+event_value : expression ;

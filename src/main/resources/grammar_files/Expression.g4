@@ -50,7 +50,7 @@ query_invocation
   ;
 
 param_list
-  : LBRACKET param_assignment (COMMA param_assignment)* RBRACKET
+  : LPAREN param_assignment (COMMA param_assignment)* RPAREN
   ;
 
 param_assignment
@@ -93,15 +93,3 @@ boolean_value
   : TRUE
   | FALSE
   ;
-
-//expression_call_or_literal
-//     : expression_call
-//     | expression
-//     ;
-//
-//   expression_call : expression_handle LPAREN (expression_call_argument (COMMA expression_call_argument)*)* RPAREN ;
-//
-//   expression_call_argument
-//     : INT
-//     | environment_variable
-//     ;

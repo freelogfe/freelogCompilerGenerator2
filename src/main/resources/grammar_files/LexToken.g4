@@ -1,29 +1,15 @@
 lexer grammar LexToken;
 
-// 关键词组
-FOR : 'for' ;
-PUBLIC : 'public' ;
-NODES : 'nodes' ;
-USER_GROUP : 'userGroup' ;
-REGISTERED_USERS : 'registeredUsers' ;
-INCLUDE : 'include' ;
-REQUIRE : 'require' ;
-CONTRACT_WITH : 'contract with' ;
-SERVICE_STATE_SCOPE
-    : 'always'
-    ;
-TERMINATE : 'terminate' ;
-SUM : 'sum' ;
-PI : 'pi' ;
-EULER : 'e' ;
-LET : 'let' ;
-EVENT : 'Event' ;
+// 关键字 FOR
+FOR : 'FOR' ;
+PUBLIC : 'PUBLIC' ;
+NODE : 'NODE' ;
+USER : 'USER' ;
 
-WITH_CONDITION : 'WithCondition' ;
-CASE : 'case' ;
-OTHER : 'OTHER' ;
+// 关键字 声明区
+DEF_EXPR : 'defExpr' ;
 
-//Service States
+// 关键字 色块
 NONE : 'None' ;
 PARTIAL : 'Partial' ;
 FULL : 'Full' ;
@@ -31,7 +17,16 @@ FULL : 'Full' ;
 PERMIT : 'Permit';
 DENY : 'Deny';
 
-// 关键符号
+// 关键字 事件
+TERMINATE : 'terminate' ;
+
+SUM : 'sum' ;
+PI : 'pi' ;
+EULER : 'e' ;
+LET : 'let' ;
+EVENT : 'Event' ;
+
+// 符号
 COMMA : ',' ;
 DOT : '.' ;
 COLON : ':' ;
