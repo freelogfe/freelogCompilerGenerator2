@@ -4,79 +4,79 @@ import CommonLibrary, EnvironmentVariable;
 
 options { tokenVocab=LexToken; }
 
-expression_assignment : expression_handle LPAREN (ID (COMMA ID)*)? RPAREN '=' expression ;
+// 变量赋值
+variable_assignment : variable_chain EQ assignment_clause ;
 
-expression_handle : ID ;
+assignment_clause
+    : expression
+    | boolean_expression
+    | args_group_expression
+    ;
 
+// 表达式的参数列表
+expression_param_list : expression_param (COMMA expression_param)* ;
+
+expression_param
+    : expression
+    | ID EQ expression
+    | args_group_expression
+    ;
+
+// 参数组
+args_group_expression : LBRACE args_group_param_list? RBRACE ;
+
+args_group_param_list : args_group_param (COMMA args_group_param)* ;
+
+args_group_param : STRING COLON expression ;
+
+// 条件表达式
+condition_expression : LBRACKET condition_expression_param_list? RBRACKET;
+
+condition_expression_param_list : condition_expression_param (COMMA condition_expression_param)* ;
+
+condition_expression_param : (boolean_expression COLON)? expression ;
+
+// 布尔表达式
 boolean_expression
   : expression (('>' | '<' | '==' | '>=' | '<=') expression)
   | boolean_value
   ;
 
+boolean_value : (TRUE|FALSE) ;
+
 expression
-   : multiplyingExpression (('+' | '-') multiplyingExpression)*
+   : multiplying_expression (('+' | '-') multiplying_expression)*
    ;
 
-multiplyingExpression
-   : powExpression (('*' | '/') powExpression)*
+multiplying_expression
+   : pow_expression (('*' | '/') pow_expression)*
    ;
 
-powExpression
-   : signedAtom ('^' signedAtom)*
+pow_expression
+   : signed_atom ('^' signed_atom)*
    ;
 
-signedAtom
-   : '+' signedAtom
-   | '-' signedAtom
+signed_atom
+   : '+' signed_atom
+   | '-' signed_atom
    | built_in_function
    | function_call
-   | echo_call
-   | query_invocation
    | atom
    ;
 
-built_in_function
-  : funcname LPAREN expression (COMMA expression)* RPAREN
-  ;
+built_in_function : funcname LPAREN expression_param_list? RPAREN;
 
-funcname
-  : ID
-  ;
+funcname : ID ;
 
-function_call : ID DOT built_in_function ;
-
-query_invocation
-  : QUERY (DOT ID)+ param_list
-  ;
-
-param_list
-  : LPAREN param_assignment (COMMA param_assignment)* RPAREN
-  ;
-
-param_assignment
-  : contract_invocation
-  | ID EQ expression
-  ;
-
-contract_invocation
-  : contract_caller DOT built_in_function
-  ;
-
-contract_caller :
-  | environment_variable
-  ;
+function_call : variable_chain DOT built_in_function ;
 
 atom
-  : scientific
-  | constant
+  : constant
+  | scientific
   | LPAREN expression RPAREN
   | INT
   | STRING
-  | variable
-  ;
-
-scientific
-  : SCIENTIFIC_NUMBER
+  | variable_chain
   ;
 
 constant
@@ -84,12 +84,16 @@ constant
   | EULER
   ;
 
-variable
-  : environment_variable # VariableEnvironment
-  | ID                   # VariableArg
+scientific
+  : SCIENTIFIC_NUMBER
   ;
 
-boolean_value
-  : TRUE
-  | FALSE
+variable_chain
+    : variable
+    | variable DOT ID (DOT ID)*
+    ;
+
+variable
+  : environment_variable # VariableEnv
+  | ID                   # VariableDef
   ;

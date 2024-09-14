@@ -2,7 +2,7 @@ grammar CommonLibrary;
 
 options { tokenVocab=LexToken; }
 
-echo_call : ECHO DOT context_variable ;
+echo_call : ID DOT context_variable ;
 
 context_variable
     : '<' ID '>'

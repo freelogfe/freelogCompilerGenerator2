@@ -14,22 +14,17 @@ NONE : 'None' ;
 PARTIAL : 'Partial' ;
 FULL : 'Full' ;
 
-PERMIT : 'Permit';
-DENY : 'Deny';
-
-// 关键字 事件
-TERMINATE : 'terminate' ;
-
-SUM : 'sum' ;
-PI : 'pi' ;
-EULER : 'e' ;
+// 关键字 状态机内部
 LET : 'let' ;
 EVENT : 'Event' ;
+EVNET_VARIABLE : '$event' ;
+TERMINATE : 'terminate' ;
 
 // 符号
 COMMA : ',' ;
 DOT : '.' ;
 COLON : ':' ;
+SEMICOLON : ';' ;
 LT : '<' ;
 GT : '>' ;
 LPAREN : '(' ;
@@ -51,24 +46,19 @@ GTE : '>=' ;
 XFER : '->' ;
 ASSIGMENT_SYMBOL : '<-' ;
 
-USER_ID : PHONE_NUMBER_CN_MOBILE | EMAIL ;
-PHONE_NUMBER_CN_MOBILE : ELEVEN_DIGITS ;
-EMAIL : LOCAL_SUBPART+ '@' DOMAIN_SUBPART ('.' DOMAIN_SUBPART)* ;
-
-// ExpressionToken
-TRUE : 'true' ;
-FALSE : 'false' ;
-QUERY : 'Query' ;
-ECHO : 'Echo' ;
 SCIENTIFIC_NUMBER
    : NUMBER (('E' | 'e') SIGN? NUMBER)?
    ;
 
-// EnvironmentVariableToken
-CONTRACT
-    : 'contract'
-    | '$this'
-    ;
+// 常量
+TRUE : 'true' ;
+FALSE : 'false' ;
+PI : 'pi' ;
+EULER : 'e' ;
+
+USER_ID : PHONE_NUMBER_CN_MOBILE | EMAIL ;
+PHONE_NUMBER_CN_MOBILE : ELEVEN_DIGITS ;
+EMAIL : LOCAL_SUBPART+ '@' DOMAIN_SUBPART ('.' DOMAIN_SUBPART)* ;
 
 // LexToken
 INT : DIGIT+ ;

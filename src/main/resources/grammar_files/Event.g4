@@ -4,15 +4,6 @@ import Expression;
 
 options { tokenVocab=LexToken; }
 
-event : EVENT DOT event_path event_param_list ;
+event : EVENT DOT event_path DOT built_in_function ;
 
 event_path : ID (DOT ID)* ;
-
-event_param_list : LPAREN (event_param (COMMA event_param )*)? RPAREN ;
-
-event_param
-    : event_value
-    | ID EQ event_value
-    ;
-
-event_value : expression ;
