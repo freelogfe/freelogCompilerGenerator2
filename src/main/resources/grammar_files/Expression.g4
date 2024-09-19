@@ -39,6 +39,7 @@ condition_expression_param : (boolean_expression COLON)? expression ;
 // 布尔表达式
 boolean_expression
   : expression (('>' | '<' | '==' | '>=' | '<=') expression)
+  | expression ((LESS|BEFORE|LESS_OR_EQUAL|GREATER|AFTER|GREATER_OR_EQUAL|EQUAL|NOT_EQUAL|IN) expression)
   | boolean_value
   ;
 

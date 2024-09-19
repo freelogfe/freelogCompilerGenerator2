@@ -9,6 +9,16 @@ USER : 'USER' ;
 // 关键字 声明区
 ENTITY : 'Entity' ;
 DEF_EXPR : 'defExpr' ;
+// 关键字 判断符
+LESS : 'less' ;
+BEFORE : 'before' ;
+LESS_OR_EQUAL : 'lessOrEqual' ;
+GREATER : 'greater' ;
+AFTER : 'after' ;
+GREATER_OR_EQUAL : 'greaterOrEqual' ;
+EQUAL : 'equal' ;
+NOT_EQUAL : 'notEqual' ;
+IN : 'in' ;
 
 // 关键字 色块
 NONE : 'None' ;
