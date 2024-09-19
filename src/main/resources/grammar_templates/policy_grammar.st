@@ -58,7 +58,7 @@ service_state_collection : LBRACE ID (COMMA ID)* RBRACE ;
 // 赋值区
 assignment_section : assigment+ ;
 
-assigment : LET ID ASSIGMENT_SYMBOL expression ;
+assigment : LET ID EQ assignment_clause ;
 
 state_transition
   : single_transition

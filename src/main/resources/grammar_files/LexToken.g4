@@ -65,6 +65,7 @@ EMAIL : LOCAL_SUBPART+ '@' DOMAIN_SUBPART ('.' DOMAIN_SUBPART)* ;
 INT : DIGIT+ ;
 ID : ALPHABET (ALPHABET | DIGIT | '_')* ;
 STRING : '"' (ESC | ~["\\])* '"' ;
+ENTITY_NAME : '<' (ESC | ~[\\:*?"<>| @$#])+ '>' ;
 NUMERIC_LITERAL
  : DIGIT+ ( '.' DIGIT+ )? ( E ('+'|'-')? DIGIT+ )? ('D' | 'F')?
  | '.' DIGIT+ ( E ('+'|'-')? DIGIT+ )? ('D' | 'F')?
