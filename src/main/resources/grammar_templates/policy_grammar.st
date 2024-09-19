@@ -1,14 +1,14 @@
 policy_grammar(serviceName) ::= <<
 grammar <serviceName>Policy;
 
-import Entity, CommonLibrary, <serviceName>Service, Expression, Event, LexToken;
+import CommonLibrary, <serviceName>Service, Expression, Event, LexToken;
 
 options { tokenVocab=LexToken; }
 
 policy : audience_strict variable_declaration_section state_definition_section ;
 
 // for
-audience_strict : FOR audience_clause ;
+audience_strict : FOR audience_clause audience_condition? ;
 
 audience_clause
   : audience
@@ -21,6 +21,10 @@ audience
     | USER
     ;
 
+audience_condition
+    : LPAREN expression_param_list? RPAREN
+    ;
+
 // 变量声明区
 variable_declaration_section : variable_definition* ;
 
@@ -30,9 +34,9 @@ variable_definition
     | expression_definition
     ;
 
-global_variable_definition : ID EQ expression ;
+global_variable_definition : ID EQ assignment_clause ;
 
-macro_variable_definition : ID ASSIGMENT_SYMBOL expression ;
+macro_variable_definition : ID ASSIGMENT_SYMBOL assignment_clause ;
 
 expression_definition : DEF_EXPR ID LPAREN (ID (COMMA ID)*)? RPAREN EQ condition_expression ;
 

@@ -7,6 +7,7 @@ NODE : 'NODE' ;
 USER : 'USER' ;
 
 // 关键字 声明区
+ENTITY : 'Entity' ;
 DEF_EXPR : 'defExpr' ;
 
 // 关键字 色块

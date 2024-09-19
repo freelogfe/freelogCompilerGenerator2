@@ -2,9 +2,6 @@ grammar CommonLibrary;
 
 options { tokenVocab=LexToken; }
 
-echo_call : ID DOT context_variable ;
+entity_variable : ENTITY DOT ID DOT LT entity_name GT ;
 
-context_variable
-    : '<' ID '>'
-    | '<' ID '>' DOT ID
-    ;
+entity_name : .*? ;

@@ -10,6 +10,7 @@ variable_assignment : variable_chain EQ assignment_clause ;
 assignment_clause
     : expression
     | boolean_expression
+    | condition_expression
     | args_group_expression
     ;
 
@@ -17,9 +18,8 @@ assignment_clause
 expression_param_list : expression_param (COMMA expression_param)* ;
 
 expression_param
-    : expression
-    | ID EQ expression
-    | args_group_expression
+    : (expression|boolean_expression|condition_expression|args_group_expression)
+    | ID EQ (expression|boolean_expression|condition_expression)
     ;
 
 // 参数组
@@ -27,7 +27,7 @@ args_group_expression : LBRACE args_group_param_list? RBRACE ;
 
 args_group_param_list : args_group_param (COMMA args_group_param)* ;
 
-args_group_param : STRING COLON expression ;
+args_group_param : STRING COLON (expression|boolean_expression|condition_expression) ;
 
 // 条件表达式
 condition_expression : LBRACKET condition_expression_param_list? RBRACKET;
@@ -64,7 +64,7 @@ signed_atom
    | atom
    ;
 
-built_in_function : funcname LPAREN expression_param_list? RPAREN;
+built_in_function : funcname LPAREN expression_param_list? RPAREN ;
 
 funcname : ID ;
 
@@ -76,6 +76,7 @@ atom
   | LPAREN expression RPAREN
   | INT
   | STRING
+  | entity_variable
   | variable_chain
   ;
 
