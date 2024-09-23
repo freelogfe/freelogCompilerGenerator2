@@ -10,6 +10,8 @@ USER : 'USER' ;
 ENTITY : 'Entity' ;
 DEF_EXPR : 'defExpr' ;
 // 关键字 判断符
+AND : 'and' ;
+OR : 'or' ;
 LESS : 'less' ;
 BEFORE : 'before' ;
 LESS_OR_EQUAL : 'lessOrEqual' ;

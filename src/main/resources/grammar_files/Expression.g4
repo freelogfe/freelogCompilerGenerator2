@@ -12,6 +12,7 @@ assignment_clause
     | boolean_expression
     | condition_expression
     | args_group_expression
+    | collection_expression
     ;
 
 // 表达式的参数列表
@@ -22,24 +23,31 @@ expression_param
     | ID EQ (expression|boolean_expression|condition_expression)
     ;
 
+// 集合表达式
+collection_expression : LBRACE (LPAREN|LBRACKET) expression COMMA expression (RPAREN|RBRACKET) RBRACE ;
+
 // 参数组
 args_group_expression : LBRACE args_group_param_list? RBRACE ;
 
 args_group_param_list : args_group_param (COMMA args_group_param)* ;
 
-args_group_param : STRING COLON (expression|boolean_expression|condition_expression) ;
+args_group_param : STRING COLON (expression|boolean_expression|condition_expression|collection_expression) ;
 
 // 条件表达式
 condition_expression : LBRACKET condition_expression_param_list? RBRACKET;
 
 condition_expression_param_list : condition_expression_param (COMMA condition_expression_param)* ;
 
-condition_expression_param : (boolean_expression COLON)? expression ;
+condition_expression_param : (boolean_expression COLON)? (expression|boolean_expression|args_group_expression|collection_expression) ;
 
 // 布尔表达式
 boolean_expression
-  : expression (('>' | '<' | '==' | '>=' | '<=') expression)
+  : boolean_expression AND boolean_expression
+  | boolean_expression OR boolean_expression
+  | expression
+  | expression (('>' | '<' | '==' | '>=' | '<=') expression)
   | expression ((LESS|BEFORE|LESS_OR_EQUAL|GREATER|AFTER|GREATER_OR_EQUAL|EQUAL|NOT_EQUAL|IN) expression)
+  | expression ((IN) (expression|condition_expression|collection_expression))
   | boolean_value
   ;
 
