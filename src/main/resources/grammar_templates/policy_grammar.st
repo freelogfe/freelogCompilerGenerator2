@@ -11,8 +11,7 @@ policy : audience_strict variable_declaration_section state_definition_section ;
 audience_strict : FOR audience_clause audience_condition? ;
 
 audience_clause
-  : audience
-  | audience_clause COMMA  audience_clause
+  : audience (COMMA audience)*
   ;
 
 audience
@@ -34,11 +33,29 @@ variable_definition
     | expression_definition
     ;
 
-global_variable_definition : ID EQ assignment_clause ;
+global_variable_definition : global_variable_name EQ assignment_clause ;
 
-macro_variable_definition : ID ASSIGMENT_SYMBOL assignment_clause ;
+global_variable_name
+    : ID
+    ;
 
-expression_definition : DEF_EXPR ID LPAREN (ID (COMMA ID)*)? RPAREN EQ condition_expression ;
+macro_variable_definition : macro_variable_name ASSIGMENT_SYMBOL assignment_clause ;
+
+macro_variable_name
+    : ID
+    ;
+
+expression_definition : DEF_EXPR expression_def_declaration EQ condition_expression ;
+
+expression_def_declaration : expression_def_declaration_name LPAREN expression_def_declaration_param_list? RPAREN ;
+
+expression_def_declaration_name
+    : ID
+    ;
+
+expression_def_declaration_param_list
+    : ID (COMMA ID)*
+    ;
 
 // 状态机状态
 state_definition_section : state_definition+ ;

@@ -19,9 +19,13 @@ assignment_clause
 expression_param_list : expression_param (COMMA expression_param)* ;
 
 expression_param
-    : (expression|boolean_expression|condition_expression|args_group_expression)
-    | ID EQ (expression|boolean_expression|condition_expression)
+    : expression_param_value
+    | expression_param_name EQ expression_param_value
     ;
+
+expression_param_name : ID ;
+
+expression_param_value : (expression|boolean_expression|condition_expression|args_group_expression) ;
 
 // 集合表达式
 collection_expression : LBRACE (LPAREN|LBRACKET) expression COMMA expression (RPAREN|RBRACKET) RBRACE ;
@@ -46,7 +50,7 @@ boolean_expression
   | boolean_expression OR boolean_expression
   | expression
   | expression (('>' | '<' | '==' | '>=' | '<=') expression)
-  | expression ((LESS|BEFORE|LESS_OR_EQUAL|GREATER|AFTER|GREATER_OR_EQUAL|EQUAL|NOT_EQUAL|IN) expression)
+  | expression ((LESS|BEFORE|LESS_OR_EQUAL|GREATER|AFTER|GREATER_OR_EQUAL|EQUAL|NOT_EQUAL) expression)
   | expression ((IN) (expression|condition_expression|collection_expression))
   | boolean_value
   ;

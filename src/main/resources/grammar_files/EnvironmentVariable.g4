@@ -3,5 +3,5 @@ grammar EnvironmentVariable;
 options { tokenVocab=LexToken; }
 
 environment_variable
-  : '$event'
+  : EVNET_VARIABLE
   ;
