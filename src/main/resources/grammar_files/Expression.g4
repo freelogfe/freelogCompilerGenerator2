@@ -28,14 +28,20 @@ expression_param_name : ID ;
 expression_param_value : (expression|boolean_expression|condition_expression|args_group_expression) ;
 
 // 集合表达式
-collection_expression : LBRACE (LPAREN|LBRACKET) expression COMMA expression (RPAREN|RBRACKET) RBRACE ;
+collection_expression : LBRACE collection_expression_content RBRACE ;
+
+collection_expression_content : lSymbol=(LPAREN|LBRACKET) expression COMMA expression rSymbol=(RPAREN|RBRACKET) ;
 
 // 参数组
 args_group_expression : LBRACE args_group_param_list? RBRACE ;
 
 args_group_param_list : args_group_param (COMMA args_group_param)* ;
 
-args_group_param : STRING COLON (expression|boolean_expression|condition_expression|collection_expression) ;
+args_group_param : args_group_param_name COLON args_group_param_value ;
+
+args_group_param_name : STRING ;
+
+args_group_param_value : (expression|boolean_expression|condition_expression|collection_expression) ;
 
 // 条件表达式
 condition_expression : LBRACKET condition_expression_param_list? RBRACKET;

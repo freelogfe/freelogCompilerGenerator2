@@ -5,7 +5,7 @@ import CommonLibrary, <serviceName>Service, Expression, Event, LexToken;
 
 options { tokenVocab=LexToken; }
 
-policy : audience_strict variable_declaration_section state_definition_section ;
+policy : audience_strict variable_declaration_section? state_definition_section ;
 
 // for
 audience_strict : FOR audience_clause audience_condition? ;
@@ -25,7 +25,7 @@ audience_condition
     ;
 
 // 变量声明区
-variable_declaration_section : variable_definition* ;
+variable_declaration_section : variable_definition+ ;
 
 variable_definition
     : global_variable_definition
