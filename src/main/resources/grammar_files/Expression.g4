@@ -78,7 +78,6 @@ pow_expression
 signed_atom
    : '+' signed_atom
    | '-' signed_atom
-   | built_in_function
    | function_call
    | atom
    ;
@@ -87,7 +86,7 @@ built_in_function : funcname LPAREN expression_param_list? RPAREN ;
 
 funcname : ID ;
 
-function_call : variable_chain DOT built_in_function ;
+function_call : (variable_chain DOT)? built_in_function ;
 
 atom
   : constant

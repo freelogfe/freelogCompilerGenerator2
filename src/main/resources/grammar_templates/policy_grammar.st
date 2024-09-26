@@ -60,7 +60,7 @@ expression_def_declaration_param_list
 // 状态机状态
 state_definition_section : state_definition+ ;
 
-state_definition : state_name service_state_section? COLON assignment_section? state_transition+ ;
+state_definition : state_name service_state_section? COLON fsm_assignment_section? state_transition+ ;
 
 state_name : ID ;
 
@@ -73,9 +73,14 @@ service_state_section
 service_state_collection : LBRACE ID (COMMA ID)* RBRACE ;
 
 // 赋值区
-assignment_section : assigment+ ;
+fsm_assignment_section : fsm_assigment+ ;
 
-assigment : LET? ID EQ assignment_clause ;
+fsm_assigment
+    : variable_assignment
+    | LET variable_name EQ assignment_clause
+    ;
+
+variable_name : ID ;
 
 state_transition
   : single_transition
@@ -87,7 +92,7 @@ single_transition : event XFER state_name action_section? ;
 action_section : LBRACE action (SEMICOLON action)* RBRACE ;
 
 action
-    : expression
+    : function_call
     | variable_assignment
     ;
 >>
