@@ -25,7 +25,7 @@ expression_param
 
 expression_param_name : ID ;
 
-expression_param_value : (expression|boolean_expression|condition_expression|args_group_expression) ;
+expression_param_value : (expression|boolean_expression|condition_expression|args_group_expression|collection_expression) ;
 
 // 集合表达式
 collection_expression : LBRACE collection_expression_content RBRACE ;
@@ -48,14 +48,18 @@ condition_expression : LBRACKET condition_expression_param_list? RBRACKET;
 
 condition_expression_param_list : condition_expression_param (COMMA condition_expression_param)* ;
 
-condition_expression_param : (boolean_expression COLON)? (expression|boolean_expression|args_group_expression|collection_expression) ;
+condition_expression_param : (condition_expression_param_conditon COLON)? condition_expression_param_value ;
+
+condition_expression_param_conditon : boolean_expression ;
+
+condition_expression_param_value : (expression|boolean_expression|args_group_expression|collection_expression) ;
 
 // 布尔表达式
 boolean_expression
   : boolean_expression AND boolean_expression
   | boolean_expression OR boolean_expression
   | expression
-  | expression (('>' | '<' | '==' | '>=' | '<=') expression)
+  | expression ((LT | LTE | GT | GTE | EQ_DOUBLE) expression)
   | expression ((LESS|BEFORE|LESS_OR_EQUAL|GREATER|AFTER|GREATER_OR_EQUAL|EQUAL|NOT_EQUAL) expression)
   | expression ((IN) (expression|condition_expression|collection_expression))
   | boolean_value
@@ -64,20 +68,19 @@ boolean_expression
 boolean_value : (TRUE|FALSE) ;
 
 expression
-   : multiplying_expression (('+' | '-') multiplying_expression)*
+   : multiplying_expression ((PLUS | MINUS) multiplying_expression)*
    ;
 
 multiplying_expression
-   : pow_expression (('*' | '/') pow_expression)*
+   : pow_expression ((TIMES | DIV) pow_expression)*
    ;
 
 pow_expression
-   : signed_atom ('^' signed_atom)*
+   : signed_atom (POW signed_atom)*
    ;
 
 signed_atom
-   : '+' signed_atom
-   | '-' signed_atom
+   : (PLUS | MINUS) signed_atom
    | function_call
    | atom
    ;

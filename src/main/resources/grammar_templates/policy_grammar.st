@@ -7,7 +7,7 @@ options { tokenVocab=LexToken; }
 
 policy : audience_strict variable_declaration_section? state_definition_section ;
 
-// for
+// FOR
 audience_strict : FOR audience_clause audience_condition? ;
 
 audience_clause
