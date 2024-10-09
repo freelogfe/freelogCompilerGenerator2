@@ -34,7 +34,7 @@ public class MainTest {
         CompilerGeneratorBuilder cg_builder = new CompilerGeneratorBuilder();
         CompilerGenerator cg = cg_builder
                 .setOutputDir(targetDir)
-                .setServiceName("Resource")
+                .setServiceName("Collection")
                 .setTargetLang("JavaScript")
                 .setExactOutput(true)
                 .build();
