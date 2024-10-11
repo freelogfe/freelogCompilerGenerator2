@@ -70,17 +70,17 @@ service_state_section
   | service_state_collection
   ;
 
-service_state_collection : LBRACE ID (COMMA ID)* RBRACE ;
+service_state_collection : LBRACE ID (COMMA ID+)* RBRACE ;
 
 // 赋值区
 fsm_assignment_section : fsm_assigment+ ;
 
 fsm_assigment
-    : variable_assignment
-    | LET variable_name EQ assignment_clause
+    : variable_assignment                       #FsmVarAssignment
+    | LET local_variable_name EQ assignment_clause    #FsmVarInitial
     ;
 
-variable_name : ID ;
+local_variable_name : ID ;
 
 state_transition
   : single_transition

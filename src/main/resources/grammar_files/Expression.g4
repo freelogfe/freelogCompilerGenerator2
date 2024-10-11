@@ -8,11 +8,11 @@ options { tokenVocab=LexToken; }
 variable_assignment : variable_chain EQ assignment_clause ;
 
 assignment_clause
-    : expression
-    | boolean_expression
-    | condition_expression
-    | args_group_expression
-    | collection_expression
+    : expression            # Assign_ex
+    | boolean_expression    # Assign_boolean
+    | condition_expression  # Assign_condition
+    | args_group_expression # Assign_args_group
+    | collection_expression # Assign_collection
     ;
 
 // 表达式的参数列表
@@ -116,6 +116,6 @@ variable_chain
     ;
 
 variable
-  : environment_variable # VariableEnv
-  | ID                   # VariableDef
+  : environment_variable
+  | ID
   ;
