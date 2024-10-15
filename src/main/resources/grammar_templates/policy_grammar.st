@@ -76,23 +76,21 @@ service_state_collection : LBRACE ID (COMMA ID+)* RBRACE ;
 fsm_assignment_section : fsm_assigment+ ;
 
 fsm_assigment
-    : variable_assignment                       #FsmVarAssignment
-    | LET local_variable_name EQ assignment_clause    #FsmVarInitial
+    : variable_assignment                               #FsmVarAssignment
+    | LET local_variable_name EQ assignment_clause      #FsmVarInitial
     ;
 
 local_variable_name : ID ;
 
 state_transition
-  : single_transition
-  | TERMINATE
+  : event XFER state_name action_section?   #EventNormal
+  | TERMINATE                               #EventTerminate
   ;
-
-single_transition : event XFER state_name action_section? ;
 
 action_section : LBRACE action (SEMICOLON action)* RBRACE ;
 
 action
-    : function_call
-    | variable_assignment
+    : function_call         #FsmActionFunctionCall
+    | variable_assignment   #FsmActionVarAssignment
     ;
 >>

@@ -8,24 +8,22 @@ options { tokenVocab=LexToken; }
 variable_assignment : variable_chain EQ assignment_clause ;
 
 assignment_clause
-    : expression            # Assign_ex
-    | boolean_expression    # Assign_boolean
-    | condition_expression  # Assign_condition
-    | args_group_expression # Assign_args_group
-    | collection_expression # Assign_collection
+    : expression
+    | boolean_expression
+    | condition_expression
+    | args_group_expression
+    | collection_expression
     ;
 
 // 表达式的参数列表
 expression_param_list : expression_param (COMMA expression_param)* ;
 
 expression_param
-    : expression_param_value
-    | expression_param_name EQ expression_param_value
+    : assignment_clause
+    | expression_param_name EQ assignment_clause
     ;
 
 expression_param_name : ID ;
-
-expression_param_value : (expression|boolean_expression|condition_expression|args_group_expression|collection_expression) ;
 
 // 集合表达式
 collection_expression : LBRACE collection_expression_content RBRACE ;
