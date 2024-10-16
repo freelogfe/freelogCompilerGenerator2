@@ -54,16 +54,19 @@ condition_expression_param_value : (expression|boolean_expression|args_group_exp
 
 // 布尔表达式
 boolean_expression
-  : boolean_expression AND boolean_expression
-  | boolean_expression OR boolean_expression
+  : boolean_atom
   | expression
-  | expression ((LT | LTE | GT | GTE | EQ_DOUBLE) expression)
-  | expression ((LESS|BEFORE|LESS_OR_EQUAL|GREATER|AFTER|GREATER_OR_EQUAL|EQUAL|NOT_EQUAL) expression)
-  | expression ((IN) (expression|condition_expression|collection_expression))
-  | boolean_value
+  | LPAREN boolean_expression RPAREN
+  | boolean_expression (boolean_op boolean_expression)
+  | boolean_expression (IN (expression|condition_expression|collection_expression))
   ;
 
-boolean_value : (TRUE|FALSE) ;
+boolean_op
+    : (AND | OR)
+    | (LESS|BEFORE|LESS_OR_EQUAL|GREATER|AFTER|GREATER_OR_EQUAL|EQUAL|NOT_EQUAL)
+    ;
+
+boolean_atom : (TRUE|FALSE) ;
 
 expression
    : multiplying_expression ((PLUS | MINUS) multiplying_expression)*
