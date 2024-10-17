@@ -25,6 +25,12 @@ expression_param
 
 expression_param_name : ID ;
 
+expression_collection_clause
+    : function_call
+    | condition_expression
+    | collection_expression
+    ;
+
 // 集合表达式
 collection_expression : LBRACE collection_expression_content RBRACE ;
 
@@ -54,16 +60,28 @@ condition_expression_param_value : (expression|boolean_expression|args_group_exp
 
 // 布尔表达式
 boolean_expression
-  : boolean_atom
-  | expression
-  | LPAREN boolean_expression RPAREN
-  | boolean_expression (boolean_op boolean_expression)
-  | boolean_expression (IN (expression|condition_expression|collection_expression))
+    : boolean_expression_clause
+    | LPAREN boolean_expression RPAREN
+    | boolean_expression boolean_op_logic boolean_expression
+    | NOT boolean_expression
+    ;
+
+boolean_expression_clause
+  : (boolean_atom | function_call)                                                  #ExpBooleanSingle
+  | (boolean_atom | expression) boolean_op_collection expression_collection_clause  #ExpBooleanOpCollection
+  | (boolean_atom | expression) boolean_op_compare (boolean_atom | expression)      #ExpBooleanOpCompare
   ;
 
-boolean_op
+boolean_op_logic
     : (AND | OR)
-    | (LESS|BEFORE|LESS_OR_EQUAL|GREATER|AFTER|GREATER_OR_EQUAL|EQUAL|NOT_EQUAL)
+    ;
+
+boolean_op_compare
+    : (LESS|BEFORE|LESS_OR_EQUAL|GREATER|AFTER|GREATER_OR_EQUAL|EQUAL|NOT_EQUAL)
+    ;
+
+boolean_op_collection
+    : IN
     ;
 
 boolean_atom : (TRUE|FALSE) ;
