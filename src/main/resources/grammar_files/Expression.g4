@@ -27,6 +27,7 @@ expression_param_name : ID ;
 
 expression_collection_clause
     : function_call
+    | variable_chain
     | condition_expression
     | collection_expression
     ;
@@ -67,32 +68,56 @@ boolean_expression
     ;
 
 boolean_expression_clause
-  : (boolean_atom | function_call)                                                  #ExpBooleanSingle
-  | (boolean_atom | expression) boolean_op_collection expression_collection_clause  #ExpBooleanOpCollection
-  | (boolean_atom | expression) boolean_op_compare (boolean_atom | expression)      #ExpBooleanOpCompare
+  : boolean_atom                                                                    #ExpBooleanSingle
+  | boolean_atom_or_expression boolean_op_collection expression_collection_clause   #ExpBooleanOpCollection
+  | boolean_atom_or_expression boolean_op_compare boolean_atom_or_expression        #ExpBooleanOpCompare
   ;
+
+boolean_atom
+    : boolean_constant
+    | function_call
+    | variable_chain
+    ;
+
+boolean_atom_or_expression
+    : boolean_atom
+    | expression
+    ;
+
+boolean_constant
+    : (TRUE | FALSE)
+    ;
 
 boolean_op_logic
     : (AND | OR)
-    ;
-
-boolean_op_compare
-    : (LESS|BEFORE|LESS_OR_EQUAL|GREATER|AFTER|GREATER_OR_EQUAL|EQUAL|NOT_EQUAL)
     ;
 
 boolean_op_collection
     : IN
     ;
 
-boolean_atom : (TRUE|FALSE) ;
+boolean_op_compare
+    : (LESS|BEFORE|LESS_OR_EQUAL|GREATER|AFTER|GREATER_OR_EQUAL|EQUAL|NOT_EQUAL)
+    ;
 
+// 表达式
 expression
-   : multiplying_expression ((PLUS | MINUS) multiplying_expression)*
+   : multiplying_expression
+   | expression expression_op expression
    ;
+
+expression_op
+    : PLUS | MINUS
+    ;
 
 multiplying_expression
-   : pow_expression ((TIMES | DIV) pow_expression)*
+   : pow_expression
+   | multiplying_expression multiplying_expression_op multiplying_expression
    ;
+
+multiplying_expression_op
+    : TIMES | DIV
+    ;
 
 pow_expression
    : signed_atom (POW signed_atom)*
@@ -114,7 +139,6 @@ atom
   : constant
   | scientific
   | LPAREN expression RPAREN
-  | INT
   | STRING
   | entity_variable
   | variable_chain
