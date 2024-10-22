@@ -47,15 +47,7 @@ macro_variable_name
 
 expression_definition : DEF_EXPR expression_def_declaration EQ condition_expression ;
 
-expression_def_declaration : expression_def_declaration_name LPAREN expression_def_declaration_param_list? RPAREN ;
-
-expression_def_declaration_name
-    : ID
-    ;
-
-expression_def_declaration_param_list
-    : ID (COMMA ID)*
-    ;
+expression_def_declaration : built_in_function ;
 
 // 状态机状态
 state_definition_section : state_definition+ ;

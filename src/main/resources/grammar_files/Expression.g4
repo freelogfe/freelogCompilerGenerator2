@@ -63,8 +63,9 @@ condition_expression_param_value : (expression|boolean_expression|args_group_exp
 boolean_expression
     : boolean_expression_clause
     | LPAREN boolean_expression RPAREN
-    | boolean_expression boolean_op_logic boolean_expression
     | NOT boolean_expression
+    | boolean_expression AND boolean_expression
+    | boolean_expression OR boolean_expression
     ;
 
 boolean_expression_clause
@@ -86,10 +87,6 @@ boolean_atom_or_expression
 
 boolean_constant
     : (TRUE | FALSE)
-    ;
-
-boolean_op_logic
-    : (AND | OR)
     ;
 
 boolean_op_collection
