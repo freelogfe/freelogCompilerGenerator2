@@ -44,7 +44,7 @@ args_group_param_list : args_group_param (COMMA args_group_param)* ;
 
 args_group_param : args_group_param_name COLON args_group_param_value ;
 
-args_group_param_name : STRING ;
+args_group_param_name : atom_string ;
 
 args_group_param_value : (expression|boolean_expression|condition_expression|collection_expression) ;
 
@@ -95,6 +95,7 @@ boolean_op_collection
 
 boolean_op_compare
     : (LESS|BEFORE|LESS_OR_EQUAL|GREATER|AFTER|GREATER_OR_EQUAL|EQUAL|NOT_EQUAL)
+    | (LT | LTE | GT | GTE | EQ_DOUBLE)
     ;
 
 // 表达式
@@ -117,13 +118,14 @@ multiplying_expression_op
     ;
 
 pow_expression
-   : signed_atom (POW signed_atom)*
+   : signed_atom
+   | pow_expression POW pow_expression
    ;
 
 signed_atom
-   : (PLUS | MINUS) signed_atom
-   | function_call
+   : function_call
    | atom
+   | signedSymbol=(PLUS|MINUS) signed_atom
    ;
 
 built_in_function : funcname LPAREN expression_param_list? RPAREN ;
@@ -136,7 +138,7 @@ atom
   : constant
   | scientific
   | LPAREN expression RPAREN
-  | STRING
+  | atom_string
   | entity_variable
   | variable_chain
   ;
@@ -149,6 +151,10 @@ constant
 scientific
   : SCIENTIFIC_NUMBER
   ;
+
+atom_string
+    : STRING
+    ;
 
 variable_chain
     : variable

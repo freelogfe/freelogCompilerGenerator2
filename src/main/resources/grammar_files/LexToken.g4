@@ -53,6 +53,7 @@ TIMES : '*' ;
 DIV : '/' ;
 POW : '^' ;
 EQ : '=' ;
+EQ_DOUBLE : '==' ;
 TILDE : '~' ;
 LTE : '<=' ;
 GTE : '>=' ;
