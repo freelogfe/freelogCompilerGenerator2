@@ -53,9 +53,9 @@ condition_expression : LBRACKET condition_expression_param_list? RBRACKET;
 
 condition_expression_param_list : condition_expression_param (COMMA condition_expression_param)* ;
 
-condition_expression_param : (condition_expression_param_conditon COLON)? condition_expression_param_value ;
+condition_expression_param : (condition_expression_param_condition COLON)? condition_expression_param_value ;
 
-condition_expression_param_conditon : boolean_expression ;
+condition_expression_param_condition : boolean_expression ;
 
 condition_expression_param_value : (expression|boolean_expression|args_group_expression|collection_expression) ;
 
@@ -69,9 +69,9 @@ boolean_expression
     ;
 
 boolean_expression_clause
-  : boolean_atom                                                                    #ExpBooleanSingle
-  | boolean_atom_or_expression boolean_op_collection expression_collection_clause   #ExpBooleanOpCollection
-  | boolean_atom_or_expression boolean_op_compare boolean_atom_or_expression        #ExpBooleanOpCompare
+  : boolean_atom
+  | boolean_atom_or_expression boolean_op_collection expression_collection_clause
+  | boolean_atom_or_expression boolean_op_compare boolean_atom_or_expression
   ;
 
 boolean_atom
@@ -162,6 +162,7 @@ variable_chain
     ;
 
 variable
-  : environment_variable
+  : environment_event
+  | environment_context
   | ID
   ;
