@@ -5,7 +5,7 @@ import CommonLibrary, EnvironmentVariable;
 options { tokenVocab=LexToken; }
 
 // 变量赋值
-variable_assignment : variable_chain EQ assignment_clause ;
+variable_assignment : ID EQ assignment_clause ;
 
 assignment_clause
     : expression
@@ -95,7 +95,7 @@ boolean_op_collection
 
 boolean_op_compare
     : (LESS|BEFORE|LESS_OR_EQUAL|GREATER|AFTER|GREATER_OR_EQUAL|EQUAL|NOT_EQUAL)
-    | (LT | LTE | GT | GTE | EQ_DOUBLE)
+    | (LT | LTE | GT | GTE | EQ_DOUBLE | NEQ)
     ;
 
 // 表达式
@@ -163,6 +163,5 @@ variable_chain
 
 variable
   : environment_event
-  | environment_context
   | ID
   ;
