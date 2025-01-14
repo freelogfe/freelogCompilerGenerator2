@@ -18,6 +18,7 @@ audience
     : PUBLIC
     | NODE
     | USER
+    | SELF
     ;
 
 audience_condition
@@ -52,7 +53,7 @@ expression_def_declaration : built_in_function ;
 // 状态机状态
 state_definition_section : state_definition+ ;
 
-state_definition : state_name service_state_section? COLON fsm_assignment_section? state_transition+ ;
+state_definition : state_name service_state_section? COLON state_context_args_section? fsm_assignment_section? state_transition+ ;
 
 state_name : ID ;
 
@@ -62,7 +63,11 @@ service_state_section
   | service_state_collection
   ;
 
-service_state_collection : LBRACE ID (COMMA ID+)* RBRACE ;
+service_state : ID ;
+
+service_state_collection : LBRACE ID (COMMA ID)* RBRACE ;
+
+state_context_args_section : LBRACKET ID+ RBRACKET ;
 
 // 赋值区
 fsm_assignment_section : fsm_assigment+ ;
@@ -75,8 +80,8 @@ fsm_assigment
 local_variable_name : ID ;
 
 state_transition
-  : event XFER state_name action_section?   #EventNormal
-  | TERMINATE                               #EventTerminate
+  : event XFER state_name state_context_args_section? action_section?   #EventNormal
+  | TERMINATE                                                               #EventTerminate
   ;
 
 action_section : LBRACE action (SEMICOLON action)* RBRACE ;

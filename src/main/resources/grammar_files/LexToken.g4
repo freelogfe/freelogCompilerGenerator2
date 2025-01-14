@@ -5,6 +5,7 @@ FOR : 'FOR' ;
 PUBLIC : 'PUBLIC' ;
 NODE : 'NODE' ;
 USER : 'USER' ;
+SELF : 'SELF' ;
 
 // 关键字 声明区
 ENTITY : 'Entity' ;
@@ -22,11 +23,6 @@ GREATER_OR_EQUAL : 'greaterOrEqual' ;
 EQUAL : 'equal' ;
 NOT_EQUAL : 'notEqual' ;
 IN : 'in' ;
-
-// 关键字 色块
-NONE : 'None' ;
-PARTIAL : 'Partial' ;
-FULL : 'Full' ;
 
 // 关键字 状态机内部
 LET : 'let' ;
