@@ -7,8 +7,11 @@ NODE : 'NODE' ;
 USER : 'USER' ;
 SELF : 'SELF' ;
 
+USE : 'USE' ;
+DEMAND : 'DEMAND' ;
+AS : 'AS' ;
+
 // 关键字 声明区
-ENTITY : 'Entity' ;
 DEF_EXPR : 'defExpr' ;
 // 关键字 判断符
 AND : 'and' ;
@@ -56,6 +59,8 @@ GTE : '>=' ;
 NEQ : '!=' ;
 XFER : '->' ;
 ASSIGMENT_SYMBOL : '<-' ;
+AT : '@' ;
+AND_SIGN : '&' ;
 
 SCIENTIFIC_NUMBER
    : NUMBER (('E' | 'e') SIGN? NUMBER)?
